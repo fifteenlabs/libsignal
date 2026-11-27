@@ -9,6 +9,8 @@
  * @module MessageBackup
  */
 
+import type { Bytes } from '@signalapp/types';
+
 import * as Native from './Native.js';
 import { ErrorCode, LibSignalErrorBase } from './Errors.js';
 import { BackupForwardSecrecyToken, BackupKey } from './AccountKeys.js';
@@ -55,8 +57,8 @@ export type MessageBackupKeyInput = Readonly<
       forwardSecrecyToken?: BackupForwardSecrecyToken;
     }
   | {
-      backupKey: BackupKey | Uint8Array<ArrayBuffer>;
-      backupId: Uint8Array<ArrayBuffer>;
+      backupKey: BackupKey | Bytes;
+      backupId: Bytes;
       forwardSecrecyToken?: BackupForwardSecrecyToken;
     }
 >;
@@ -101,12 +103,12 @@ export class MessageBackupKey {
   }
 
   /** An HMAC key used to sign a backup file. */
-  public get hmacKey(): Uint8Array<ArrayBuffer> {
+  public get hmacKey(): Bytes {
     return Native.MessageBackupKey_GetHmacKey(this);
   }
 
   /** An AES-256-CBC key used to encrypt a backup file. */
-  public get aesKey(): Uint8Array<ArrayBuffer> {
+  public get aesKey(): Bytes {
     return Native.MessageBackupKey_GetAesKey(this);
   }
 }
@@ -188,7 +190,7 @@ export class OnlineBackupValidator {
    *
    * @throws BackupValidationError on error
    */
-  constructor(backupInfo: Uint8Array<ArrayBuffer>, purpose: Purpose) {
+  constructor(backupInfo: Bytes, purpose: Purpose) {
     this._nativeHandle = Native.OnlineBackupValidator_New(backupInfo, purpose);
   }
 
@@ -199,7 +201,7 @@ export class OnlineBackupValidator {
    *
    * @throws BackupValidationError on error
    */
-  addFrame(frame: Uint8Array<ArrayBuffer>): void {
+  addFrame(frame: Bytes): void {
     Native.OnlineBackupValidator_AddFrame(this, frame);
   }
 
@@ -318,7 +320,7 @@ export class BackupJsonExporter {
    * @throws Error if the input is invalid.
    */
   public static start(
-    backupInfo: Uint8Array<ArrayBuffer>,
+    backupInfo: Bytes,
     options?: { validate?: boolean }
   ): { exporter: BackupJsonExporter; chunk: string } {
     const shouldValidate = options?.validate ?? true;
@@ -337,9 +339,7 @@ export class BackupJsonExporter {
    * aborting.
    * @throws Error if the input data cannot be parsed.
    */
-  public exportFrames(
-    frames: Uint8Array<ArrayBuffer>
-  ): BackupJsonFrameResult[] {
+  public exportFrames(frames: Bytes): BackupJsonFrameResult[] {
     return Native.BackupJsonExporter_ExportFrames(this, frames).map(
       ([line, errorMessage]) => ({
         ...(line !== null && { line }),
@@ -366,4 +366,50 @@ export class BackupJsonExporter {
       throw error;
     }
   }
+}
+
+/**
+ * Uncompressed bytes to write before ending the current DEFLATE block.
+ *
+ * The caller owns the compressor and does the flushing itself; this provides
+ * the arithmetic.
+ *
+ * The interval grows with position, which is what lets a reasonable value be
+ * chosen without knowing the final size of the backup in advance. A caller that
+ * can estimate the total *uncompressed* length of the backup should pass it, and
+ * gets the fixed interval that suits a backup of that size. The uncompressed
+ * length of the previous backup is a good estimate. Passing a reasonable estimate
+ * will result in a smaller padded file, but the estimate does not need to be precise
+ * and the estimate has no impact on security.
+ *
+ * @param uncompressedLength Uncompressed bytes written since the chat item
+ * region began.
+ * @param estimatedTotalUncompressedLength Estimated total uncompressed length
+ * of the backup, if known.
+ */
+export function flushInterval(
+  uncompressedLength: bigint,
+  estimatedTotalUncompressedLength?: bigint
+): bigint {
+  return Native.MessageBackupSizing_FlushInterval(
+    uncompressedLength,
+    estimatedTotalUncompressedLength ?? 0n
+  );
+}
+
+/**
+ * Number of zero bytes to append to a finished backup stream.
+ *
+ * @param maxIntervalBytes The largest DEFLATE block the writer *actually
+ * produced* in the chat item region, in uncompressed bytes.
+ * @param compressedLength Length of the compressed stream, before padding.
+ */
+export function paddingSize(
+  maxIntervalBytes: bigint,
+  compressedLength: bigint
+): bigint {
+  return Native.MessageBackupSizing_PaddingSize(
+    maxIntervalBytes,
+    compressedLength
+  );
 }

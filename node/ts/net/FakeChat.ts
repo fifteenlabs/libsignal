@@ -3,13 +3,13 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 //
 
+import type { Bytes } from '@signalapp/types';
+import assert from 'node:assert';
+
 import type { TokioAsyncContext } from '../net.js';
 import * as Native from '../Native.js';
 import { newNativeHandle } from '../internal.js';
 import { FakeChatRemoteEnd } from '../Native.js';
-
-import assert from 'node:assert';
-import { Buffer } from 'node:buffer';
 
 export class InternalRequest implements Native.Wrapper<Native.HttpRequest> {
   readonly _nativeHandle: Native.HttpRequest;
@@ -37,33 +37,8 @@ export class InternalRequest implements Native.Wrapper<Native.HttpRequest> {
     );
   }
 
-  public get body(): Uint8Array<ArrayBuffer> {
+  public get body(): Bytes {
     return Native.TESTING_ChatRequestGetBody(this);
-  }
-
-  public static getNextGrpcMessage(
-    name: string,
-    body: Uint8Array<ArrayBuffer>
-  ): [Uint8Array<ArrayBuffer>, unknown] {
-    const [start, end] = Native.TESTING_FakeChatRemoteEnd_NextGrpcMessage(
-      body,
-      0
-    );
-    const messageJson = Native.TESTING_FakeChatRemoteEnd_BinprotoToJson(
-      name,
-      body.subarray(start, end)
-    );
-    return [body.subarray(end), JSON.parse(messageJson)];
-  }
-
-  public getSingleGrpcMessage(name: string): unknown {
-    const body = this.body;
-    const [remaining, result] = InternalRequest.getNextGrpcMessage(name, body);
-    assert(
-      remaining.length == 0,
-      'message had trailing data, use getNextGrpcMessage instead'
-    );
-    return result;
   }
 }
 
@@ -72,7 +47,7 @@ export type ServerResponse = {
   status: number;
   message?: string;
   headers?: string[];
-  body?: Uint8Array<ArrayBuffer>;
+  body?: Bytes;
 };
 
 export class FakeChatRemote {
@@ -127,11 +102,11 @@ export class FakeChatRemote {
     Native.TESTING_FakeChatRemoteEnd_SendServerResponse(this, nativeResponse);
   }
 
-  public sendRawServerResponse(bytes: Uint8Array<ArrayBuffer>): void {
+  public sendRawServerResponse(bytes: Bytes): void {
     Native.TESTING_FakeChatRemoteEnd_SendRawServerResponse(this, bytes);
   }
 
-  public sendRawServerRequest(bytes: Uint8Array<ArrayBuffer>): void {
+  public sendRawServerRequest(bytes: Bytes): void {
     Native.TESTING_FakeChatRemoteEnd_SendRawServerRequest(this, bytes);
   }
 
@@ -159,7 +134,7 @@ export class FakeChatRemote {
 
   public sendRawGrpcReplyTo(
     request: InternalRequest,
-    response: Uint8Array<ArrayBuffer> | Native.GrpcTestCaseBridgedResponse
+    response: Bytes | Native.GrpcTestCaseBridgedResponse
   ): Promise<void> {
     if (response instanceof Uint8Array) {
       const nativeResponse = newNativeHandle(
@@ -184,31 +159,5 @@ export class FakeChatRemote {
         newNativeHandle(response)
       );
     }
-  }
-
-  static encodeSingleGrpcMessage(
-    name: string,
-    json: Record<string, unknown>
-  ): Uint8Array<ArrayBuffer> {
-    const message = JSON.stringify(json);
-    const binproto = Native.TESTING_FakeChatRemoteEnd_JsonToBinproto(
-      name,
-      message
-    );
-    const header = Native.TESTING_FakeChatRemoteEnd_GrpcFrameForMessageLength(
-      binproto.length
-    );
-    return new Uint8Array(Buffer.concat([header, binproto]));
-  }
-
-  public sendGrpcReplyTo(
-    request: InternalRequest,
-    name: string,
-    response: Record<string, unknown>
-  ): Promise<void> {
-    return this.sendRawGrpcReplyTo(
-      request,
-      FakeChatRemote.encodeSingleGrpcMessage(name, response)
-    );
   }
 }

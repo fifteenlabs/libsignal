@@ -20,9 +20,11 @@ use libsignal_net_chat::api::backups::{BackupAuthCredentialRejected, GetUploadFo
 use libsignal_net_chat::api::keys::GetPreKeysFailure;
 use libsignal_net_chat::api::keytrans::Error as KeyTransError;
 use libsignal_net_chat::api::messages::{MismatchedDeviceError, UploadTooLarge};
+use libsignal_net_chat::api::purchase::ChargeFailure;
 use libsignal_net_chat::api::registration::{RegistrationLock, VerificationCodeNotDeliverable};
 use libsignal_net_chat::grpc::devices::DeviceIdNotFoundInAccount;
 use libsignal_net_chat::grpc::usernames::UsernameNotAvailable;
+use libsignal_net_chat::grpc::{login_purchase, subscriptions};
 use libsignal_protocol::*;
 use signal_crypto::Error as SignalCryptoError;
 use usernames::{UsernameError, UsernameLinkError};
@@ -133,6 +135,11 @@ pub enum SignalErrorCode {
     RegistrationDeviceTransferPossible = 199,
     RegistrationRecoveryVerificationFailed = 200,
     RegistrationLock = 201,
+    RegisterAccountRequestRejected = 202,
+    RegistrationRecoveryPasswordRequired = 203,
+    RegistrationOneTimePasswordRequired = 204,
+    RegistrationInvalidSession = 205,
+    RegistrationInvalidReceipt = 206,
 
     KeyTransparencyError = 210,
     KeyTransparencyVerificationFailed = 211,
@@ -146,6 +153,23 @@ pub enum SignalErrorCode {
     DeviceIdNotFound = 224,
     UsernameNotAvailable = 225,
     UsernameNotSet = 226,
+    UsernameReservationNotFound = 227,
+    InvalidReceipt = 228,
+    MissingBackupId = 229,
+
+    ReceiptCredentialErrorPaymentStillProcessing = 230,
+    ReceiptCredentialErrorPaymentRequired = 231,
+    ReceiptCredentialErrorPaymentNotFound = 232,
+    ReceiptCredentialErrorReceiptAlreadyIssued = 233,
+    TooManyTotpKeys = 234,
+    TooManyMfaKeys = 235,
+    MfaNotVerified = 236,
+    MfaKeyNotFound = 237,
+    WebAuthnRegistrationUnsuccessful = 238,
+
+    ProfileNotFound = 239,
+
+    ReceiptAlreadyRedeemed = 240,
 }
 
 pub trait UpcastAsAny {
@@ -209,6 +233,9 @@ pub trait FfiError: UpcastAsAny + fmt::Debug + Send + 'static {
         Err(WrongErrorKind)
     }
     fn provide_mismatched_device_errors(&self) -> Result<&[MismatchedDeviceError], WrongErrorKind> {
+        Err(WrongErrorKind)
+    }
+    fn provide_charge_failure(&self) -> Result<Option<ChargeFailure>, WrongErrorKind> {
         Err(WrongErrorKind)
     }
 }
@@ -525,6 +552,15 @@ impl IntoFfiError for PinError {
             }
         };
         SimpleError::new(code, self.to_string())
+    }
+}
+
+impl IntoFfiError for libsignal_provisioning::ProvisioningError {
+    fn into_ffi_error(self) -> impl Into<SignalFfiError> {
+        SimpleError::new(
+            SignalErrorCode::InvalidMessage,
+            format!("Provisioning failed: {self}"),
+        )
     }
 }
 
@@ -865,6 +901,16 @@ impl IntoFfiError for UsernameNotAvailable {
     }
 }
 
+impl IntoFfiError for libsignal_net_chat::grpc::backups::RedeemBackupReceiptFailure {
+    fn into_ffi_error(self) -> impl Into<SignalFfiError> {
+        let code = match self {
+            Self::InvalidOrExpiredReceipt => SignalErrorCode::InvalidReceipt,
+            Self::MissingBackupId => SignalErrorCode::MissingBackupId,
+        };
+        SimpleError::new(code, self.to_string())
+    }
+}
+
 impl IntoFfiError for libsignal_net_chat::api::DisconnectedError {
     fn into_ffi_error(self) -> impl Into<SignalFfiError> {
         let code = match self {
@@ -1055,6 +1101,15 @@ mod registration {
                 }
                 Self::RegistrationRecoveryVerificationFailed => {
                     SignalErrorCode::RegistrationRecoveryVerificationFailed
+                }
+                Self::RequestRejected => SignalErrorCode::RegisterAccountRequestRejected,
+                Self::InvalidSession => SignalErrorCode::RegistrationInvalidSession,
+                Self::InvalidReceipt => SignalErrorCode::RegistrationInvalidReceipt,
+                Self::RecoveryPasswordRequired => {
+                    SignalErrorCode::RegistrationRecoveryPasswordRequired
+                }
+                Self::OneTimePasswordRequired => {
+                    SignalErrorCode::RegistrationOneTimePasswordRequired
                 }
                 Self::RegistrationLock(_) => {
                     // Re-match as owned.
@@ -1327,5 +1382,155 @@ impl From<WithContext<SignalFfiError>> for std::io::Error {
 impl IntoFfiError for libsignal_net_chat::grpc::usernames::UsernameNotSet {
     fn into_ffi_error(self) -> impl Into<SignalFfiError> {
         SimpleError::new(SignalErrorCode::UsernameNotSet, self.to_string())
+    }
+}
+
+impl IntoFfiError for libsignal_net_chat::grpc::usernames::ConfirmUsernameError {
+    fn into_ffi_error(self) -> impl Into<SignalFfiError> {
+        use libsignal_net_chat::grpc::usernames::ConfirmUsernameError;
+        let code = match self {
+            ConfirmUsernameError::ReservationNotFound => {
+                SignalErrorCode::UsernameReservationNotFound
+            }
+            ConfirmUsernameError::UsernameNotAvailable => SignalErrorCode::UsernameNotAvailable,
+        };
+        SimpleError::new(code, self.to_string())
+    }
+}
+
+impl FfiError for login_purchase::ReceiptCredentialError {
+    fn provide_charge_failure(&self) -> Result<Option<ChargeFailure>, WrongErrorKind> {
+        if let Self::PaymentRequired { charge_failure } = self {
+            Ok(charge_failure.as_ref().map(|x| (**x).clone()))
+        } else {
+            Err(WrongErrorKind)
+        }
+    }
+
+    fn describe(&self) -> Cow<'_, str> {
+        self.to_string().into()
+    }
+
+    fn code(&self) -> SignalErrorCode {
+        match self {
+            Self::PaymentStillProcessing => {
+                SignalErrorCode::ReceiptCredentialErrorPaymentStillProcessing
+            }
+            Self::PaymentRequired { .. } => SignalErrorCode::ReceiptCredentialErrorPaymentRequired,
+            Self::PaymentNotFound => SignalErrorCode::ReceiptCredentialErrorPaymentNotFound,
+            Self::ReceiptAlreadyIssued => {
+                SignalErrorCode::ReceiptCredentialErrorReceiptAlreadyIssued
+            }
+        }
+    }
+}
+
+impl FfiError for subscriptions::ReceiptCredentialError {
+    fn provide_charge_failure(&self) -> Result<Option<ChargeFailure>, WrongErrorKind> {
+        if let Self::PaymentRequired { charge_failure } = self {
+            Ok(charge_failure.as_ref().map(|x| (**x).clone()))
+        } else {
+            Err(WrongErrorKind)
+        }
+    }
+
+    fn describe(&self) -> Cow<'_, str> {
+        self.to_string().into()
+    }
+
+    fn code(&self) -> SignalErrorCode {
+        match self {
+            Self::NoPaidInvoice => SignalErrorCode::ReceiptCredentialErrorPaymentStillProcessing,
+            Self::PaymentRequired { .. } => SignalErrorCode::ReceiptCredentialErrorPaymentRequired,
+            Self::SubscriberNotFound => SignalErrorCode::ReceiptCredentialErrorPaymentNotFound,
+            Self::ReceiptAlreadyIssued => {
+                SignalErrorCode::ReceiptCredentialErrorReceiptAlreadyIssued
+            }
+        }
+    }
+}
+
+impl IntoFfiError for libsignal_net_chat::grpc::accounts::GenerateTotpKeyError {
+    fn into_ffi_error(self) -> impl Into<SignalFfiError> {
+        let code = match self {
+            Self::TooManyTotpKeys => SignalErrorCode::TooManyTotpKeys,
+            Self::TooManyMfaKeys => SignalErrorCode::TooManyMfaKeys,
+        };
+        SimpleError::new(code, self.to_string())
+    }
+}
+
+impl IntoFfiError for libsignal_net_chat::grpc::accounts::ConfirmTotpKeyError {
+    fn into_ffi_error(self) -> impl Into<SignalFfiError> {
+        let code = match self {
+            Self::OneTimePasswordNotVerified => SignalErrorCode::MfaNotVerified,
+            Self::TooManyMfaKeys => SignalErrorCode::TooManyMfaKeys,
+        };
+        SimpleError::new(code, self.to_string())
+    }
+}
+
+impl IntoFfiError for libsignal_net_chat::grpc::accounts::StartWebAuthnRegistrationError {
+    fn into_ffi_error(self) -> impl Into<SignalFfiError> {
+        let code = match self {
+            Self::TooManyMfaKeys => SignalErrorCode::TooManyMfaKeys,
+        };
+        SimpleError::new(code, self.to_string())
+    }
+}
+
+impl IntoFfiError for libsignal_net_chat::grpc::accounts::FinishWebAuthnRegistrationError {
+    fn into_ffi_error(self) -> impl Into<SignalFfiError> {
+        let code = match self {
+            Self::WebAuthnRegistrationUnsuccessful => {
+                SignalErrorCode::WebAuthnRegistrationUnsuccessful
+            }
+            Self::TooManyMfaKeys => SignalErrorCode::TooManyMfaKeys,
+        };
+        SimpleError::new(code, self.to_string())
+    }
+}
+
+impl IntoFfiError for libsignal_net_chat::grpc::accounts::MfaKeyNotFound {
+    fn into_ffi_error(self) -> impl Into<SignalFfiError> {
+        SimpleError::new(SignalErrorCode::MfaKeyNotFound, self.to_string())
+    }
+}
+
+impl IntoFfiError for libsignal_net_chat::grpc::accounts::MfaVerificationFailed {
+    fn into_ffi_error(self) -> impl Into<SignalFfiError> {
+        SimpleError::new(SignalErrorCode::MfaNotVerified, self.to_string())
+    }
+}
+
+impl IntoFfiError for libsignal_net_chat::api::profiles::ProfileKeyCredentialRequestError {
+    fn into_ffi_error(self) -> impl Into<SignalFfiError> {
+        let code = match self {
+            Self::AuthFailed => SignalErrorCode::RequestUnauthorized,
+            Self::ProfileNotFound => SignalErrorCode::ProfileNotFound,
+        };
+        SimpleError::new(code, self.to_string())
+    }
+}
+
+impl IntoFfiError for libsignal_net_chat::grpc::donations::RedeemDonationReceiptFailure {
+    fn into_ffi_error(self) -> impl Into<SignalFfiError> {
+        let code = match self {
+            Self::InvalidReceipt => SignalErrorCode::InvalidReceipt,
+            Self::AlreadyRedeemed => SignalErrorCode::ReceiptAlreadyRedeemed,
+        };
+        SimpleError::new(code, self.to_string())
+    }
+}
+
+impl<E> IntoFfiError for crate::support::RequestOrArgumentError<E>
+where
+    libsignal_net_chat::api::RequestError<E>: IntoFfiError,
+{
+    fn into_ffi_error(self) -> impl Into<SignalFfiError> {
+        match self {
+            Self::Request(e) => SignalFfiError::from(e),
+            Self::Argument(e) => SignalFfiError::from(e),
+        }
     }
 }

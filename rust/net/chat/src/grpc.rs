@@ -8,9 +8,18 @@
 
 pub mod accounts;
 pub mod backups;
+pub mod call_quality;
+pub mod credentials;
 pub mod devices;
-mod messages;
-mod profiles;
+pub mod donations;
+pub mod keys;
+pub mod keytrans;
+pub mod login_purchase;
+pub mod messages;
+pub mod payments;
+pub mod profiles;
+pub mod stickers;
+pub mod subscriptions;
 pub mod usernames;
 
 use std::convert::Infallible;
@@ -29,7 +38,9 @@ use libsignal_net_grpc::proto::google;
 use prost::Message as _;
 use tonic::codegen::StdError;
 
-use crate::api::{ChallengeOption, DisconnectedError, RateLimitChallenge, RequestError};
+use crate::api::{
+    ChallengeOption, DisconnectedError, RateLimitChallenge, RequestError, S3UploadForm,
+};
 use crate::logging::{DebugAsStrOrBytes, Redact, RedactHex};
 use crate::stream_util::take_until_first_error;
 
@@ -86,68 +97,6 @@ impl<T: GrpcService + Clone + Sync> GrpcServiceProvider for T {
     fn service(&self) -> Self {
         self.clone()
     }
-}
-
-/// A tonic encoder and decoder that passes byte buffers through unchanged, letting tonic
-/// add the gRPC framing and nothing else.
-struct PassthroughCodec;
-
-impl tonic::codec::Codec for PassthroughCodec {
-    type Encode = Vec<u8>;
-    type Decode = Vec<u8>;
-    type Encoder = Self;
-    type Decoder = Self;
-
-    fn encoder(&mut self) -> Self::Encoder {
-        PassthroughCodec
-    }
-    fn decoder(&mut self) -> Self::Decoder {
-        PassthroughCodec
-    }
-}
-
-impl tonic::codec::Encoder for PassthroughCodec {
-    type Item = Vec<u8>;
-    type Error = tonic::Status;
-    fn encode(
-        &mut self,
-        item: Self::Item,
-        dst: &mut tonic::codec::EncodeBuf<'_>,
-    ) -> Result<(), Self::Error> {
-        use bytes::BufMut;
-        dst.put(&item[..]);
-        Ok(())
-    }
-}
-
-impl tonic::codec::Decoder for PassthroughCodec {
-    type Item = Vec<u8>;
-    type Error = tonic::Status;
-    fn decode(
-        &mut self,
-        src: &mut tonic::codec::DecodeBuf<'_>,
-    ) -> Result<Option<Self::Item>, Self::Error> {
-        use bytes::Buf;
-        Ok(Some(src.copy_to_bytes(src.remaining()).into()))
-    }
-}
-
-pub fn raw_grpc(
-    log_tag: &'static str,
-    service_provider: impl GrpcServiceProvider,
-    service_name: &str,
-    method: &str,
-    payload: Vec<u8>,
-) -> impl Future<Output = Result<Vec<u8>, RequestError<Infallible>>> {
-    let mut client = tonic::client::Grpc::new(service_provider.service());
-    let path = http::uri::PathAndQuery::from_maybe_shared(format!("/{service_name}/{method}"))
-        .expect("valid URI path");
-    log_and_send(log_tag, method, || async move {
-        let response = client
-            .unary(tonic::Request::new(payload), path, PassthroughCodec)
-            .await?;
-        Ok(response.into_inner())
-    })
 }
 
 /// Performs a single operation, assumed to be a gRPC request, with logging at the start and end.
@@ -227,7 +176,7 @@ where
 ///
 /// ```ignored
 /// send_request_with_streaming_response(
-///     "unauth",
+///     Self::LOG_TAG,
 ///     self.grpc_service(),
 ///     || Ok(SomeRequest { id: validate_id(id_param)? }),
 ///     |service, request| async move {
@@ -493,11 +442,16 @@ impl<E> RequestError<E> {
             | tonic::Code::DataLoss
             | tonic::Code::Unauthenticated => {}
         }
+
+        // We treat gRPC errors as "disconnect"-level events, because we can't guarantee that the
+        // gRPC library on our end (tonic) or on the Server's end hasn't (a) reported a transport
+        // error using an opaque gRPC status, or (b) decided to end the connection over a gRPC-level
+        // error.
         // Use the Debug implementation to get the name of the code, which is easier to identify than
         // the human-readable description.
-        RequestError::Unexpected {
-            log_safe: format!("unexpected error: {:?}", status.code()),
-        }
+        RequestError::Disconnected(DisconnectedError::Transport {
+            log_safe: format!("unexpected gRPC status: {:?}", status.code()),
+        })
     }
 }
 
@@ -703,6 +657,34 @@ impl TryFrom<ChallengeRequiredProto> for RateLimitChallenge {
     }
 }
 
+impl TryFrom<libsignal_net_grpc::proto::chat::common::S3UploadForm> for S3UploadForm {
+    type Error = RequestError<std::convert::Infallible>;
+
+    fn try_from(
+        value: libsignal_net_grpc::proto::chat::common::S3UploadForm,
+    ) -> Result<Self, Self::Error> {
+        let libsignal_net_grpc::proto::chat::common::S3UploadForm {
+            key,
+            credential,
+            acl,
+            algorithm,
+            date,
+            policy,
+            signature,
+        } = value;
+        // If we want to validate any of these fields, here's where we'd do it.
+        Ok(S3UploadForm {
+            key,
+            credential,
+            acl,
+            algorithm,
+            date,
+            policy,
+            signature,
+        })
+    }
+}
+
 impl std::fmt::Display for Redact<libsignal_net_grpc::proto::chat::common::ServiceIdentifier> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self.0.try_as_service_id() {
@@ -725,6 +707,56 @@ pub struct GrpcTestCase<Request, RequestGrpc, ResponseGrpc, Response> {
     pub response: Response,
 }
 
+impl<Request, RequestGrpc, ResponseGrpc, Response>
+    GrpcTestCase<Request, RequestGrpc, ResponseGrpc, Response>
+{
+    #[inline]
+    pub fn map_request<NewReq>(
+        self,
+        f: impl FnOnce(Request) -> NewReq,
+    ) -> GrpcTestCase<NewReq, RequestGrpc, ResponseGrpc, Response> {
+        let GrpcTestCase {
+            name,
+            method,
+            request,
+            request_grpc,
+            response_grpc,
+            response,
+        } = self;
+        GrpcTestCase {
+            name,
+            method,
+            request: f(request),
+            request_grpc,
+            response_grpc,
+            response,
+        }
+    }
+
+    #[inline]
+    pub fn map_response<NewResp>(
+        self,
+        f: impl FnOnce(Response) -> NewResp,
+    ) -> GrpcTestCase<Request, RequestGrpc, ResponseGrpc, NewResp> {
+        let GrpcTestCase {
+            name,
+            method,
+            request,
+            request_grpc,
+            response_grpc,
+            response,
+        } = self;
+        GrpcTestCase {
+            name,
+            method,
+            request,
+            request_grpc,
+            response_grpc,
+            response: f(response),
+        }
+    }
+}
+
 // Utilities used by exported test cases (and thus not `cfg(test)`).
 pub mod test_case_util {
     use base64::Engine as _;
@@ -732,6 +764,7 @@ pub mod test_case_util {
     use futures_util::FutureExt as _;
     use http_body_util::BodyExt as _;
     use libsignal_net::chat::fake::BodyWithTrailers;
+    use zkgroup::SECONDS_PER_DAY;
 
     use super::*;
 
@@ -798,6 +831,38 @@ pub mod test_case_util {
             ),
         ]))
         .expect("valid")
+    }
+
+    pub(crate) fn day_align(x: u64) -> u64 {
+        (x / SECONDS_PER_DAY) * SECONDS_PER_DAY
+    }
+
+    /// A structurally-valid receipt credential presentation.
+    ///
+    /// Our tests never actually verify these presentations, so it's fine that the server params are synthetic.
+    pub(crate) fn test_receipt_credential_presentation()
+    -> zkgroup::receipts::ReceiptCredentialPresentation {
+        let server_keys =
+            zkgroup::server_params::ServerSecretParams::generate([b's'; zkgroup::RANDOMNESS_LEN]);
+        let server_public = server_keys.get_public_params();
+
+        let context = server_public.create_receipt_credential_request_context(
+            [b'r'; zkgroup::RANDOMNESS_LEN],
+            [b'r'; zkgroup::RECEIPT_SERIAL_LEN],
+        );
+        let request = context.get_request();
+        let expiration = zkgroup::Timestamp::from_epoch_seconds(1771545600); // 2026-02-20 00:00
+        let response = server_keys.issue_receipt_credential(
+            [b'i'; zkgroup::RANDOMNESS_LEN],
+            &request,
+            expiration,
+            200,
+        );
+        let credential = server_public
+            .receive_receipt_credential(&context, &response)
+            .expect("valid");
+        server_public
+            .create_receipt_credential_presentation([b'p'; zkgroup::RANDOMNESS_LEN], &credential)
     }
 }
 
@@ -1436,13 +1501,13 @@ mod test {
     fn test_retry_later(reason: &str) {
         let info = vec![
             google::rpc::RetryInfo {
-                retry_delay: Some(libsignal_net_grpc::Duration {
+                retry_delay: Some(prost_types::Duration {
                     seconds: 10,
                     nanos: 2,
                 }),
             },
             google::rpc::RetryInfo {
-                retry_delay: Some(libsignal_net_grpc::Duration {
+                retry_delay: Some(prost_types::Duration {
                     seconds: 20,
                     nanos: 5,
                 }),
@@ -1667,7 +1732,7 @@ mod test {
         let contents: Vec<_> = stream.collect().now_or_never().expect("ready");
         assert_matches!(
             &contents[..],
-            [Err(RequestError::Unexpected { log_safe })]
+            [Err(RequestError::Disconnected(DisconnectedError::Transport { log_safe }))]
             if log_safe.contains("PermissionDenied") && !log_safe.contains("user data")
         );
     }
@@ -1759,7 +1824,7 @@ mod test {
                 Ok(2),
                 Ok(3),
                 Ok(4),
-                Err(RequestError::Unexpected { log_safe }),
+                Err(RequestError::Disconnected(DisconnectedError::Transport { log_safe })),
             ]
             if log_safe.contains("PermissionDenied") && !log_safe.contains("user data")
         );

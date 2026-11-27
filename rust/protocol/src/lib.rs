@@ -39,11 +39,10 @@ mod ratchet;
 mod sealed_sender;
 mod sender_keys;
 mod session;
-#[cfg(test)]
-mod session_cipher_legacy;
 mod session_management;
 mod state;
 mod storage;
+mod tahini;
 mod timestamp;
 mod triple_ratchet;
 
@@ -65,7 +64,6 @@ pub use protocol::{
     CiphertextMessage, CiphertextMessageType, DecryptionErrorMessage, KyberPayload,
     PlaintextContent, PreKeySignalMessage, SenderKeyDistributionMessage, SenderKeyMessage,
     SignalMessage, extract_decryption_error_message_from_serialized_content,
-    should_use_nonpq_session,
 };
 pub use ratchet::{
     AliceSignalProtocolParameters, BobSignalProtocolParameters, initialize_alice_session_record,
@@ -78,9 +76,10 @@ pub use sealed_sender::{
     sealed_sender_encrypt, sealed_sender_encrypt_from_usmc, sealed_sender_multi_recipient_encrypt,
 };
 pub use sender_keys::SenderKeyRecord;
-pub use session::{process_prekey, process_prekey_bundle};
+pub use session::process_prekey_bundle;
 pub use session_management::{
-    message_decrypt, message_decrypt_prekey, message_decrypt_signal, message_encrypt,
+    PreKeyDecryptResult, initiate_session, message_decrypt, message_decrypt_prekey,
+    message_decrypt_signal, message_encrypt,
 };
 pub use state::{
     GenericSignedPreKey, KyberPreKeyId, KyberPreKeyRecord, PreKeyBundle, PreKeyBundleContent,

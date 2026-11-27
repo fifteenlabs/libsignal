@@ -83,8 +83,25 @@ public enum SignalError: Error {
     case uploadTooLarge(String)
     case usernameNotAvailable(String)
     case usernameNotSet(String)
+    case usernameReservationNotFound(String)
+    case invalidReceipt(String)
+    case missingBackupId(String)
+    case receiptCredentialErrorPaymentStillProcessing(String)
+    case receiptCredentialErrorPaymentRequired(chargeFailure: ChargeFailure?, message: String)
+    case receiptCredentialErrorPaymentNotFound(String)
+    case receiptCredentialErrorReceiptAlreadyIssued(String)
+    case tooManyTotpKeys(String)
+    case tooManyMfaKeys(String)
+    case mfaNotVerified(String)
+    case mfaKeyNotFound(String)
+    case webAuthnRegistrationUnsuccessful(String)
+    case profileNotFound(String)
+    case receiptAlreadyRedeemed(String)
 
     case unknown(UInt32, String)
+
+    @available(*, unavailable, renamed: "mfaNotVerified(_:)")
+    public static func oneTimePasswordNotVerified() {}
 }
 
 internal typealias SignalFfiErrorRef = OpaquePointer
@@ -313,6 +330,16 @@ internal func checkError(_ error: SignalFfiErrorRef?) throws {
         throw RegistrationError.deviceTransferPossible(errStr)
     case SignalErrorCodeRegistrationRecoveryVerificationFailed:
         throw RegistrationError.recoveryVerificationFailed(errStr)
+    case SignalErrorCodeRegisterAccountRequestRejected:
+        throw RegistrationError.registerAccountRequestRejected(errStr)
+    case SignalErrorCodeRegistrationInvalidSession:
+        throw RegistrationError.invalidSession(errStr)
+    case SignalErrorCodeRegistrationInvalidReceipt:
+        throw RegistrationError.invalidReceipt(errStr)
+    case SignalErrorCodeRegistrationRecoveryPasswordRequired:
+        throw RegistrationError.recoveryPasswordRequired(errStr)
+    case SignalErrorCodeRegistrationOneTimePasswordRequired:
+        throw RegistrationError.oneTimePasswordRequired(errStr)
     case SignalErrorCodeRegistrationLock:
         var timeRemaining: UInt64 = 0
         var credentials = SignalPairOfCStringPtrCStringPtr()
@@ -356,6 +383,38 @@ internal func checkError(_ error: SignalFfiErrorRef?) throws {
         throw SignalError.usernameNotAvailable(errStr)
     case SignalErrorCodeUsernameNotSet:
         throw SignalError.usernameNotSet(errStr)
+    case SignalErrorCodeUsernameReservationNotFound:
+        throw SignalError.usernameReservationNotFound(errStr)
+    case SignalErrorCodeInvalidReceipt:
+        throw SignalError.invalidReceipt(errStr)
+    case SignalErrorCodeMissingBackupId:
+        throw SignalError.missingBackupId(errStr)
+    case SignalErrorCodeReceiptCredentialErrorPaymentStillProcessing:
+        throw SignalError.receiptCredentialErrorPaymentStillProcessing(errStr)
+    case SignalErrorCodeReceiptCredentialErrorPaymentRequired:
+        let chargeFailure = try NativeNice.Error_GetChargeFailure(err: error)
+        throw SignalError.receiptCredentialErrorPaymentRequired(
+            chargeFailure: chargeFailure,
+            message: errStr
+        )
+    case SignalErrorCodeReceiptCredentialErrorPaymentNotFound:
+        throw SignalError.receiptCredentialErrorPaymentNotFound(errStr)
+    case SignalErrorCodeReceiptCredentialErrorReceiptAlreadyIssued:
+        throw SignalError.receiptCredentialErrorReceiptAlreadyIssued(errStr)
+    case SignalErrorCodeTooManyTotpKeys:
+        throw SignalError.tooManyTotpKeys(errStr)
+    case SignalErrorCodeTooManyMfaKeys:
+        throw SignalError.tooManyMfaKeys(errStr)
+    case SignalErrorCodeMfaNotVerified:
+        throw SignalError.mfaNotVerified(errStr)
+    case SignalErrorCodeMfaKeyNotFound:
+        throw SignalError.mfaKeyNotFound(errStr)
+    case SignalErrorCodeWebAuthnRegistrationUnsuccessful:
+        throw SignalError.webAuthnRegistrationUnsuccessful(errStr)
+    case SignalErrorCodeProfileNotFound:
+        throw SignalError.profileNotFound(errStr)
+    case SignalErrorCodeReceiptAlreadyRedeemed:
+        throw SignalError.receiptAlreadyRedeemed(errStr)
     default:
         throw SignalError.unknown(errType, errStr)
     }

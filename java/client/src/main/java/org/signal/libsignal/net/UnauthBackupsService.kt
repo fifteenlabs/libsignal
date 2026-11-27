@@ -6,15 +6,12 @@
 package org.signal.libsignal.net
 
 import kotlinx.coroutines.flow.Flow
-import org.signal.libsignal.internal.BridgeCopyBackupMediaItem
 import org.signal.libsignal.internal.BridgeCopyBackupMediaOutcome
 import org.signal.libsignal.internal.BridgeCopyBackupMediaResult
-import org.signal.libsignal.internal.BridgeDeleteBackupMediaItem
-import org.signal.libsignal.internal.BridgeMediaBackupInfo
-import org.signal.libsignal.internal.BridgeMessageBackupInfo
 import org.signal.libsignal.internal.CompletableFuture
 import org.signal.libsignal.internal.Native
 import org.signal.libsignal.internal.NativeNice
+import org.signal.libsignal.internal.liftExceptions
 import org.signal.libsignal.internal.mapWithCancellation
 import org.signal.libsignal.internal.wrapStream
 import org.signal.libsignal.messagebackup.BackupKey
@@ -38,8 +35,9 @@ public data class BackupCdnCredentials(
   val headers: Map<String, String>,
 ) {
   public companion object {
+    // Public for testing, not intended for general use.
     @Suppress("UNCHECKED_CAST")
-    internal fun fromFfiHeaders(headers: Array<Object>): BackupCdnCredentials =
+    public fun fromFfiHeaders(headers: Array<Object>): BackupCdnCredentials =
       BackupCdnCredentials((headers as Array<Pair<String, String>>).toMap())
   }
 }
@@ -63,16 +61,7 @@ public data class MessageBackupInfo(
    * Always non-empty, even if a backup has not actually been stored to the CDN.
    */
   val backupName: String,
-) {
-  public companion object {
-    public fun fromInternal(it: BridgeMessageBackupInfo): MessageBackupInfo =
-      MessageBackupInfo(
-        backupDir = it.backupDir,
-        cdn = it.cdn,
-        backupName = it.backupName,
-      )
-  }
-}
+)
 
 public data class MediaBackupInfo(
   /**
@@ -94,16 +83,7 @@ public data class MediaBackupInfo(
    * The amount of space used to store media, in bytes.
    */
   val usedSpace: Long,
-) {
-  public companion object {
-    public fun fromInternal(it: BridgeMediaBackupInfo): MediaBackupInfo =
-      MediaBackupInfo(
-        backupDir = it.backupDir,
-        mediaDir = it.mediaDir,
-        usedSpace = it.usedSpace,
-      )
-  }
-}
+)
 
 /**
  * A single item to copy from the attachment CDN to the backup CDN.
@@ -198,8 +178,6 @@ public data class DeleteBackupMediaItem(
   val mediaId: ByteArray,
   val cdn: Int,
 ) {
-  internal constructor(value: BridgeDeleteBackupMediaItem) : this(value.mediaId, value.cdn) {}
-
   override fun equals(other: Any?): Boolean {
     if (other !is DeleteBackupMediaItem) {
       return false
@@ -208,6 +186,47 @@ public data class DeleteBackupMediaItem(
   }
 
   override fun hashCode(): Int = Objects.hash(mediaId.contentHashCode(), cdn)
+}
+
+/** @see UnauthBackupsService.listMedia */
+public data class ListBackupMediaResponse(
+  /** The requested page of items. */
+  val items: List<Item>,
+  /**
+   * The base directory of the backup data on the CDN.
+   *
+   * Always non-empty, even if no media has been stored to the CDN or the credential is for a tier
+   * that does not support media.
+   */
+  val backupDir: String,
+  /**
+   * The prefix path component for media objects on a CDN.
+   *
+   * Stored media for a `mediaId` can be found at `/backupDir/mediaDir/mediaId`, where the
+   * `mediaId` is encoded in unpadded url-safe base64. Always non-empty, even if no media has been
+   * stored to the CDN or the credential is for a tier that does not support media.
+   */
+  val mediaDir: String,
+  /**
+   * If set, the cursor value to pass to the next list request to continue listing. If absent, all
+   * objects have been listed.
+   */
+  val cursor: String?,
+) {
+  public data class Item(
+    val cdn: Int,
+    val mediaId: ByteArray,
+    val objectLength: Long,
+  ) {
+    override fun equals(other: Any?): Boolean {
+      if (other !is Item) {
+        return false
+      }
+      return cdn == other.cdn && mediaId.contentEquals(other.mediaId) && objectLength == other.objectLength
+    }
+
+    override fun hashCode(): Int = Objects.hash(cdn, mediaId.contentHashCode(), objectLength)
+  }
 }
 
 public data class DeterministicRandomSeedUseOnlyForTesting(
@@ -237,7 +256,7 @@ public class UnauthBackupsService(
     uploadSize: Long,
     rngSeedForTesting: DeterministicRandomSeedUseOnlyForTesting? = null,
   ): CompletableFuture<RequestResult<UploadForm, GetUploadFormError>> =
-    try {
+    liftExceptions {
       require(uploadSize >= 0, { "uploadSize ($uploadSize) wasn't >= 0" })
       connection.runWithContextAndConnectionHandles { asyncCtx, conn ->
         auth.signingKey.guardedMap { signingKey ->
@@ -250,15 +269,13 @@ public class UnauthBackupsService(
               signingKey,
               uploadSize,
               rngSeedForTesting?.seed ?: -1,
-            ).mapWithCancellation(
-              onSuccess = { RequestResult.Success(it as UploadForm) },
-              onError = { err -> err.toRequestResult<GetUploadFormError>() },
             )
         }
       }
-    } catch (e: Throwable) {
-      CompletableFuture.completedFuture(RequestResult.ApplicationError(e))
-    }
+    }.mapWithCancellation(
+      onSuccess = { RequestResult.Success(it as UploadForm) },
+      onError = { err -> err.toRequestResult<GetUploadFormError>() },
+    )
 
   /**
    * Get an attachment backup attachment upload form
@@ -272,7 +289,7 @@ public class UnauthBackupsService(
     uploadSize: Long,
     rngSeedForTesting: DeterministicRandomSeedUseOnlyForTesting? = null,
   ): CompletableFuture<RequestResult<UploadForm, GetUploadFormError>> =
-    try {
+    liftExceptions {
       require(uploadSize >= 0, { "uploadSize ($uploadSize) wasn't >= 0" })
       connection.runWithContextAndConnectionHandles { asyncCtx, conn ->
         auth.signingKey.guardedMap { signingKey ->
@@ -285,15 +302,13 @@ public class UnauthBackupsService(
               signingKey,
               uploadSize,
               rngSeedForTesting?.seed ?: -1,
-            ).mapWithCancellation(
-              onSuccess = { RequestResult.Success(it as UploadForm) },
-              onError = { err -> err.toRequestResult<GetUploadFormError>() },
             )
         }
       }
-    } catch (e: Throwable) {
-      CompletableFuture.completedFuture(RequestResult.ApplicationError(e))
-    }
+    }.mapWithCancellation(
+      onSuccess = { RequestResult.Success(it as UploadForm) },
+      onError = { err -> err.toRequestResult<GetUploadFormError>() },
+    )
 
   /**
    * Sets the messages or media backup key based on `auth`.
@@ -306,7 +321,7 @@ public class UnauthBackupsService(
     auth: BackupAuth,
     rngSeedForTesting: DeterministicRandomSeedUseOnlyForTesting? = null,
   ): CompletableFuture<RequestResult<Unit, RequestUnauthorizedException>> =
-    try {
+    liftExceptions {
       NativeNice
         .UnauthenticatedChatConnection_backup_set_public_key(
           asyncCtx = connection.tokioAsyncContext,
@@ -315,13 +330,11 @@ public class UnauthBackupsService(
           serverKeys = auth.serverKeys,
           signingKey = auth.signingKey,
           rng = rngSeedForTesting,
-        ).mapWithCancellation(
-          onSuccess = { RequestResult.Success(Unit) },
-          onError = { it.toRequestResult<RequestUnauthorizedException>() },
         )
-    } catch (e: Throwable) {
-      CompletableFuture.completedFuture(RequestResult.ApplicationError(e))
-    }
+    }.mapWithCancellation(
+      onSuccess = { RequestResult.Success(Unit) },
+      onError = { it.toRequestResult<RequestUnauthorizedException>() },
+    )
 
   /**
    * Fetches the credentials necessary to read from the given backup CDN.
@@ -335,7 +348,7 @@ public class UnauthBackupsService(
     cdn: Int,
     rngSeedForTesting: DeterministicRandomSeedUseOnlyForTesting? = null,
   ): CompletableFuture<RequestResult<BackupCdnCredentials, RequestUnauthorizedException>> =
-    try {
+    liftExceptions {
       NativeNice
         .UnauthenticatedChatConnection_backup_get_cdn_credentials(
           asyncCtx = connection.tokioAsyncContext,
@@ -345,13 +358,11 @@ public class UnauthBackupsService(
           signingKey = auth.signingKey,
           cdn = cdn,
           rng = rngSeedForTesting,
-        ).mapWithCancellation(
-          onSuccess = { RequestResult.Success(it) },
-          onError = { it.toRequestResult<RequestUnauthorizedException>() },
         )
-    } catch (e: Throwable) {
-      CompletableFuture.completedFuture(RequestResult.ApplicationError(e))
-    }
+    }.mapWithCancellation(
+      onSuccess = { RequestResult.Success(it) },
+      onError = { it.toRequestResult<RequestUnauthorizedException>() },
+    )
 
   /**
    * Retrieves information about the currently stored message backup.
@@ -369,7 +380,7 @@ public class UnauthBackupsService(
     auth: BackupAuth,
     rngSeedForTesting: DeterministicRandomSeedUseOnlyForTesting? = null,
   ): CompletableFuture<RequestResult<MessageBackupInfo, RequestUnauthorizedException>> =
-    try {
+    liftExceptions {
       NativeNice
         .UnauthenticatedChatConnection_backup_get_message_backup_info(
           asyncCtx = connection.tokioAsyncContext,
@@ -378,13 +389,11 @@ public class UnauthBackupsService(
           serverKeys = auth.serverKeys,
           signingKey = auth.signingKey,
           rng = rngSeedForTesting,
-        ).mapWithCancellation(
-          onSuccess = { RequestResult.Success(MessageBackupInfo.fromInternal(it)) },
-          onError = { it.toRequestResult<RequestUnauthorizedException>() },
         )
-    } catch (e: Throwable) {
-      CompletableFuture.completedFuture(RequestResult.ApplicationError(e))
-    }
+    }.mapWithCancellation(
+      onSuccess = { RequestResult.Success(it) },
+      onError = { it.toRequestResult<RequestUnauthorizedException>() },
+    )
 
   /**
    * Retrieves information about the currently stored media backup.
@@ -402,7 +411,7 @@ public class UnauthBackupsService(
     auth: BackupAuth,
     rngSeedForTesting: DeterministicRandomSeedUseOnlyForTesting? = null,
   ): CompletableFuture<RequestResult<MediaBackupInfo, RequestUnauthorizedException>> =
-    try {
+    liftExceptions {
       NativeNice
         .UnauthenticatedChatConnection_backup_get_media_backup_info(
           asyncCtx = connection.tokioAsyncContext,
@@ -411,13 +420,11 @@ public class UnauthBackupsService(
           serverKeys = auth.serverKeys,
           signingKey = auth.signingKey,
           rng = rngSeedForTesting,
-        ).mapWithCancellation(
-          onSuccess = { RequestResult.Success(MediaBackupInfo.fromInternal(it)) },
-          onError = { it.toRequestResult<RequestUnauthorizedException>() },
         )
-    } catch (e: Throwable) {
-      CompletableFuture.completedFuture(RequestResult.ApplicationError(e))
-    }
+    }.mapWithCancellation(
+      onSuccess = { RequestResult.Success(it) },
+      onError = { it.toRequestResult<RequestUnauthorizedException>() },
+    )
 
   /**
    * Fetches the credentials for connecting to SVR-B (a username/password pair).
@@ -430,7 +437,7 @@ public class UnauthBackupsService(
     auth: BackupAuth,
     rngSeedForTesting: DeterministicRandomSeedUseOnlyForTesting? = null,
   ): CompletableFuture<RequestResult<Pair<String, String>, RequestUnauthorizedException>> =
-    try {
+    liftExceptions {
       NativeNice
         .UnauthenticatedChatConnection_backup_get_svrb_credentials(
           asyncCtx = connection.tokioAsyncContext,
@@ -439,13 +446,11 @@ public class UnauthBackupsService(
           serverKeys = auth.serverKeys,
           signingKey = auth.signingKey,
           rng = rngSeedForTesting,
-        ).mapWithCancellation(
-          onSuccess = { RequestResult.Success(it) },
-          onError = { it.toRequestResult<RequestUnauthorizedException>() },
         )
-    } catch (e: Throwable) {
-      CompletableFuture.completedFuture(RequestResult.ApplicationError(e))
-    }
+    }.mapWithCancellation(
+      onSuccess = { RequestResult.Success(it) },
+      onError = { it.toRequestResult<RequestUnauthorizedException>() },
+    )
 
   /**
    * Indicates that the backup is still active.
@@ -461,7 +466,7 @@ public class UnauthBackupsService(
     auth: BackupAuth,
     rngSeedForTesting: DeterministicRandomSeedUseOnlyForTesting? = null,
   ): CompletableFuture<RequestResult<Unit, RequestUnauthorizedException>> =
-    try {
+    liftExceptions {
       NativeNice
         .UnauthenticatedChatConnection_backup_refresh(
           asyncCtx = connection.tokioAsyncContext,
@@ -470,13 +475,11 @@ public class UnauthBackupsService(
           serverKeys = auth.serverKeys,
           signingKey = auth.signingKey,
           rng = rngSeedForTesting,
-        ).mapWithCancellation(
-          onSuccess = { RequestResult.Success(Unit) },
-          onError = { it.toRequestResult<RequestUnauthorizedException>() },
         )
-    } catch (e: Throwable) {
-      CompletableFuture.completedFuture(RequestResult.ApplicationError(e))
-    }
+    }.mapWithCancellation(
+      onSuccess = { RequestResult.Success(Unit) },
+      onError = { it.toRequestResult<RequestUnauthorizedException>() },
+    )
 
   /**
    * Deletes all backup metadata, objects, and stored public key.
@@ -491,7 +494,7 @@ public class UnauthBackupsService(
     auth: BackupAuth,
     rngSeedForTesting: DeterministicRandomSeedUseOnlyForTesting? = null,
   ): CompletableFuture<RequestResult<Unit, RequestUnauthorizedException>> =
-    try {
+    liftExceptions {
       NativeNice
         .UnauthenticatedChatConnection_backup_delete_all(
           asyncCtx = connection.tokioAsyncContext,
@@ -500,13 +503,11 @@ public class UnauthBackupsService(
           serverKeys = auth.serverKeys,
           signingKey = auth.signingKey,
           rng = rngSeedForTesting,
-        ).mapWithCancellation(
-          onSuccess = { RequestResult.Success(Unit) },
-          onError = { it.toRequestResult<RequestUnauthorizedException>() },
         )
-    } catch (e: Throwable) {
-      CompletableFuture.completedFuture(RequestResult.ApplicationError(e))
-    }
+    }.mapWithCancellation(
+      onSuccess = { RequestResult.Success(Unit) },
+      onError = { it.toRequestResult<RequestUnauthorizedException>() },
+    )
 
   /**
    * Copy and re-encrypt media from the attachments CDN into the backup CDN.
@@ -541,16 +542,7 @@ public class UnauthBackupsService(
         credential = auth.credential,
         serverKeys = auth.serverKeys,
         signingKey = auth.signingKey,
-        items =
-          items.map {
-            BridgeCopyBackupMediaItem(
-              sourceAttachmentCdn = it.sourceAttachmentCdn,
-              sourceKey = it.sourceKey,
-              objectLength = it.objectLength,
-              mediaId = it.mediaId,
-              encryptionKey = it.encryptionKey,
-            )
-          },
+        items = items,
         rng = rngSeedForTesting,
       )
     return wrapStream(
@@ -592,13 +584,7 @@ public class UnauthBackupsService(
         credential = auth.credential,
         serverKeys = auth.serverKeys,
         signingKey = auth.signingKey,
-        items =
-          items.map {
-            BridgeDeleteBackupMediaItem(
-              mediaId = it.mediaId,
-              cdn = it.cdn,
-            )
-          },
+        items = items,
         rng = rngSeedForTesting,
       )
     return wrapStream(
@@ -607,8 +593,44 @@ public class UnauthBackupsService(
       pull = { asyncRuntime, stream ->
         NativeNice.DeleteBackupMediaStream_next(asyncRuntime, stream).thenApply { Pair(it.chunk, it.termination) }
       },
-      convertItem = ::DeleteBackupMediaItem,
+      convertItem = { it },
       cancel = Native::DeleteBackupMediaStream_cancel,
     )
   }
+
+  /**
+   * Lists media objects stored with this backup ID.
+   *
+   * This is a paginated API; each invocation will return a `cursor` to use in subsequent requests.
+   * The final page will not have a `cursor`.
+   *
+   * All exceptions are mapped into [RequestResult]; unexpected ones will be treated as
+   * [RequestResult.ApplicationError]. A [RequestUnauthorizedException] means that the authorization
+   * failed.
+   *
+   * @param cursor pass the cursor from a previous response to fetch the next page of items
+   * @param limit a value up to `10_000`; omit this to leave the page size up to the server
+   */
+  public fun listMedia(
+    auth: BackupAuth,
+    cursor: String? = null,
+    limit: Int? = null,
+    rngSeedForTesting: DeterministicRandomSeedUseOnlyForTesting? = null,
+  ): CompletableFuture<RequestResult<ListBackupMediaResponse, RequestUnauthorizedException>> =
+    liftExceptions {
+      NativeNice
+        .UnauthenticatedChatConnection_backup_list_media(
+          asyncCtx = connection.tokioAsyncContext,
+          chat = connection,
+          credential = auth.credential,
+          serverKeys = auth.serverKeys,
+          signingKey = auth.signingKey,
+          cursor = cursor ?: "",
+          limit = limit ?: -1,
+          rng = rngSeedForTesting,
+        )
+    }.mapWithCancellation(
+      onSuccess = { RequestResult.Success(it) },
+      onError = { it.toRequestResult<RequestUnauthorizedException>() },
+    )
 }

@@ -7,7 +7,6 @@ package org.signal.libsignal.net;
 
 import java.lang.ref.WeakReference;
 import java.net.MalformedURLException;
-import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
@@ -194,10 +193,60 @@ public abstract class ChatConnection extends NativeHandleGuard.SimpleOwner {
     }
   }
 
+  /**
+   * Produces information about the established connection.
+   *
+   * <p>The result is a snapshot taken when the connection was established; it does not change if
+   * the connection is later interrupted.
+   */
+  public ConnectionInfo info() {
+    return new ConnectionInfo(guardedMap(this::infoWrapper));
+  }
+
+  /** Information about an established {@link ChatConnection}. */
+  public static final class ConnectionInfo extends NativeHandleGuard.SimpleOwner {
+    private ConnectionInfo(long nativeHandle) {
+      super(nativeHandle);
+    }
+
+    @Override
+    protected void release(long nativeHandle) {
+      Native.ChatConnectionInfo_Destroy(nativeHandle);
+    }
+
+    /** The local port used by the connection. */
+    public int getLocalPort() {
+      return guardedMap(Native::ChatConnectionInfo_local_port);
+    }
+
+    /** The IP addressing version used by the connection. */
+    public IpType getIpType() {
+      int rawValue = guardedMap(Native::ChatConnectionInfo_ip_version);
+      IpType[] values = IpType.values();
+      return rawValue < values.length ? values[rawValue] : IpType.UNKNOWN;
+    }
+
+    /**
+     * Whether the connection was made directly to the Signal service, rather than through a
+     * censorship-circumvention reflector or a user-configured proxy.
+     */
+    public boolean isDirect() {
+      return guardedMap(Native::ChatConnectionInfo_is_direct);
+    }
+
+    /** A developer-facing description of the connection. */
+    @Override
+    public String toString() {
+      return guardedMap(Native::ChatConnectionInfo_description);
+    }
+  }
+
   // These are meant to be thin wrappers around the correct call to Native.ChatConnection_* calls
   //   for each of the concrete implementing classes.
   protected abstract CompletableFuture disconnectWrapper(
       long nativeAsyncContextHandle, long nativeChatConnectionHandle);
+
+  protected abstract long infoWrapper(long nativeChatConnectionHandle);
 
   protected abstract CompletableFuture<Object> sendWrapper(
       long nativeAsyncContextHandle,
@@ -259,25 +308,6 @@ public abstract class ChatConnection extends NativeHandleGuard.SimpleOwner {
                 guardedMap(req -> NativeTesting.TESTING_ChatRequestGetHeaderValue(req, header)));
       }
       return map;
-    }
-
-    /** Must be called with an array-backed ByteBuffer. */
-    public static kotlinx.serialization.json.JsonElement getNextGrpcMessage(
-        String name, ByteBuffer body) {
-      var messageOffsets =
-          NativeTesting.TESTING_FakeChatRemoteEnd_NextGrpcMessage(
-              body.array(), body.arrayOffset() + body.position());
-      var messageBytes = new byte[messageOffsets.getSecond() - messageOffsets.getFirst()];
-      body.position(messageOffsets.getFirst() - body.arrayOffset()).get(messageBytes);
-      var messageJson = NativeTesting.TESTING_FakeChatRemoteEnd_BinprotoToJson(name, messageBytes);
-      return FakeChatRemoteKt.decodeJson(messageJson);
-    }
-
-    public kotlinx.serialization.json.JsonElement getSingleGrpcMessage(String name) {
-      var body = ByteBuffer.wrap(getBody());
-      var result = InternalRequest.getNextGrpcMessage(name, body);
-      assert !body.hasRemaining() : "message had trailing data, use getNextGrpcMessage instead";
-      return result;
     }
   }
 

@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 //
 
+import type { Bytes } from '@signalapp/types';
 import { randomBytes } from 'node:crypto';
 
 import * as Native from '../../Native.js';
@@ -44,6 +45,30 @@ export default class ClientZkAuthOperations {
     );
   }
 
+  /**
+   * Produces the AuthCredentialWithPni from a server-generated AuthCredentialWithPniResponse,
+   * even though there's no expected PNI.
+   *
+   * @param authCredentialSalt - should have been provided by the server at registration/link time.
+   * @param redemptionTime - This is provided by the server as an integer, and should be passed through directly.
+   */
+  receiveAuthCredentialWithoutPni(
+    aci: Aci,
+    authCredentialSalt: Bytes,
+    redemptionTime: number,
+    authCredentialResponse: AuthCredentialWithPniResponse
+  ): AuthCredentialWithPni {
+    return new AuthCredentialWithPni(
+      Native.ServerPublicParams_ReceiveAuthCredentialZkcWithoutPni(
+        this.serverPublicParams,
+        aci.getServiceIdFixedWidthBinary(),
+        authCredentialSalt,
+        redemptionTime,
+        authCredentialResponse.getContents()
+      )
+    );
+  }
+
   createAuthCredentialWithPniPresentation(
     groupSecretParams: GroupSecretParams,
     authCredential: AuthCredentialWithPni
@@ -58,7 +83,7 @@ export default class ClientZkAuthOperations {
   }
 
   createAuthCredentialWithPniPresentationWithRandom(
-    random: Uint8Array<ArrayBuffer>,
+    random: Bytes,
     groupSecretParams: GroupSecretParams,
     authCredential: AuthCredentialWithPni
   ): AuthCredentialPresentation {

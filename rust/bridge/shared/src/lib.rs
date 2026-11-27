@@ -17,7 +17,7 @@ pub use libsignal_bridge_types::{
     bridge_handle_fns, bridge_serializable_handle_fns, describe_panic, io,
 };
 #[cfg(feature = "jni")]
-pub use libsignal_bridge_types::{jni, jni_arg_type, jni_args, jni_result_type};
+pub use libsignal_bridge_types::{jni, jni_args};
 #[cfg(feature = "node")]
 pub use libsignal_bridge_types::{node, node_register};
 
@@ -44,6 +44,7 @@ mod svr2;
 
 pub mod incremental_mac;
 pub mod message_backup;
+pub mod provisioning;
 pub mod usernames;
 
 #[cfg(feature = "signal-media")]

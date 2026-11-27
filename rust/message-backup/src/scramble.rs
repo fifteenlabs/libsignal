@@ -204,7 +204,9 @@ impl Visit<Scrambler> for proto::Frame {
                 Item::Recipient(item) => item.accept(visitor),
                 Item::Chat(item) => item.accept(visitor),
                 Item::ChatItem(item) => item.accept(visitor),
-                Item::StickerPack(item) => item.accept(visitor),
+                Item::InstalledStickerPack(item) => item.accept(visitor),
+                Item::HiddenStickerPack(item) => item.accept(visitor),
+                Item::FavoriteStickerList(item) => item.accept(visitor),
                 Item::AdHocCall(item) => item.accept(visitor),
                 Item::NotificationProfile(item) => item.accept(visitor),
                 Item::ChatFolder(item) => item.accept(visitor),
@@ -313,6 +315,14 @@ impl Visit<Scrambler> for proto::account_data::AccountSettings {
             allowSealedSenderFromAnyone: _,
             allowAutomaticKeyVerification: _,
             hasSeenAdminDeleteEducationDialog: _,
+            unreadBadgeType: _,
+            includeMutedChatsInBadge: _,
+            reactionNotifications: _,
+            notifyForCallsIfMuted: _,
+            notifyForMentionsIfMuted: _,
+            notifyForRepliesIfMuted: _,
+            showUnreadReminders: _,
+            notifyWhenContactJoins: _,
             special_fields: _,
         } = self;
 
@@ -361,6 +371,8 @@ impl Visit<Scrambler> for proto::FilePointer {
             caption,
             blurHash,
             locatorInfo,
+            audioWaveform,
+            audioDurationSeconds: _,
             special_fields: _,
         } = self;
 
@@ -369,6 +381,7 @@ impl Visit<Scrambler> for proto::FilePointer {
         fileName.randomize(&mut visitor.rng);
         caption.randomize(&mut visitor.rng);
         blurHash.randomize(&mut visitor.rng);
+        audioWaveform.randomize(&mut visitor.rng);
 
         if let Some(loc) = locatorInfo.as_mut() {
             loc.accept(visitor);
@@ -476,6 +489,7 @@ impl Visit<Scrambler> for proto::Contact {
             username,
             e164,
             blocked: _,
+            blockedAtTimestamp: _,
             visibility: _,
             profileKey,
             profileSharing: _,
@@ -487,6 +501,7 @@ impl Visit<Scrambler> for proto::Contact {
             keyTransparencyData,
             registration,
             nickname,
+            sharedName,
             systemGivenName,
             systemFamilyName,
             systemNickname,
@@ -530,6 +545,7 @@ impl Visit<Scrambler> for proto::Contact {
         }
 
         nickname.accept(visitor);
+        sharedName.accept(visitor);
         systemGivenName.randomize(&mut visitor.rng);
         systemFamilyName.randomize(&mut visitor.rng);
         systemNickname.randomize(&mut visitor.rng);
@@ -574,6 +590,7 @@ impl Visit<Scrambler> for proto::Group {
             storySendMode: _,
             snapshot,
             blocked: _,
+            blockedAtTimestamp: _,
             avatarColor: _,
             special_fields: _,
         } = self;
@@ -779,6 +796,10 @@ impl Visit<Scrambler> for proto::Chat {
             muteUntilMs: _,
             markedUnread: _,
             dontNotifyForMentionsIfMuted: _,
+            notifyForCallsIfMuted: _,
+            notifyForMentionsIfMuted: _,
+            notifyForRepliesIfMuted: _,
+            showUnreadReminders: _,
             style,
             expireTimerVersion: _,
             special_fields: _,
@@ -1124,6 +1145,9 @@ impl Visit<Scrambler> for proto::ContactAttachment {
             address,
             avatar,
             organization,
+            aci,
+            nickname,
+            note,
             special_fields: _,
         } = self;
         name.accept(visitor);
@@ -1132,6 +1156,21 @@ impl Visit<Scrambler> for proto::ContactAttachment {
         address.accept(visitor);
         avatar.accept(visitor);
         organization.randomize(&mut visitor.rng);
+        visitor.replace_service_id(aci);
+        nickname.accept(visitor);
+        note.randomize(&mut visitor.rng);
+    }
+}
+
+impl Visit<Scrambler> for proto::contact_attachment::SignalNickname {
+    fn accept(&mut self, visitor: &mut Scrambler) {
+        let Self {
+            given,
+            family,
+            special_fields: _,
+        } = self;
+        given.randomize(&mut visitor.rng);
+        family.randomize(&mut visitor.rng);
     }
 }
 
@@ -1884,6 +1923,7 @@ impl Visit<Scrambler> for proto::LearnedProfileChatUpdate {
             match name {
                 PreviousName::E164(e164) => visitor.replace_e164(e164),
                 PreviousName::Username(username) => *username = visitor.next_username(),
+                PreviousName::SharedName(shared_name) => shared_name.randomize(&mut visitor.rng),
             }
         }
     }
@@ -2062,6 +2102,30 @@ impl Visit<Scrambler> for proto::StickerPack {
         let Self {
             packId,
             packKey,
+            special_fields: _,
+        } = self;
+        packId.randomize(&mut visitor.rng);
+        packKey.randomize(&mut visitor.rng);
+    }
+}
+
+impl Visit<Scrambler> for proto::FavoriteStickerList {
+    fn accept(&mut self, visitor: &mut Scrambler) {
+        let Self {
+            favoriteSticker,
+            special_fields: _,
+        } = self;
+        favoriteSticker.accept(visitor);
+    }
+}
+
+impl Visit<Scrambler> for proto::favorite_sticker_list::FavoriteSticker {
+    fn accept(&mut self, visitor: &mut Scrambler) {
+        let Self {
+            packId,
+            packKey,
+            stickerId: _,
+            favoritedAtTimestamp: _,
             special_fields: _,
         } = self;
         packId.randomize(&mut visitor.rng);

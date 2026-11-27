@@ -5,6 +5,7 @@
 
 import { assert, config, expect, use } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
+import type { Bytes } from '@signalapp/types';
 import { Buffer } from 'node:buffer';
 
 import * as Native from '../../Native.js';
@@ -34,6 +35,7 @@ const testGroupSendToken = new GroupSendFullToken(
 
 describe('UnauthMessagesService', () => {
   describe('multi-recipient messages', () => {
+    const grpcOverrides = ['MessagesAnonymousSendMultiRecipientMessage'];
     async function sendTestMultiRecipientMessage(
       chat: UnauthMessagesService,
       fakeRemote: FakeChatRemote
@@ -65,7 +67,10 @@ describe('UnauthMessagesService', () => {
 
     it('can send', async () => {
       const tokio = new TokioAsyncContext(Native.TokioAsyncContext_new());
-      const [chat, fakeRemote] = connectUnauth<UnauthMessagesService>(tokio);
+      const [chat, fakeRemote] = connectUnauth<UnauthMessagesService>(
+        tokio,
+        grpcOverrides
+      );
 
       const [responseFuture, request] = await sendTestMultiRecipientMessage(
         chat,
@@ -92,7 +97,10 @@ describe('UnauthMessagesService', () => {
 
     it('can handle RequestUnauthorized', async () => {
       const tokio = new TokioAsyncContext(Native.TokioAsyncContext_new());
-      const [chat, fakeRemote] = connectUnauth<UnauthMessagesService>(tokio);
+      const [chat, fakeRemote] = connectUnauth<UnauthMessagesService>(
+        tokio,
+        grpcOverrides
+      );
 
       const [responseFuture, request] = await sendTestMultiRecipientMessage(
         chat,
@@ -113,7 +121,10 @@ describe('UnauthMessagesService', () => {
 
     it('can handle a mismatched device error', async () => {
       const tokio = new TokioAsyncContext(Native.TokioAsyncContext_new());
-      const [chat, fakeRemote] = connectUnauth<UnauthMessagesService>(tokio);
+      const [chat, fakeRemote] = connectUnauth<UnauthMessagesService>(
+        tokio,
+        grpcOverrides
+      );
 
       const [responseFuture, request] = await sendTestMultiRecipientMessage(
         chat,
@@ -154,7 +165,10 @@ describe('UnauthMessagesService', () => {
 
     it('can handle a stale device error', async () => {
       const tokio = new TokioAsyncContext(Native.TokioAsyncContext_new());
-      const [chat, fakeRemote] = connectUnauth<UnauthMessagesService>(tokio);
+      const [chat, fakeRemote] = connectUnauth<UnauthMessagesService>(
+        tokio,
+        grpcOverrides
+      );
 
       const [responseFuture, request] = await sendTestMultiRecipientMessage(
         chat,
@@ -194,7 +208,10 @@ describe('UnauthMessagesService', () => {
 
     it('can handle server-side errors', async () => {
       const tokio = new TokioAsyncContext(Native.TokioAsyncContext_new());
-      const [chat, fakeRemote] = connectUnauth<UnauthMessagesService>(tokio);
+      const [chat, fakeRemote] = connectUnauth<UnauthMessagesService>(
+        tokio,
+        grpcOverrides
+      );
 
       const [responseFuture, request] = await sendTestMultiRecipientMessage(
         chat,
@@ -215,11 +232,13 @@ describe('UnauthMessagesService', () => {
   });
 
   describe('1:1 messages', () => {
+    const grpcOverrides = ['MessagesAnonymousSendSingleRecipientMessage'];
+
     async function sendTestSealedMessage(
       chat: UnauthMessagesService,
       auth:
         | 'story'
-        | { accessKey: Uint8Array<ArrayBuffer> }
+        | { accessKey: Bytes }
         | GroupSendFullToken
         | 'unrestricted',
       expectedAuthHeader: Readonly<[string, string]> | null,
@@ -276,7 +295,10 @@ describe('UnauthMessagesService', () => {
 
     it('can send', async () => {
       const tokio = new TokioAsyncContext(Native.TokioAsyncContext_new());
-      const [chat, fakeRemote] = connectUnauth<UnauthMessagesService>(tokio);
+      const [chat, fakeRemote] = connectUnauth<UnauthMessagesService>(
+        tokio,
+        grpcOverrides
+      );
 
       for (const [auth, expectedAuthHeader] of [
         ['story', null] as const,
@@ -316,7 +338,10 @@ describe('UnauthMessagesService', () => {
 
     it('can handle RequestUnauthorized', async () => {
       const tokio = new TokioAsyncContext(Native.TokioAsyncContext_new());
-      const [chat, fakeRemote] = connectUnauth<UnauthMessagesService>(tokio);
+      const [chat, fakeRemote] = connectUnauth<UnauthMessagesService>(
+        tokio,
+        grpcOverrides
+      );
 
       const [responseFuture, request] = await sendTestSealedMessage(
         chat,
@@ -339,7 +364,10 @@ describe('UnauthMessagesService', () => {
 
     it('can handle a mismatched device error', async () => {
       const tokio = new TokioAsyncContext(Native.TokioAsyncContext_new());
-      const [chat, fakeRemote] = connectUnauth<UnauthMessagesService>(tokio);
+      const [chat, fakeRemote] = connectUnauth<UnauthMessagesService>(
+        tokio,
+        grpcOverrides
+      );
 
       const [responseFuture, request] = await sendTestSealedMessage(
         chat,
@@ -377,7 +405,10 @@ describe('UnauthMessagesService', () => {
 
     it('can handle a stale device error', async () => {
       const tokio = new TokioAsyncContext(Native.TokioAsyncContext_new());
-      const [chat, fakeRemote] = connectUnauth<UnauthMessagesService>(tokio);
+      const [chat, fakeRemote] = connectUnauth<UnauthMessagesService>(
+        tokio,
+        grpcOverrides
+      );
 
       const [responseFuture, request] = await sendTestSealedMessage(
         chat,

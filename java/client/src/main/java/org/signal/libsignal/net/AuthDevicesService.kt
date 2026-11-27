@@ -6,8 +6,9 @@
 package org.signal.libsignal.net
 
 import org.signal.libsignal.internal.CompletableFuture
-import org.signal.libsignal.internal.LinkedDeviceInternal
+import org.signal.libsignal.internal.DeviceCapabilityInternal
 import org.signal.libsignal.internal.NativeNice
+import org.signal.libsignal.internal.liftExceptions
 import org.signal.libsignal.internal.mapWithCancellation
 import org.signal.libsignal.protocol.DeviceId
 import java.time.Instant
@@ -36,18 +37,6 @@ public data class LinkedDevice(
    */
   val createdAtCiphertext: ByteArray,
 ) {
-  // These need to be public for testing
-  public companion object {
-    public fun fromInternal(it: LinkedDeviceInternal): LinkedDevice =
-      LinkedDevice(
-        id = it.id,
-        encryptedName = it.encryptedName,
-        lastSeen = it.lastSeen,
-        registrationId = it.registrationId,
-        createdAtCiphertext = it.createdAtCiphertext,
-      )
-  }
-
   override fun equals(other: Any?): Boolean {
     if (this === other) return true
     if (javaClass != other?.javaClass) return false
@@ -73,6 +62,57 @@ public data class LinkedDevice(
   }
 }
 
+/**
+ * A feature that a device may declare support for.
+ */
+public enum class DeviceCapability {
+  /** Support for Signal's storage service. */
+  STORAGE,
+
+  /** Support for transferring data between devices. */
+  TRANSFER,
+
+  /** Support for attachment backfill. */
+  ATTACHMENT_BACKFILL,
+
+  /** Support for sparse post-quantum ratchets. */
+  SPARSE_POST_QUANTUM_RATCHET,
+
+  /** Support for version 2 of the profiles API. */
+  PROFILES_V2,
+
+  /** Support for username-change sync messages. */
+  USERNAME_CHANGE_SYNC_MESSAGE,
+
+  /** Support for accounts without a phone number. */
+  OPTIONAL_PHONE_NUMBER,
+  ;
+
+  internal companion object {
+    internal fun fromInternal(it: DeviceCapabilityInternal): DeviceCapability =
+      when (it) {
+        DeviceCapabilityInternal.Storage -> STORAGE
+        DeviceCapabilityInternal.Transfer -> TRANSFER
+        DeviceCapabilityInternal.AttachmentBackfill -> ATTACHMENT_BACKFILL
+        DeviceCapabilityInternal.SparsePostQuantumRatchet -> SPARSE_POST_QUANTUM_RATCHET
+        DeviceCapabilityInternal.ProfilesV2 -> PROFILES_V2
+        DeviceCapabilityInternal.UsernameChangeSyncMessage -> USERNAME_CHANGE_SYNC_MESSAGE
+        DeviceCapabilityInternal.OptionalPhoneNumber -> OPTIONAL_PHONE_NUMBER
+      }
+  }
+}
+
+private fun DeviceCapability.toInternal(): DeviceCapabilityInternal =
+  when (this) {
+    DeviceCapability.STORAGE -> DeviceCapabilityInternal.Storage
+    DeviceCapability.TRANSFER -> DeviceCapabilityInternal.Transfer
+    DeviceCapability.ATTACHMENT_BACKFILL -> DeviceCapabilityInternal.AttachmentBackfill
+    DeviceCapability.SPARSE_POST_QUANTUM_RATCHET -> DeviceCapabilityInternal.SparsePostQuantumRatchet
+    DeviceCapability.PROFILES_V2 -> DeviceCapabilityInternal.ProfilesV2
+    DeviceCapability.USERNAME_CHANGE_SYNC_MESSAGE -> DeviceCapabilityInternal.UsernameChangeSyncMessage
+    DeviceCapability.OPTIONAL_PHONE_NUMBER -> DeviceCapabilityInternal.OptionalPhoneNumber
+  }
+
 public class AuthDevicesService(
   private val connection: AuthenticatedChatConnection,
 ) {
@@ -89,20 +129,18 @@ public class AuthDevicesService(
     deviceId: DeviceId,
     encryptedName: ByteArray,
   ): CompletableFuture<RequestResult<Unit, DeviceIdNotFoundException>> =
-    try {
+    liftExceptions {
       NativeNice
         .AuthenticatedChatConnection_set_device_name(
           asyncCtx = connection.tokioAsyncContext,
           chat = connection,
           deviceId = deviceId,
           encryptedName = encryptedName,
-        ).mapWithCancellation(
-          onSuccess = { RequestResult.Success(Unit) },
-          onError = { err -> err.toRequestResult<DeviceIdNotFoundException>() },
         )
-    } catch (e: Throwable) {
-      CompletableFuture.completedFuture(RequestResult.ApplicationError(e))
-    }
+    }.mapWithCancellation(
+      onSuccess = { RequestResult.Success(Unit) },
+      onError = { err -> err.toRequestResult<DeviceIdNotFoundException>() },
+    )
 
   /**
    * Remove a linked device from the current account.
@@ -121,36 +159,56 @@ public class AuthDevicesService(
   public fun removeDevice(
     deviceId: org.signal.libsignal.protocol.DeviceId,
   ): CompletableFuture<RequestResult<Unit, Nothing>> =
-    try {
+    liftExceptions {
       NativeNice
         .AuthenticatedChatConnection_remove_device(
           asyncCtx = connection.tokioAsyncContext,
           chat = connection,
           deviceId = deviceId,
-        ).mapWithCancellation(
-          onSuccess = { RequestResult.Success(Unit) },
-          onError = { err -> err.toRequestResult() },
         )
-    } catch (e: Throwable) {
-      CompletableFuture.completedFuture(RequestResult.ApplicationError(e))
-    }
+    }.mapWithCancellation(
+      onSuccess = { RequestResult.Success(Unit) },
+      onError = { err -> err.toRequestResult() },
+    )
 
   /**
    * List the devices associated with the current account.
    */
   public fun getDevices(): CompletableFuture<RequestResult<List<LinkedDevice>, Nothing>> =
-    try {
+    liftExceptions {
       NativeNice
         .AuthenticatedChatConnection_get_devices(
           asyncCtx = connection.tokioAsyncContext,
           chat = connection,
-        ).mapWithCancellation(
-          onSuccess = { RequestResult.Success(it.map(LinkedDevice::fromInternal)) },
-          onError = { err -> err.toRequestResult() },
         )
-    } catch (e: Throwable) {
-      CompletableFuture.completedFuture(RequestResult.ApplicationError(e))
-    }
+    }.mapWithCancellation(
+      onSuccess = { RequestResult.Success(it) },
+      onError = { err -> err.toRequestResult() },
+    )
+
+  /**
+   * Declares that the current device supports the specified features.
+   *
+   * The provided set of capabilities replaces the device's previously declared capabilities; a
+   * capability not listed is cleared.
+   *
+   * @param capabilities The [DeviceCapability] values supported by the current device.
+   *
+   * All exceptions are mapped into [RequestResult]; unexpected ones will be treated as
+   * [RequestResult.ApplicationError].
+   */
+  public fun setCapabilities(capabilities: Set<DeviceCapability>): CompletableFuture<RequestResult<Unit, Nothing>> =
+    liftExceptions {
+      NativeNice
+        .AuthenticatedChatConnection_set_capabilities(
+          asyncCtx = connection.tokioAsyncContext,
+          chat = connection,
+          capabilities = capabilities.map { it.toInternal() },
+        )
+    }.mapWithCancellation(
+      onSuccess = { RequestResult.Success(Unit) },
+      onError = { err -> err.toRequestResult() },
+    )
 
   /**
    * Sets the FCM push token the server should use to send new message notifications to the
@@ -162,19 +220,17 @@ public class AuthDevicesService(
    * [RequestResult.ApplicationError].
    */
   public fun setPushToken(fcmToken: String): CompletableFuture<RequestResult<Unit, Nothing>> =
-    try {
+    liftExceptions {
       NativeNice
         .AuthenticatedChatConnection_set_push_token_fcm(
           asyncCtx = connection.tokioAsyncContext,
           chat = connection,
           fcmToken = fcmToken,
-        ).mapWithCancellation(
-          onSuccess = { RequestResult.Success(Unit) },
-          onError = { err -> err.toRequestResult() },
         )
-    } catch (e: Throwable) {
-      CompletableFuture.completedFuture(RequestResult.ApplicationError(e))
-    }
+    }.mapWithCancellation(
+      onSuccess = { RequestResult.Success(Unit) },
+      onError = { err -> err.toRequestResult() },
+    )
 
   /**
    * Remove any push tokens associated with the current device.
@@ -183,16 +239,14 @@ public class AuthDevicesService(
    * messages.
    */
   public fun clearPushToken(): CompletableFuture<RequestResult<Unit, Nothing>> =
-    try {
+    liftExceptions {
       NativeNice
         .AuthenticatedChatConnection_clear_push_token(
           asyncCtx = connection.tokioAsyncContext,
           chat = connection,
-        ).mapWithCancellation(
-          onSuccess = { RequestResult.Success(Unit) },
-          onError = { err -> err.toRequestResult() },
         )
-    } catch (e: Throwable) {
-      CompletableFuture.completedFuture(RequestResult.ApplicationError(e))
-    }
+    }.mapWithCancellation(
+      onSuccess = { RequestResult.Success(Unit) },
+      onError = { err -> err.toRequestResult() },
+    )
 }

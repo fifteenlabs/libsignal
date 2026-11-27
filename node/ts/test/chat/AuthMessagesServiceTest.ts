@@ -8,9 +8,10 @@ import chaiAsPromised from 'chai-as-promised';
 import { Buffer } from 'node:buffer';
 
 import * as Native from '../../Native.js';
+import * as NativeNice from '../../NativeNice.js';
 import * as util from '../util.js';
 import { AuthMessagesService, TokioAsyncContext } from '../../net.js';
-import { connectAuth } from './ServiceTestUtils.js';
+import { connectAuth, defineTestGrpcCases } from './ServiceTestUtils.js';
 import { ErrorCode, LibSignalErrorBase } from '../../Errors.js';
 import { FakeChatRemote, InternalRequest } from '../../net/FakeChat.js';
 import { Aci } from '../../Address.js';
@@ -23,9 +24,14 @@ config.truncateThreshold = 0;
 
 describe('AuthMessagesService', () => {
   describe('getUploadForm', () => {
+    const grpcOverrides = ['AttachmentsGetUploadForm'];
+
     it('works correctly', async () => {
       const tokio = new TokioAsyncContext(Native.TokioAsyncContext_new());
-      const [chat, fakeRemote] = connectAuth<AuthMessagesService>(tokio);
+      const [chat, fakeRemote] = connectAuth<AuthMessagesService>(
+        tokio,
+        grpcOverrides
+      );
       const responseFuture = chat.getUploadForm({ uploadSize: 42n });
       const request = await fakeRemote.assertReceiveIncomingRequest();
       expect(request.verb).to.eq('GET');
@@ -58,7 +64,10 @@ describe('AuthMessagesService', () => {
     });
     it('throws on upload too large', async () => {
       const tokio = new TokioAsyncContext(Native.TokioAsyncContext_new());
-      const [chat, fakeRemote] = connectAuth<AuthMessagesService>(tokio);
+      const [chat, fakeRemote] = connectAuth<AuthMessagesService>(
+        tokio,
+        grpcOverrides
+      );
       const responseFuture = chat.getUploadForm({ uploadSize: 42n });
       const request = await fakeRemote.assertReceiveIncomingRequest();
       expect(request.verb).to.eq('GET');
@@ -78,6 +87,7 @@ describe('AuthMessagesService', () => {
   });
 
   describe('1:1 messages', () => {
+    const grpcOverrides = ['MessagesSendMessage'];
     const recipientUuid = '4fcfe887-a600-40cd-9ab7-fd2a695e9981';
 
     async function sendTestMessage(
@@ -151,7 +161,10 @@ describe('AuthMessagesService', () => {
 
     it('can send', async () => {
       const tokio = new TokioAsyncContext(Native.TokioAsyncContext_new());
-      const [chat, fakeRemote] = connectAuth<AuthMessagesService>(tokio);
+      const [chat, fakeRemote] = connectAuth<AuthMessagesService>(
+        tokio,
+        grpcOverrides
+      );
 
       for (const syncMessage of [false, true]) {
         const [responseFuture, request] = await sendTestMessage(
@@ -173,7 +186,10 @@ describe('AuthMessagesService', () => {
 
     it('can handle NotFound', async () => {
       const tokio = new TokioAsyncContext(Native.TokioAsyncContext_new());
-      const [chat, fakeRemote] = connectAuth<AuthMessagesService>(tokio);
+      const [chat, fakeRemote] = connectAuth<AuthMessagesService>(
+        tokio,
+        grpcOverrides
+      );
 
       const [responseFuture, request] = await sendTestMessage(
         chat,
@@ -195,7 +211,10 @@ describe('AuthMessagesService', () => {
 
     it('can handle a mismatched device error', async () => {
       const tokio = new TokioAsyncContext(Native.TokioAsyncContext_new());
-      const [chat, fakeRemote] = connectAuth<AuthMessagesService>(tokio);
+      const [chat, fakeRemote] = connectAuth<AuthMessagesService>(
+        tokio,
+        grpcOverrides
+      );
 
       const [responseFuture, request] = await sendTestMessage(
         chat,
@@ -232,7 +251,10 @@ describe('AuthMessagesService', () => {
 
     it('can handle a stale device error', async () => {
       const tokio = new TokioAsyncContext(Native.TokioAsyncContext_new());
-      const [chat, fakeRemote] = connectAuth<AuthMessagesService>(tokio);
+      const [chat, fakeRemote] = connectAuth<AuthMessagesService>(
+        tokio,
+        grpcOverrides
+      );
 
       const [responseFuture, request] = await sendTestMessage(
         chat,
@@ -268,7 +290,10 @@ describe('AuthMessagesService', () => {
 
     it('can handle challenges', async () => {
       const tokio = new TokioAsyncContext(Native.TokioAsyncContext_new());
-      const [chat, fakeRemote] = connectAuth<AuthMessagesService>(tokio);
+      const [chat, fakeRemote] = connectAuth<AuthMessagesService>(
+        tokio,
+        grpcOverrides
+      );
 
       const [responseFuture, request] = await sendTestMessage(
         chat,
@@ -296,5 +321,19 @@ describe('AuthMessagesService', () => {
           options: new Set(['captcha']),
         });
     });
+  });
+
+  describe('reportMessage', () => {
+    defineTestGrpcCases(
+      NativeNice.TESTING_ReportMessageTests(),
+      connectAuth<AuthMessagesService>,
+      async (
+        chat: AuthMessagesService,
+        { source, messageGuid, reportSpamToken }: NativeNice.ReportMessageArgs,
+        _resp: void
+      ) => {
+        await chat.reportMessage({ source, messageGuid, reportSpamToken });
+      }
+    );
   });
 });

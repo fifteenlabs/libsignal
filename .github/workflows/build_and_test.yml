@@ -20,6 +20,9 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
 
+# WARNING: Make sure not to put any secrets in job-wide env vars
+# if they're available in the public repo! They could end up in
+# a public GitHub Actions cache.
 env:
   CARGO_TERM_COLOR: always
   NDK_VERSION: 28.0.13004108
@@ -95,7 +98,8 @@ jobs:
           swift:
           - *rust_ios
           - 'swift/**'
-          - 'LibSignalClient.podspec'
+          - 'Package.resolved'
+          - 'Package.swift'
           ignored:
           - 'LICENSE'
           - '*.md'
@@ -127,11 +131,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        version: [nightly, stable]
+        version: [pinned, msrv]
         include:
-        - version: nightly
+        - version: pinned
           toolchain: "$(cat rust-toolchain)"
-        - version: stable
+        - version: msrv
           # Extract 'rust-version' value from Cargo.toml.
           toolchain: "$(yq '.workspace.package.rust-version' $(git rev-parse --show-toplevel)/Cargo.toml)"
 
@@ -178,11 +182,11 @@ jobs:
 
     - name: Clippy
       run: cargo clippy --workspace --all-targets --all-features --keep-going -- -D warnings
-      if: matrix.version == 'nightly'
+      if: matrix.version == 'pinned'
 
     - name: Rust docs
       run: cargo +${{ matrix.toolchain }} doc --workspace --all-features --no-deps --document-private-items --keep-going
-      if: matrix.version == 'stable'
+      if: matrix.version == 'pinned'
       env:
         RUSTDOCFLAGS: -D warnings
 
@@ -210,11 +214,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        version: [nightly, stable]
+        version: [pinned, msrv]
         include:
-        - version: nightly
+        - version: pinned
           toolchain: "$(cat rust-toolchain)"
-        - version: stable
+        - version: msrv
           # Extract 'rust-version' value from Cargo.toml.
           toolchain: "$(yq '.workspace.package.rust-version' $(git rev-parse --show-toplevel)/Cargo.toml)"
 
@@ -355,12 +359,12 @@ jobs:
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Resolve pinned nightly toolchain
+    - name: Resolve pinned toolchain
       id: rust-fmt-toolchain
-      run: echo "pinned-nightly-toolchain=$(cat rust-toolchain)" >> "$GITHUB_OUTPUT"
+      run: echo "pinned-toolchain=$(cat rust-toolchain)" >> "$GITHUB_OUTPUT"
 
-    - name: Install pinned nightly toolchain
-      run: rustup toolchain install "${{ steps.rust-fmt-toolchain.outputs.pinned-nightly-toolchain }}" --profile minimal --component rustfmt
+    - name: Install pinned toolchain
+      run: rustup toolchain install "${{ steps.rust-fmt-toolchain.outputs.pinned-toolchain }}" --profile minimal --component rustfmt
 
     - name: Cache locally-built tools
       uses: runs-on/cache@575425708ccb521bfce731e8d8a67f7f337b8954 # main as of 2026-04-10
@@ -382,11 +386,14 @@ jobs:
     - name: Cargo.toml formatting check
       run: PATH="$PATH:$PWD/local-tools/bin" taplo format -c .taplo.toml --check
 
+    - name: Lint Cargo.toml
+      run: bin/verify-cargo-toml.py
+
     - name: Rustfmt check
-      run: cargo +${{ steps.rust-fmt-toolchain.outputs.pinned-nightly-toolchain }} fmt --all -- --check
+      run: cargo +${{ steps.rust-fmt-toolchain.outputs.pinned-toolchain }} fmt --all -- --check
 
     - name: Rustfmt check for cross-version-testing
-      run: cargo +${{ steps.rust-fmt-toolchain.outputs.pinned-nightly-toolchain }} fmt --all -- --check
+      run: cargo +${{ steps.rust-fmt-toolchain.outputs.pinned-toolchain }} fmt --all -- --check
       working-directory: rust/protocol/cross-version-testing
 
     - name: Check acknowledgments
@@ -425,8 +432,6 @@ jobs:
       run: ./bin/install_protoc_linux
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - run: cargo +stable install --version "$(cat .cbindgen-version)" --locked cbindgen
 
     - run: rustup toolchain install "$(cat rust-toolchain)" --profile minimal --target aarch64-linux-android,armv7-linux-androideabi
 
@@ -496,8 +501,6 @@ jobs:
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - run: cargo +stable install cbindgen
-
     - run: rustup toolchain install "$(cat rust-toolchain)" --profile minimal
 
     - name: Restore cargo cache
@@ -514,7 +517,7 @@ jobs:
         job-name: java-jvm
 
     - name: Verify that the JNI bindings are up to date
-      run: rust/bridge/jni/bin/gen_java_decl.py --verify
+      run: cargo run -p libsignal-jni-native_kt -- --verify
 
     - run: ./gradlew --dependency-verification strict -Dorg.gradle.warning.mode=fail build dokkaGenerate -PskipAndroid
       working-directory: java
@@ -660,8 +663,6 @@ jobs:
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - run: cargo +stable install --version "$(cat .cbindgen-version)" --locked cbindgen
-
     - run: swift/verify_error_codes.sh
 
     - name: Build libsignal-ffi
@@ -669,7 +670,6 @@ jobs:
 
     - name: Build Swift and run tests
       run: swift test -v
-      working-directory: swift
 
     - name: Build and run Swift benchmarks (in debug mode)
       run: swift run -v Benchmarks --allow-debug-build
@@ -691,10 +691,9 @@ jobs:
 # See https://forums.swift.org/t/generate-documentation-failing-for-swift-6-pre-release/74534
 #    - name: Build Swift package documentation
 #      run: swift package plugin generate-documentation --analyze --warnings-as-errors
-#      working-directory: swift
 
-  swift_cocoapod:
-    name: Swift CocoaPod
+  swift_ios:
+    name: Swift iOS
 
     runs-on: macos-15-xlarge
 
@@ -705,7 +704,6 @@ jobs:
     timeout-minutes: 45
 
     env:
-      LIBSIGNAL_TESTING_ONLY_ACTIVE_ARCH: 1
       # For Swift 6.2. Can be removed when advancing to the macos-26 runner.
       DEVELOPER_DIR: /Applications/Xcode_26.3.app
 
@@ -737,17 +735,10 @@ jobs:
           RUNS_ON_S3_BUCKET_CACHE: ${{ secrets.R2_BUCKET_NAME }}
           RUNS_ON_S3_BUCKET_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
         with:
-          job-name: swift-cocoapod
+          job-name: swift-ios
 
-      - name: Build for aarch64-apple-ios-sim
-        run: swift/build_ffi.sh --release
-        env:
-          CARGO_BUILD_TARGET: aarch64-apple-ios-sim
-
-      - name: Run pod lint
-        run: pod lib lint --verbose --platforms=ios --skip-tests
-        env:
-          LIBSIGNAL_TESTING_DISABLE_EXPLICIT_MODULES: 1
+      - name: Build and test on an iOS simulator
+        run: swift/run_ios_tests.sh
 
       - name: Save cargo cache
         if: ${{ env.SHOULD_USE_CARGO_CACHE == 'true' }}

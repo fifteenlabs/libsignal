@@ -128,12 +128,26 @@ fn PublicKey_Deserialize(data: &[u8]) -> Result<PublicKey> {
     Ok(PublicKey::deserialize(data)?)
 }
 
+/// Returns `data[offset..][..length]`, or an `InvalidArgument` error if that range is out of bounds.
+#[cfg(feature = "jni")]
+fn slice_at_offset_with_length(data: &[u8], offset: u32, length: u32) -> Result<&[u8]> {
+    let offset = offset as usize;
+    let length = length as usize;
+    data.get(offset..)
+        .and_then(|rest| rest.get(..length))
+        .ok_or_else(|| {
+            SignalProtocolError::InvalidArgument(format!(
+                "offset {offset} and length {length} out of bounds for {} bytes",
+                data.len()
+            ))
+        })
+}
+
 // Alternate implementation to deserialize from an offset and length.
 #[bridge_fn(ffi = false, node = false)]
 fn ECPublicKey_Deserialize(data: &[u8], offset: u32, length: u32) -> Result<PublicKey> {
-    let offset = offset as usize;
-    let length = length as usize;
-    Ok(PublicKey::deserialize(&data[offset..][..length])?)
+    let data = slice_at_offset_with_length(data, offset, length)?;
+    Ok(PublicKey::deserialize(data)?)
 }
 
 bridge_get!(
@@ -217,9 +231,8 @@ fn KyberPublicKey_DeserializeWithOffsetLength(
     offset: u32,
     length: u32,
 ) -> Result<KyberPublicKey> {
-    let offset = offset as usize;
-    let length = length as usize;
-    KyberPublicKey::deserialize(&data[offset..][..length])
+    let data = slice_at_offset_with_length(data, offset, length)?;
+    KyberPublicKey::deserialize(data)
 }
 
 bridge_get!(
@@ -887,7 +900,7 @@ fn UnidentifiedSenderMessageContentNew(
     node = false
 )]
 fn UnidentifiedSenderMessageContent_New_Java(
-    message: jni::CiphertextMessageRef,
+    message: jni::CiphertextMessageRef<'_>,
     sender: &SenderCertificate,
     content_hint: u32,
     group_id: Option<&[u8]>,
@@ -961,35 +974,13 @@ fn SessionRecord_ArchiveCurrentState(session_record: &mut SessionRecord) -> Resu
 }
 
 #[bridge_fn]
-fn SessionRecord_HasUsableSenderChain(
-    s: &SessionRecord,
-    require_pq_ratio: f64,
-    now: Timestamp,
-) -> Result<bool> {
-    let has_chain =
-        s.has_usable_sender_chain(now.into(), SessionUsabilityRequirements::NotStale)?;
-    if !has_chain {
-        return Ok(false);
-    }
-    let has_pq_chain = s.has_usable_sender_chain(
+fn SessionRecord_HasUsableSenderChain(s: &SessionRecord, now: Timestamp) -> Result<bool> {
+    s.has_usable_sender_chain(
         now.into(),
         SessionUsabilityRequirements::NotStale
             | SessionUsabilityRequirements::EstablishedWithPqxdh
             | SessionUsabilityRequirements::Spqr,
-    )?;
-    if has_pq_chain || require_pq_ratio == 0.0 {
-        return Ok(true);
-    }
-    let require_pq_ratio = if require_pq_ratio > 1.0 {
-        log::warn!("pinning overly high PQ ratio {require_pq_ratio} to 1.0");
-        1.0
-    } else if require_pq_ratio < 0.0 {
-        log::warn!("pinning overly low PQ ratio {require_pq_ratio} to 0.0");
-        0.0
-    } else {
-        require_pq_ratio
-    };
-    Ok(should_use_nonpq_session(require_pq_ratio, s.alice_base_key().expect("we should have a current session, since has_usable_sender_chain returned a non-error value")))
+    )
 }
 
 #[bridge_fn]
@@ -1109,6 +1100,7 @@ async fn SessionCipher_DecryptPreKeySignalMessage(
         &mut csprng,
     )
     .await
+    .map(|r| r.plaintext)
 }
 
 #[bridge_fn(node = "SealedSender_Encrypt")]

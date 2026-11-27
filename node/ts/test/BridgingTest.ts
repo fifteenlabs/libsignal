@@ -14,6 +14,7 @@ import { toBase64 } from './util.js';
 import { TokioAsyncContext } from '../net.js';
 import { DeviceId } from '../NiceConverters.js';
 import { ErrorCode, LibSignalErrorBase } from '../Errors.js';
+import { MySimpleTestEnum } from '../NativeNice.js';
 
 use(chaiAsPromised);
 
@@ -227,6 +228,11 @@ describe('bridge_fn', () => {
       17
     );
   });
+
+  it('handles AsType on return', () => {
+    assert.equal(-1, Native.TESTING_DowncastViaAsTypeOnReturn(-1n));
+    assert.throws(() => Native.TESTING_DowncastViaAsTypeOnReturn(1n << 63n));
+  });
 });
 
 describe('BridgedStringMap', () => {
@@ -386,6 +392,39 @@ describe('NativeTestingNice', () => {
       });
     }
   });
+  it('OptionalData', async () => {
+    for (const item of [
+      null,
+      new Uint8Array(),
+      new Uint8Array([0]),
+      new Uint8Array([0, 1]),
+    ]) {
+      await testConversion({
+        item,
+        toString: item === null ? '%' : toBase64(item),
+        nativeToString: (x) =>
+          NativeNice.TESTING_conversion_OptionalBytes_to_string({ x }),
+        nativeIdentity: (x) =>
+          NativeNice.TESTING_conversion_OptionalBytes_identity({ x }),
+        nativeIdentityAsync:
+          NativeNice.TESTING_conversion_OptionalBytes_identity_async,
+      });
+    }
+  });
+  it('OptionalString', async () => {
+    for (const item of [null, '', 'a', 'abc']) {
+      await testConversion({
+        item,
+        toString: JSON.stringify(item),
+        nativeToString: (x) =>
+          NativeNice.TESTING_conversion_OptionalString_to_string({ x }),
+        nativeIdentity: (x) =>
+          NativeNice.TESTING_conversion_OptionalString_identity({ x }),
+        nativeIdentityAsync:
+          NativeNice.TESTING_conversion_OptionalString_identity_async,
+      });
+    }
+  });
   it('BridgeVec of MySimpleTestEnum', async () => {
     for (const item of [
       [],
@@ -418,6 +457,105 @@ describe('NativeTestingNice', () => {
           NativeNice.TESTING_conversion_BridgeVecString_identity({ x }),
         nativeIdentityAsync:
           NativeNice.TESTING_conversion_BridgeVecString_identity_async,
+      });
+    }
+  });
+  it('string map', async () => {
+    for (const map of [
+      new Map<string, string>(),
+      new Map([['1', 'a']]),
+      new Map([
+        ['1', 'a'],
+        ['2', 'b'],
+      ]),
+      new Map([
+        ['1', 'a'],
+        ['2', 'b'],
+        ['3', 'c'],
+      ]),
+    ]) {
+      await testConversion({
+        item: map,
+        toString: Array.from(map.entries().map(([k, v]) => `${k},${v}`))
+          .toSorted()
+          .join('\n'),
+        nativeToString: (x) =>
+          NativeNice.TESTING_conversion_MapStringString_to_string({ x }),
+        nativeIdentity: (x) =>
+          NativeNice.TESTING_conversion_MapStringString_identity({ x }),
+        nativeIdentityAsync:
+          NativeNice.TESTING_conversion_MapStringString_identity_async,
+      });
+    }
+  });
+  it('string -> MySimpleTestEnum map', async () => {
+    for (const map of [
+      new Map<string, MySimpleTestEnum>(),
+      new Map<string, MySimpleTestEnum>([['1', 'a']]),
+      new Map<string, MySimpleTestEnum>([
+        ['1', 'a'],
+        ['2', 'b'],
+      ]),
+      new Map<string, MySimpleTestEnum>([
+        ['1', 'a'],
+        ['2', 'b'],
+        ['3', 'a'],
+      ]),
+    ]) {
+      await testConversion({
+        item: map,
+        toString: Array.from(map.entries().map(([k, v]) => `${k},${v}`))
+          .toSorted()
+          .join('\n'),
+        nativeToString: (x) =>
+          NativeNice.TESTING_conversion_MapStringMySimpleTestEnum_to_string({
+            x,
+          }),
+        nativeIdentity: (x) =>
+          NativeNice.TESTING_conversion_MapStringMySimpleTestEnum_identity({
+            x,
+          }),
+        nativeIdentityAsync:
+          NativeNice.TESTING_conversion_MapStringMySimpleTestEnum_identity_async,
+      });
+    }
+  });
+  it('Pair of strings', async () => {
+    for (const [a, b] of [
+      ['', ''],
+      ['a', 'b'],
+      ['12', '34'],
+    ] as [string, string][]) {
+      await testConversion({
+        item: [a, b],
+        toString: `${a},${b}`,
+        nativeToString: (x) =>
+          NativeNice.TESTING_conversion_PairStringString_to_string({ x }),
+        nativeIdentity: (x) =>
+          NativeNice.TESTING_conversion_PairStringString_identity({ x }),
+        nativeIdentityAsync:
+          NativeNice.TESTING_conversion_PairStringString_identity_async,
+      });
+    }
+  });
+  it('Pair of string, MySimpleTestEnum', async () => {
+    for (const [a, b] of [
+      ['foo', 'b'],
+      ['baz', 'a'],
+    ] as [string, NativeNice.MySimpleTestEnum][]) {
+      await testConversion({
+        item: [a, b],
+        toString: `${a},${b}`,
+        nativeToString: (x) =>
+          NativeNice.TESTING_conversion_PairStringMySimpleTestEnum_to_string({
+            x,
+          }),
+        nativeIdentity: (x) =>
+          NativeNice.TESTING_conversion_PairStringMySimpleTestEnum_identity({
+            x,
+          }),
+        nativeIdentityAsync:
+          NativeNice.TESTING_conversion_PairStringMySimpleTestEnum_identity_async,
       });
     }
   });
@@ -475,6 +613,40 @@ describe('NativeTestingNice', () => {
           NativeNice.TESTING_conversion_DeviceId_identity_async,
       });
     }
+  });
+  it('Floats', async () => {
+    for (const item of [3.640625, 0.0, 1, -1, NaN, Infinity, -Infinity]) {
+      const toString = `${item}`.replace('Infinity', 'inf');
+      await testConversion({
+        item,
+        toString,
+        nativeToString: (x) =>
+          NativeNice.TESTING_conversion_Float_to_string({ x }),
+        nativeIdentity: (x) =>
+          NativeNice.TESTING_conversion_Float_identity({ x }),
+        nativeIdentityAsync: NativeNice.TESTING_conversion_Float_identity_async,
+      });
+      await testConversion({
+        item,
+        toString,
+        nativeToString: (x) =>
+          NativeNice.TESTING_conversion_OptionalFloat_to_string({ x }),
+        nativeIdentity: (x) =>
+          NativeNice.TESTING_conversion_OptionalFloat_identity({ x }),
+        nativeIdentityAsync:
+          NativeNice.TESTING_conversion_OptionalFloat_identity_async,
+      });
+    }
+    await testConversion({
+      item: null,
+      toString: '',
+      nativeToString: (x) =>
+        NativeNice.TESTING_conversion_OptionalFloat_to_string({ x }),
+      nativeIdentity: (x) =>
+        NativeNice.TESTING_conversion_OptionalFloat_identity({ x }),
+      nativeIdentityAsync:
+        NativeNice.TESTING_conversion_OptionalFloat_identity_async,
+    });
   });
   it('should handle async', async () => {
     for (const count of [0, 1, 2, 4, 8, 16, 32, 64, 128, 256]) {

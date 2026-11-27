@@ -14,96 +14,114 @@ static_assert_64bit(alignof(uint8_t) == 1);
 typedef uint8_t SignalType_FixedArray32_uint8_t[32];
 static_assert_64bit(sizeof(SignalType_FixedArray32_uint8_t) == 32);
 static_assert_64bit(alignof(SignalType_FixedArray32_uint8_t) == 1);
-typedef const SignalType_FixedArray32_uint8_t* SignalType_ConstPointer_SignalType_FixedArray32_uint8_t;
-static_assert_64bit(sizeof(SignalType_ConstPointer_SignalType_FixedArray32_uint8_t) == 8);
-static_assert_64bit(alignof(SignalType_ConstPointer_SignalType_FixedArray32_uint8_t) == 8);
-typedef const SignalType_ConstPointer_SignalType_FixedArray32_uint8_t* SignalType_ConstPointer_SignalType_ConstPointer_SignalType_FixedArray32_uint8_t;
-static_assert_64bit(sizeof(SignalType_ConstPointer_SignalType_ConstPointer_SignalType_FixedArray32_uint8_t) == 8);
-static_assert_64bit(alignof(SignalType_ConstPointer_SignalType_ConstPointer_SignalType_FixedArray32_uint8_t) == 8);
+typedef const SignalType_FixedArray32_uint8_t* SignalType_ConstPointer_FixedArray32_uint8_t;
+static_assert_64bit(sizeof(SignalType_ConstPointer_FixedArray32_uint8_t) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_FixedArray32_uint8_t) == 8);
+typedef const SignalType_ConstPointer_FixedArray32_uint8_t* SignalType_ConstPointer_ConstPointer_FixedArray32_uint8_t;
+static_assert_64bit(sizeof(SignalType_ConstPointer_ConstPointer_FixedArray32_uint8_t) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_ConstPointer_FixedArray32_uint8_t) == 8);
+static_assert_64bit(sizeof(int8_t) == 1);
+static_assert_64bit(alignof(int8_t) == 1);
+typedef const int8_t* SignalCStringPtr;
+static_assert_64bit(sizeof(SignalCStringPtr) == 8);
+static_assert_64bit(alignof(SignalCStringPtr) == 8);
+typedef const SignalCStringPtr* SignalType_ConstPointer_SignalCStringPtr;
+static_assert_64bit(sizeof(SignalType_ConstPointer_SignalCStringPtr) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_SignalCStringPtr) == 8);
 typedef uint8_t SignalType_FixedArray129_uint8_t[129];
 static_assert_64bit(sizeof(SignalType_FixedArray129_uint8_t) == 129);
 static_assert_64bit(alignof(SignalType_FixedArray129_uint8_t) == 1);
-typedef const SignalType_FixedArray129_uint8_t* SignalType_ConstPointer_SignalType_FixedArray129_uint8_t;
-static_assert_64bit(sizeof(SignalType_ConstPointer_SignalType_FixedArray129_uint8_t) == 8);
-static_assert_64bit(alignof(SignalType_ConstPointer_SignalType_FixedArray129_uint8_t) == 8);
+typedef const SignalType_FixedArray129_uint8_t* SignalType_ConstPointer_FixedArray129_uint8_t;
+static_assert_64bit(sizeof(SignalType_ConstPointer_FixedArray129_uint8_t) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_FixedArray129_uint8_t) == 8);
 typedef uint8_t SignalType_FixedArray153_uint8_t[153];
 static_assert_64bit(sizeof(SignalType_FixedArray153_uint8_t) == 153);
 static_assert_64bit(alignof(SignalType_FixedArray153_uint8_t) == 1);
-typedef const SignalType_FixedArray153_uint8_t* SignalType_ConstPointer_SignalType_FixedArray153_uint8_t;
-static_assert_64bit(sizeof(SignalType_ConstPointer_SignalType_FixedArray153_uint8_t) == 8);
-static_assert_64bit(alignof(SignalType_ConstPointer_SignalType_FixedArray153_uint8_t) == 8);
+typedef const SignalType_FixedArray153_uint8_t* SignalType_ConstPointer_FixedArray153_uint8_t;
+static_assert_64bit(sizeof(SignalType_ConstPointer_FixedArray153_uint8_t) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_FixedArray153_uint8_t) == 8);
 typedef uint8_t SignalType_FixedArray15_uint8_t[15];
 static_assert_64bit(sizeof(SignalType_FixedArray15_uint8_t) == 15);
 static_assert_64bit(alignof(SignalType_FixedArray15_uint8_t) == 1);
-typedef const SignalType_FixedArray15_uint8_t* SignalType_ConstPointer_SignalType_FixedArray15_uint8_t;
-static_assert_64bit(sizeof(SignalType_ConstPointer_SignalType_FixedArray15_uint8_t) == 8);
-static_assert_64bit(alignof(SignalType_ConstPointer_SignalType_FixedArray15_uint8_t) == 8);
+typedef const SignalType_FixedArray15_uint8_t* SignalType_ConstPointer_FixedArray15_uint8_t;
+static_assert_64bit(sizeof(SignalType_ConstPointer_FixedArray15_uint8_t) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_FixedArray15_uint8_t) == 8);
 typedef uint8_t SignalType_FixedArray16_uint8_t[16];
 static_assert_64bit(sizeof(SignalType_FixedArray16_uint8_t) == 16);
 static_assert_64bit(alignof(SignalType_FixedArray16_uint8_t) == 1);
-typedef const SignalType_FixedArray16_uint8_t* SignalType_ConstPointer_SignalType_FixedArray16_uint8_t;
-static_assert_64bit(sizeof(SignalType_ConstPointer_SignalType_FixedArray16_uint8_t) == 8);
-static_assert_64bit(alignof(SignalType_ConstPointer_SignalType_FixedArray16_uint8_t) == 8);
+typedef const SignalType_FixedArray16_uint8_t* SignalType_ConstPointer_FixedArray16_uint8_t;
+static_assert_64bit(sizeof(SignalType_ConstPointer_FixedArray16_uint8_t) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_FixedArray16_uint8_t) == 8);
 typedef uint8_t SignalType_FixedArray177_uint8_t[177];
 static_assert_64bit(sizeof(SignalType_FixedArray177_uint8_t) == 177);
 static_assert_64bit(alignof(SignalType_FixedArray177_uint8_t) == 1);
-typedef const SignalType_FixedArray177_uint8_t* SignalType_ConstPointer_SignalType_FixedArray177_uint8_t;
-static_assert_64bit(sizeof(SignalType_ConstPointer_SignalType_FixedArray177_uint8_t) == 8);
-static_assert_64bit(alignof(SignalType_ConstPointer_SignalType_FixedArray177_uint8_t) == 8);
+typedef const SignalType_FixedArray177_uint8_t* SignalType_ConstPointer_FixedArray177_uint8_t;
+static_assert_64bit(sizeof(SignalType_ConstPointer_FixedArray177_uint8_t) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_FixedArray177_uint8_t) == 8);
 typedef uint8_t SignalType_FixedArray17_uint8_t[17];
 static_assert_64bit(sizeof(SignalType_FixedArray17_uint8_t) == 17);
 static_assert_64bit(alignof(SignalType_FixedArray17_uint8_t) == 1);
-typedef const SignalType_FixedArray17_uint8_t* SignalType_ConstPointer_SignalType_FixedArray17_uint8_t;
-static_assert_64bit(sizeof(SignalType_ConstPointer_SignalType_FixedArray17_uint8_t) == 8);
-static_assert_64bit(alignof(SignalType_ConstPointer_SignalType_FixedArray17_uint8_t) == 8);
+typedef const SignalType_FixedArray17_uint8_t* SignalType_ConstPointer_FixedArray17_uint8_t;
+static_assert_64bit(sizeof(SignalType_ConstPointer_FixedArray17_uint8_t) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_FixedArray17_uint8_t) == 8);
 typedef uint8_t SignalType_FixedArray289_uint8_t[289];
 static_assert_64bit(sizeof(SignalType_FixedArray289_uint8_t) == 289);
 static_assert_64bit(alignof(SignalType_FixedArray289_uint8_t) == 1);
-typedef const SignalType_FixedArray289_uint8_t* SignalType_ConstPointer_SignalType_FixedArray289_uint8_t;
-static_assert_64bit(sizeof(SignalType_ConstPointer_SignalType_FixedArray289_uint8_t) == 8);
-static_assert_64bit(alignof(SignalType_ConstPointer_SignalType_FixedArray289_uint8_t) == 8);
+typedef const SignalType_FixedArray289_uint8_t* SignalType_ConstPointer_FixedArray289_uint8_t;
+static_assert_64bit(sizeof(SignalType_ConstPointer_FixedArray289_uint8_t) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_FixedArray289_uint8_t) == 8);
 typedef uint8_t SignalType_FixedArray329_uint8_t[329];
 static_assert_64bit(sizeof(SignalType_FixedArray329_uint8_t) == 329);
 static_assert_64bit(alignof(SignalType_FixedArray329_uint8_t) == 1);
-typedef const SignalType_FixedArray329_uint8_t* SignalType_ConstPointer_SignalType_FixedArray329_uint8_t;
-static_assert_64bit(sizeof(SignalType_ConstPointer_SignalType_FixedArray329_uint8_t) == 8);
-static_assert_64bit(alignof(SignalType_ConstPointer_SignalType_FixedArray329_uint8_t) == 8);
+typedef const SignalType_FixedArray329_uint8_t* SignalType_ConstPointer_FixedArray329_uint8_t;
+static_assert_64bit(sizeof(SignalType_ConstPointer_FixedArray329_uint8_t) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_FixedArray329_uint8_t) == 8);
+typedef uint8_t SignalType_FixedArray33_uint8_t[33];
+static_assert_64bit(sizeof(SignalType_FixedArray33_uint8_t) == 33);
+static_assert_64bit(alignof(SignalType_FixedArray33_uint8_t) == 1);
+typedef const SignalType_FixedArray33_uint8_t* SignalType_ConstPointer_FixedArray33_uint8_t;
+static_assert_64bit(sizeof(SignalType_ConstPointer_FixedArray33_uint8_t) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_FixedArray33_uint8_t) == 8);
 typedef uint8_t SignalType_FixedArray409_uint8_t[409];
 static_assert_64bit(sizeof(SignalType_FixedArray409_uint8_t) == 409);
 static_assert_64bit(alignof(SignalType_FixedArray409_uint8_t) == 1);
-typedef const SignalType_FixedArray409_uint8_t* SignalType_ConstPointer_SignalType_FixedArray409_uint8_t;
-static_assert_64bit(sizeof(SignalType_ConstPointer_SignalType_FixedArray409_uint8_t) == 8);
-static_assert_64bit(alignof(SignalType_ConstPointer_SignalType_FixedArray409_uint8_t) == 8);
+typedef const SignalType_FixedArray409_uint8_t* SignalType_ConstPointer_FixedArray409_uint8_t;
+static_assert_64bit(sizeof(SignalType_ConstPointer_FixedArray409_uint8_t) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_FixedArray409_uint8_t) == 8);
 typedef uint8_t SignalType_FixedArray473_uint8_t[473];
 static_assert_64bit(sizeof(SignalType_FixedArray473_uint8_t) == 473);
 static_assert_64bit(alignof(SignalType_FixedArray473_uint8_t) == 1);
-typedef const SignalType_FixedArray473_uint8_t* SignalType_ConstPointer_SignalType_FixedArray473_uint8_t;
-static_assert_64bit(sizeof(SignalType_ConstPointer_SignalType_FixedArray473_uint8_t) == 8);
-static_assert_64bit(alignof(SignalType_ConstPointer_SignalType_FixedArray473_uint8_t) == 8);
+typedef const SignalType_FixedArray473_uint8_t* SignalType_ConstPointer_FixedArray473_uint8_t;
+static_assert_64bit(sizeof(SignalType_ConstPointer_FixedArray473_uint8_t) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_FixedArray473_uint8_t) == 8);
 typedef uint8_t SignalType_FixedArray497_uint8_t[497];
 static_assert_64bit(sizeof(SignalType_FixedArray497_uint8_t) == 497);
 static_assert_64bit(alignof(SignalType_FixedArray497_uint8_t) == 1);
-typedef const SignalType_FixedArray497_uint8_t* SignalType_ConstPointer_SignalType_FixedArray497_uint8_t;
-static_assert_64bit(sizeof(SignalType_ConstPointer_SignalType_FixedArray497_uint8_t) == 8);
-static_assert_64bit(alignof(SignalType_ConstPointer_SignalType_FixedArray497_uint8_t) == 8);
+typedef const SignalType_FixedArray497_uint8_t* SignalType_ConstPointer_FixedArray497_uint8_t;
+static_assert_64bit(sizeof(SignalType_ConstPointer_FixedArray497_uint8_t) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_FixedArray497_uint8_t) == 8);
 typedef uint8_t SignalType_FixedArray64_uint8_t[64];
 static_assert_64bit(sizeof(SignalType_FixedArray64_uint8_t) == 64);
 static_assert_64bit(alignof(SignalType_FixedArray64_uint8_t) == 1);
-typedef const SignalType_FixedArray64_uint8_t* SignalType_ConstPointer_SignalType_FixedArray64_uint8_t;
-static_assert_64bit(sizeof(SignalType_ConstPointer_SignalType_FixedArray64_uint8_t) == 8);
-static_assert_64bit(alignof(SignalType_ConstPointer_SignalType_FixedArray64_uint8_t) == 8);
+typedef const SignalType_FixedArray64_uint8_t* SignalType_ConstPointer_FixedArray64_uint8_t;
+static_assert_64bit(sizeof(SignalType_ConstPointer_FixedArray64_uint8_t) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_FixedArray64_uint8_t) == 8);
 typedef uint8_t SignalType_FixedArray65_uint8_t[65];
 static_assert_64bit(sizeof(SignalType_FixedArray65_uint8_t) == 65);
 static_assert_64bit(alignof(SignalType_FixedArray65_uint8_t) == 1);
-typedef const SignalType_FixedArray65_uint8_t* SignalType_ConstPointer_SignalType_FixedArray65_uint8_t;
-static_assert_64bit(sizeof(SignalType_ConstPointer_SignalType_FixedArray65_uint8_t) == 8);
-static_assert_64bit(alignof(SignalType_ConstPointer_SignalType_FixedArray65_uint8_t) == 8);
+typedef const SignalType_FixedArray65_uint8_t* SignalType_ConstPointer_FixedArray65_uint8_t;
+static_assert_64bit(sizeof(SignalType_ConstPointer_FixedArray65_uint8_t) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_FixedArray65_uint8_t) == 8);
 typedef uint8_t SignalType_FixedArray97_uint8_t[97];
 static_assert_64bit(sizeof(SignalType_FixedArray97_uint8_t) == 97);
 static_assert_64bit(alignof(SignalType_FixedArray97_uint8_t) == 1);
-typedef const SignalType_FixedArray97_uint8_t* SignalType_ConstPointer_SignalType_FixedArray97_uint8_t;
-static_assert_64bit(sizeof(SignalType_ConstPointer_SignalType_FixedArray97_uint8_t) == 8);
-static_assert_64bit(alignof(SignalType_ConstPointer_SignalType_FixedArray97_uint8_t) == 8);
+typedef const SignalType_FixedArray97_uint8_t* SignalType_ConstPointer_FixedArray97_uint8_t;
+static_assert_64bit(sizeof(SignalType_ConstPointer_FixedArray97_uint8_t) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_FixedArray97_uint8_t) == 8);
+typedef struct SignalAes256GcmSiv SignalAes256GcmSiv;
+typedef const SignalAes256GcmSiv* SignalType_ConstPointer_SignalAes256GcmSiv;
+static_assert_64bit(sizeof(SignalType_ConstPointer_SignalAes256GcmSiv) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_SignalAes256GcmSiv) == 8);
 static_assert_64bit(sizeof(bool) == 1);
 static_assert_64bit(alignof(bool) == 1);
 typedef const bool* SignalType_ConstPointer_bool;
@@ -112,19 +130,15 @@ static_assert_64bit(alignof(SignalType_ConstPointer_bool) == 8);
 typedef const void* SignalType_ConstPointer_void;
 static_assert_64bit(sizeof(SignalType_ConstPointer_void) == 8);
 static_assert_64bit(alignof(SignalType_ConstPointer_void) == 8);
-static_assert_64bit(sizeof(int8_t) == 1);
-static_assert_64bit(alignof(int8_t) == 1);
-typedef const int8_t* SignalCStringPtr;
-static_assert_64bit(sizeof(SignalCStringPtr) == 8);
-static_assert_64bit(alignof(SignalCStringPtr) == 8);
+static_assert_64bit(sizeof(int32_t) == 4);
+static_assert_64bit(alignof(int32_t) == 4);
+typedef const int32_t* SignalType_ConstPointer_int32_t;
+static_assert_64bit(sizeof(SignalType_ConstPointer_int32_t) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_int32_t) == 8);
 typedef struct SignalPinHash SignalPinHash;
 typedef const SignalPinHash* SignalType_ConstPointer_SignalPinHash;
 static_assert_64bit(sizeof(SignalType_ConstPointer_SignalPinHash) == 8);
 static_assert_64bit(alignof(SignalType_ConstPointer_SignalPinHash) == 8);
-typedef struct SignalAes256GcmSiv SignalAes256GcmSiv;
-typedef const SignalAes256GcmSiv* SignalType_ConstPointer_SignalAes256GcmSiv;
-static_assert_64bit(sizeof(SignalType_ConstPointer_SignalAes256GcmSiv) == 8);
-static_assert_64bit(alignof(SignalType_ConstPointer_SignalAes256GcmSiv) == 8);
 typedef const uint8_t* SignalType_ConstPointer_uint8_t;
 static_assert_64bit(sizeof(SignalType_ConstPointer_uint8_t) == 8);
 static_assert_64bit(alignof(SignalType_ConstPointer_uint8_t) == 8);
@@ -167,6 +181,19 @@ static_assert_64bit(alignof(SignalConstPointerPublicKey) == 8);
 typedef const SignalConstPointerPublicKey* SignalType_ConstPointer_SignalConstPointerPublicKey;
 static_assert_64bit(sizeof(SignalType_ConstPointer_SignalConstPointerPublicKey) == 8);
 static_assert_64bit(alignof(SignalType_ConstPointer_SignalConstPointerPublicKey) == 8);
+typedef struct SignalKyberPublicKey SignalKyberPublicKey;
+typedef const SignalKyberPublicKey* SignalType_ConstPointer_SignalKyberPublicKey;
+static_assert_64bit(sizeof(SignalType_ConstPointer_SignalKyberPublicKey) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_SignalKyberPublicKey) == 8);
+typedef struct {
+  const SignalKyberPublicKey* raw;
+} SignalConstPointerKyberPublicKey;
+static_assert_64bit(offsetof(SignalConstPointerKyberPublicKey, raw) == 0);
+static_assert_64bit(sizeof(SignalConstPointerKyberPublicKey) == 8);
+static_assert_64bit(alignof(SignalConstPointerKyberPublicKey) == 8);
+typedef const SignalConstPointerKyberPublicKey* SignalType_ConstPointer_SignalConstPointerKyberPublicKey;
+static_assert_64bit(sizeof(SignalType_ConstPointer_SignalConstPointerKyberPublicKey) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_SignalConstPointerKyberPublicKey) == 8);
 typedef struct SignalCiphertextMessage SignalCiphertextMessage;
 typedef const SignalCiphertextMessage* SignalType_ConstPointer_SignalCiphertextMessage;
 static_assert_64bit(sizeof(SignalType_ConstPointer_SignalCiphertextMessage) == 8);
@@ -193,8 +220,6 @@ static_assert_64bit(alignof(SignalConstPointerSessionRecord) == 8);
 typedef const SignalConstPointerSessionRecord* SignalType_ConstPointer_SignalConstPointerSessionRecord;
 static_assert_64bit(sizeof(SignalType_ConstPointer_SignalConstPointerSessionRecord) == 8);
 static_assert_64bit(alignof(SignalType_ConstPointer_SignalConstPointerSessionRecord) == 8);
-static_assert_64bit(sizeof(int32_t) == 4);
-static_assert_64bit(alignof(int32_t) == 4);
 static_assert_64bit(sizeof(uint64_t) == 8);
 static_assert_64bit(alignof(uint64_t) == 8);
 typedef struct {
@@ -484,9 +509,9 @@ static_assert_64bit(alignof(SignalOptionalUuid) == 1);
 typedef const SignalOptionalUuid* SignalType_ConstPointer_SignalOptionalUuid;
 static_assert_64bit(sizeof(SignalType_ConstPointer_SignalOptionalUuid) == 8);
 static_assert_64bit(alignof(SignalType_ConstPointer_SignalOptionalUuid) == 8);
-typedef SignalType_FixedArray17_uint8_t* SignalType_MutPointer_SignalType_FixedArray17_uint8_t;
-static_assert_64bit(sizeof(SignalType_MutPointer_SignalType_FixedArray17_uint8_t) == 8);
-static_assert_64bit(alignof(SignalType_MutPointer_SignalType_FixedArray17_uint8_t) == 8);
+typedef SignalType_FixedArray17_uint8_t* SignalType_MutPointer_FixedArray17_uint8_t;
+static_assert_64bit(sizeof(SignalType_MutPointer_FixedArray17_uint8_t) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_FixedArray17_uint8_t) == 8);
 typedef struct {
   SignalType_FixedArray17_uint8_t* base;
   size_t length;
@@ -501,6 +526,136 @@ static_assert_64bit(alignof(SignalType_ConstPointer_SignalOwnedBufferOfc_uchar17
 typedef const SignalOwnedBuffer* SignalType_ConstPointer_SignalOwnedBuffer;
 static_assert_64bit(sizeof(SignalType_ConstPointer_SignalOwnedBuffer) == 8);
 static_assert_64bit(alignof(SignalType_ConstPointer_SignalOwnedBuffer) == 8);
+typedef SignalOwnedBuffer* SignalType_MutPointer_SignalOwnedBuffer;
+static_assert_64bit(sizeof(SignalType_MutPointer_SignalOwnedBuffer) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_SignalOwnedBuffer) == 8);
+typedef struct {
+  SignalOwnedBuffer* base;
+  size_t length;
+  size_t size_bytes;
+} SignalOwnedBufferOfMaxAlignedOwnedBuffer;
+static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedOwnedBuffer, base) == 0);
+static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedOwnedBuffer, length) == 8);
+static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedOwnedBuffer, size_bytes) == 16);
+static_assert_64bit(sizeof(SignalOwnedBufferOfMaxAlignedOwnedBuffer) == 24);
+static_assert_64bit(alignof(SignalOwnedBufferOfMaxAlignedOwnedBuffer) == 8);
+typedef const SignalOwnedBufferOfMaxAlignedOwnedBuffer* SignalType_ConstPointer_SignalOwnedBufferOfMaxAlignedOwnedBuffer;
+static_assert_64bit(sizeof(SignalType_ConstPointer_SignalOwnedBufferOfMaxAlignedOwnedBuffer) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_SignalOwnedBufferOfMaxAlignedOwnedBuffer) == 8);
+typedef enum {
+  SignalAuthCheckResultFfiResultMatch,
+  SignalAuthCheckResultFfiResultNoMatch,
+  SignalAuthCheckResultFfiResultInvalid,
+} SignalAuthCheckResultFfiResult;
+static_assert_64bit(sizeof(SignalAuthCheckResultFfiResult) == 4);
+static_assert_64bit(alignof(SignalAuthCheckResultFfiResult) == 4);
+typedef struct {
+  const int8_t* first;
+  SignalAuthCheckResultFfiResult second;
+} SignalPairOfCStringPtrAuthCheckResultFfiResult;
+static_assert_64bit(offsetof(SignalPairOfCStringPtrAuthCheckResultFfiResult, first) == 0);
+static_assert_64bit(offsetof(SignalPairOfCStringPtrAuthCheckResultFfiResult, second) == 8);
+static_assert_64bit(sizeof(SignalPairOfCStringPtrAuthCheckResultFfiResult) == 16);
+static_assert_64bit(alignof(SignalPairOfCStringPtrAuthCheckResultFfiResult) == 8);
+typedef SignalPairOfCStringPtrAuthCheckResultFfiResult* SignalType_MutPointer_SignalPairOfCStringPtrAuthCheckResultFfiResult;
+static_assert_64bit(sizeof(SignalType_MutPointer_SignalPairOfCStringPtrAuthCheckResultFfiResult) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_SignalPairOfCStringPtrAuthCheckResultFfiResult) == 8);
+typedef struct {
+  SignalPairOfCStringPtrAuthCheckResultFfiResult* base;
+  size_t length;
+  size_t size_bytes;
+} SignalOwnedBufferOfMaxAlignedPairOfCStringPtrAuthCheckResultFfiResult;
+static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedPairOfCStringPtrAuthCheckResultFfiResult, base) == 0);
+static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedPairOfCStringPtrAuthCheckResultFfiResult, length) == 8);
+static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedPairOfCStringPtrAuthCheckResultFfiResult, size_bytes) == 16);
+static_assert_64bit(sizeof(SignalOwnedBufferOfMaxAlignedPairOfCStringPtrAuthCheckResultFfiResult) == 24);
+static_assert_64bit(alignof(SignalOwnedBufferOfMaxAlignedPairOfCStringPtrAuthCheckResultFfiResult) == 8);
+typedef const SignalOwnedBufferOfMaxAlignedPairOfCStringPtrAuthCheckResultFfiResult* SignalType_ConstPointer_SignalOwnedBufferOfMaxAlignedPairOfCStringPtrAuthCheckResultFfiResult;
+static_assert_64bit(sizeof(SignalType_ConstPointer_SignalOwnedBufferOfMaxAlignedPairOfCStringPtrAuthCheckResultFfiResult) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_SignalOwnedBufferOfMaxAlignedPairOfCStringPtrAuthCheckResultFfiResult) == 8);
+typedef struct {
+  const int8_t* name;
+  uint64_t created_at;
+} SignalBridgeMfaMetadataFfiResult;
+static_assert_64bit(offsetof(SignalBridgeMfaMetadataFfiResult, name) == 0);
+static_assert_64bit(offsetof(SignalBridgeMfaMetadataFfiResult, created_at) == 8);
+static_assert_64bit(sizeof(SignalBridgeMfaMetadataFfiResult) == 16);
+static_assert_64bit(alignof(SignalBridgeMfaMetadataFfiResult) == 8);
+typedef enum {
+  SignalBridgeConfirmedMfaKeyMetadataFfiResultMetadata,
+  SignalBridgeConfirmedMfaKeyMetadataFfiResultUnreadable,
+} SignalBridgeConfirmedMfaKeyMetadataFfiResult_Tag;
+typedef struct {
+  SignalBridgeMfaMetadataFfiResult _0;
+} SignalBridgeConfirmedMfaKeyMetadataFfiResultSignalMetadata_Body;
+typedef struct {
+  SignalBridgeConfirmedMfaKeyMetadataFfiResult_Tag tag;
+  union {
+    SignalBridgeConfirmedMfaKeyMetadataFfiResultSignalMetadata_Body metadata;
+  };
+} SignalBridgeConfirmedMfaKeyMetadataFfiResult;
+static_assert_64bit(sizeof(SignalBridgeConfirmedMfaKeyMetadataFfiResult) == 24);
+static_assert_64bit(alignof(SignalBridgeConfirmedMfaKeyMetadataFfiResult) == 8);
+typedef enum {
+  SignalBridgeMfaKeyKindFfiResultTotp,
+  SignalBridgeMfaKeyKindFfiResultWebAuthn,
+  SignalBridgeMfaKeyKindFfiResultUnknown,
+} SignalBridgeMfaKeyKindFfiResult;
+static_assert_64bit(sizeof(SignalBridgeMfaKeyKindFfiResult) == 4);
+static_assert_64bit(alignof(SignalBridgeMfaKeyKindFfiResult) == 4);
+typedef struct {
+  int32_t id;
+  SignalBridgeConfirmedMfaKeyMetadataFfiResult metadata;
+  SignalBridgeMfaKeyKindFfiResult kind;
+} SignalBridgeConfirmedMfaKeyFfiResult;
+static_assert_64bit(offsetof(SignalBridgeConfirmedMfaKeyFfiResult, id) == 0);
+static_assert_64bit(offsetof(SignalBridgeConfirmedMfaKeyFfiResult, metadata) == 8);
+static_assert_64bit(offsetof(SignalBridgeConfirmedMfaKeyFfiResult, kind) == 32);
+static_assert_64bit(sizeof(SignalBridgeConfirmedMfaKeyFfiResult) == 40);
+static_assert_64bit(alignof(SignalBridgeConfirmedMfaKeyFfiResult) == 8);
+typedef SignalBridgeConfirmedMfaKeyFfiResult* SignalType_MutPointer_SignalBridgeConfirmedMfaKeyFfiResult;
+static_assert_64bit(sizeof(SignalType_MutPointer_SignalBridgeConfirmedMfaKeyFfiResult) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_SignalBridgeConfirmedMfaKeyFfiResult) == 8);
+typedef struct {
+  SignalBridgeConfirmedMfaKeyFfiResult* base;
+  size_t length;
+  size_t size_bytes;
+} SignalOwnedBufferOfMaxAlignedBridgeConfirmedMfaKeyFfiResult;
+static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedBridgeConfirmedMfaKeyFfiResult, base) == 0);
+static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedBridgeConfirmedMfaKeyFfiResult, length) == 8);
+static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedBridgeConfirmedMfaKeyFfiResult, size_bytes) == 16);
+static_assert_64bit(sizeof(SignalOwnedBufferOfMaxAlignedBridgeConfirmedMfaKeyFfiResult) == 24);
+static_assert_64bit(alignof(SignalOwnedBufferOfMaxAlignedBridgeConfirmedMfaKeyFfiResult) == 8);
+typedef const SignalOwnedBufferOfMaxAlignedBridgeConfirmedMfaKeyFfiResult* SignalType_ConstPointer_SignalOwnedBufferOfMaxAlignedBridgeConfirmedMfaKeyFfiResult;
+static_assert_64bit(sizeof(SignalType_ConstPointer_SignalOwnedBufferOfMaxAlignedBridgeConfirmedMfaKeyFfiResult) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_SignalOwnedBufferOfMaxAlignedBridgeConfirmedMfaKeyFfiResult) == 8);
+typedef enum {
+  SignalDeviceCapabilityInternalFfiResultStorage,
+  SignalDeviceCapabilityInternalFfiResultTransfer,
+  SignalDeviceCapabilityInternalFfiResultAttachmentBackfill,
+  SignalDeviceCapabilityInternalFfiResultSparsePostQuantumRatchet,
+  SignalDeviceCapabilityInternalFfiResultProfilesV2,
+  SignalDeviceCapabilityInternalFfiResultUsernameChangeSyncMessage,
+  SignalDeviceCapabilityInternalFfiResultOptionalPhoneNumber,
+} SignalDeviceCapabilityInternalFfiResult;
+static_assert_64bit(sizeof(SignalDeviceCapabilityInternalFfiResult) == 4);
+static_assert_64bit(alignof(SignalDeviceCapabilityInternalFfiResult) == 4);
+typedef SignalDeviceCapabilityInternalFfiResult* SignalType_MutPointer_SignalDeviceCapabilityInternalFfiResult;
+static_assert_64bit(sizeof(SignalType_MutPointer_SignalDeviceCapabilityInternalFfiResult) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_SignalDeviceCapabilityInternalFfiResult) == 8);
+typedef struct {
+  SignalDeviceCapabilityInternalFfiResult* base;
+  size_t length;
+  size_t size_bytes;
+} SignalOwnedBufferOfMaxAlignedDeviceCapabilityInternalFfiResult;
+static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedDeviceCapabilityInternalFfiResult, base) == 0);
+static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedDeviceCapabilityInternalFfiResult, length) == 8);
+static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedDeviceCapabilityInternalFfiResult, size_bytes) == 16);
+static_assert_64bit(sizeof(SignalOwnedBufferOfMaxAlignedDeviceCapabilityInternalFfiResult) == 24);
+static_assert_64bit(alignof(SignalOwnedBufferOfMaxAlignedDeviceCapabilityInternalFfiResult) == 8);
+typedef const SignalOwnedBufferOfMaxAlignedDeviceCapabilityInternalFfiResult* SignalType_ConstPointer_SignalOwnedBufferOfMaxAlignedDeviceCapabilityInternalFfiResult;
+static_assert_64bit(sizeof(SignalType_ConstPointer_SignalOwnedBufferOfMaxAlignedDeviceCapabilityInternalFfiResult) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_SignalOwnedBufferOfMaxAlignedDeviceCapabilityInternalFfiResult) == 8);
 typedef struct {
   uint8_t id;
   SignalOwnedBuffer encrypted_name;
@@ -576,20 +731,20 @@ static_assert_64bit(alignof(SignalType_ConstPointer_SignalUuid) == 8);
 typedef void* SignalType_MutPointer_void;
 static_assert_64bit(sizeof(SignalType_MutPointer_void) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_void) == 8);
-typedef void (*SignalType_FunctionPointer_void_SignalType_MutPointer_void)(SignalType_MutPointer_void);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_void_SignalType_MutPointer_void) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_void_SignalType_MutPointer_void) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_void)(SignalType_MutPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_void) == 8);
 typedef struct SignalConnectionManager SignalConnectionManager;
 typedef const SignalConnectionManager* SignalType_ConstPointer_SignalConnectionManager;
 static_assert_64bit(sizeof(SignalType_ConstPointer_SignalConnectionManager) == 8);
 static_assert_64bit(alignof(SignalType_ConstPointer_SignalConnectionManager) == 8);
-typedef SignalType_ConstPointer_SignalConnectionManager (*SignalType_FunctionPointer_SignalType_ConstPointer_SignalConnectionManager_SignalType_MutPointer_void)(SignalType_MutPointer_void);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_SignalType_ConstPointer_SignalConnectionManager_SignalType_MutPointer_void) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_SignalType_ConstPointer_SignalConnectionManager_SignalType_MutPointer_void) == 8);
+typedef SignalType_ConstPointer_SignalConnectionManager (*SignalType_FunctionPointer_ConstPointer_SignalConnectionManager_MutPointer_void)(SignalType_MutPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_ConstPointer_SignalConnectionManager_MutPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_ConstPointer_SignalConnectionManager_MutPointer_void) == 8);
 typedef struct {
   void* ctx;
-  SignalType_FunctionPointer_SignalType_ConstPointer_SignalConnectionManager_SignalType_MutPointer_void get_connection_manager;
-  SignalType_FunctionPointer_void_SignalType_MutPointer_void destroy;
+  SignalType_FunctionPointer_ConstPointer_SignalConnectionManager_MutPointer_void get_connection_manager;
+  SignalType_FunctionPointer_void_MutPointer_void destroy;
 } SignalFfiConnectChatBridgeStruct;
 static_assert_64bit(offsetof(SignalFfiConnectChatBridgeStruct, ctx) == 0);
 static_assert_64bit(offsetof(SignalFfiConnectChatBridgeStruct, get_connection_manager) == 8);
@@ -615,17 +770,17 @@ static_assert_64bit(offsetof(SignalBorrowedMutableBuffer, base) == 0);
 static_assert_64bit(offsetof(SignalBorrowedMutableBuffer, length) == 8);
 static_assert_64bit(sizeof(SignalBorrowedMutableBuffer) == 16);
 static_assert_64bit(alignof(SignalBorrowedMutableBuffer) == 8);
-typedef int32_t (*SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_size_t_SignalBorrowedMutableBuffer)(SignalType_MutPointer_void, SignalType_MutPointer_size_t, SignalBorrowedMutableBuffer);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_size_t_SignalBorrowedMutableBuffer) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_size_t_SignalBorrowedMutableBuffer) == 8);
-typedef int32_t (*SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_uint64_t)(SignalType_MutPointer_void, uint64_t);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_uint64_t) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_uint64_t) == 8);
+typedef int32_t (*SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_size_t_SignalBorrowedMutableBuffer)(SignalType_MutPointer_void, SignalType_MutPointer_size_t, SignalBorrowedMutableBuffer);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_size_t_SignalBorrowedMutableBuffer) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_size_t_SignalBorrowedMutableBuffer) == 8);
+typedef int32_t (*SignalType_FunctionPointer_int32_t_MutPointer_void_uint64_t)(SignalType_MutPointer_void, uint64_t);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_MutPointer_void_uint64_t) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_MutPointer_void_uint64_t) == 8);
 typedef struct {
   void* ctx;
-  SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_size_t_SignalBorrowedMutableBuffer read;
-  SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_uint64_t skip;
-  SignalType_FunctionPointer_void_SignalType_MutPointer_void destroy;
+  SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_size_t_SignalBorrowedMutableBuffer read;
+  SignalType_FunctionPointer_int32_t_MutPointer_void_uint64_t skip;
+  SignalType_FunctionPointer_void_MutPointer_void destroy;
 } SignalFfiSyncInputStreamStruct;
 static_assert_64bit(offsetof(SignalFfiSyncInputStreamStruct, ctx) == 0);
 static_assert_64bit(offsetof(SignalFfiSyncInputStreamStruct, read) == 8);
@@ -636,6 +791,10 @@ static_assert_64bit(alignof(SignalFfiSyncInputStreamStruct) == 8);
 typedef const SignalFfiSyncInputStreamStruct* SignalType_ConstPointer_SignalFfiSyncInputStreamStruct;
 static_assert_64bit(sizeof(SignalType_ConstPointer_SignalFfiSyncInputStreamStruct) == 8);
 static_assert_64bit(alignof(SignalType_ConstPointer_SignalFfiSyncInputStreamStruct) == 8);
+typedef struct SignalBackupJsonExporter SignalBackupJsonExporter;
+typedef const SignalBackupJsonExporter* SignalType_ConstPointer_SignalBackupJsonExporter;
+static_assert_64bit(sizeof(SignalType_ConstPointer_SignalBackupJsonExporter) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_SignalBackupJsonExporter) == 8);
 typedef struct SignalMessageBackupKey SignalMessageBackupKey;
 typedef const SignalMessageBackupKey* SignalType_ConstPointer_SignalMessageBackupKey;
 static_assert_64bit(sizeof(SignalType_ConstPointer_SignalMessageBackupKey) == 8);
@@ -710,6 +869,68 @@ static_assert_64bit(alignof(SignalBridgeMessageBackupInfoFfiResult) == 8);
 typedef const SignalBridgeMessageBackupInfoFfiResult* SignalType_ConstPointer_SignalBridgeMessageBackupInfoFfiResult;
 static_assert_64bit(sizeof(SignalType_ConstPointer_SignalBridgeMessageBackupInfoFfiResult) == 8);
 static_assert_64bit(alignof(SignalType_ConstPointer_SignalBridgeMessageBackupInfoFfiResult) == 8);
+typedef struct {
+  const int8_t* algorithm;
+  int32_t password_length;
+  int32_t time_step_seconds;
+} SignalBridgeTotpParametersFfiResult;
+static_assert_64bit(offsetof(SignalBridgeTotpParametersFfiResult, algorithm) == 0);
+static_assert_64bit(offsetof(SignalBridgeTotpParametersFfiResult, password_length) == 8);
+static_assert_64bit(offsetof(SignalBridgeTotpParametersFfiResult, time_step_seconds) == 12);
+static_assert_64bit(sizeof(SignalBridgeTotpParametersFfiResult) == 16);
+static_assert_64bit(alignof(SignalBridgeTotpParametersFfiResult) == 8);
+typedef struct {
+  SignalOwnedBuffer key;
+  SignalBridgeTotpParametersFfiResult parameters;
+} SignalBridgePendingTotpKeyFfiResult;
+static_assert_64bit(offsetof(SignalBridgePendingTotpKeyFfiResult, key) == 0);
+static_assert_64bit(offsetof(SignalBridgePendingTotpKeyFfiResult, parameters) == 16);
+static_assert_64bit(sizeof(SignalBridgePendingTotpKeyFfiResult) == 32);
+static_assert_64bit(alignof(SignalBridgePendingTotpKeyFfiResult) == 8);
+typedef const SignalBridgePendingTotpKeyFfiResult* SignalType_ConstPointer_SignalBridgePendingTotpKeyFfiResult;
+static_assert_64bit(sizeof(SignalType_ConstPointer_SignalBridgePendingTotpKeyFfiResult) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_SignalBridgePendingTotpKeyFfiResult) == 8);
+typedef struct {
+  int32_t aci_ec_pre_key_count;
+  int32_t aci_kem_pre_key_count;
+  int32_t pni_ec_pre_key_count;
+  int32_t pni_kem_pre_key_count;
+} SignalBridgePreKeyCountsFfiResult;
+static_assert_64bit(offsetof(SignalBridgePreKeyCountsFfiResult, aci_ec_pre_key_count) == 0);
+static_assert_64bit(offsetof(SignalBridgePreKeyCountsFfiResult, aci_kem_pre_key_count) == 4);
+static_assert_64bit(offsetof(SignalBridgePreKeyCountsFfiResult, pni_ec_pre_key_count) == 8);
+static_assert_64bit(offsetof(SignalBridgePreKeyCountsFfiResult, pni_kem_pre_key_count) == 12);
+static_assert_64bit(sizeof(SignalBridgePreKeyCountsFfiResult) == 16);
+static_assert_64bit(alignof(SignalBridgePreKeyCountsFfiResult) == 4);
+typedef const SignalBridgePreKeyCountsFfiResult* SignalType_ConstPointer_SignalBridgePreKeyCountsFfiResult;
+static_assert_64bit(sizeof(SignalType_ConstPointer_SignalBridgePreKeyCountsFfiResult) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_SignalBridgePreKeyCountsFfiResult) == 8);
+typedef int32_t* SignalType_MutPointer_int32_t;
+static_assert_64bit(sizeof(SignalType_MutPointer_int32_t) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_int32_t) == 8);
+typedef struct {
+  int32_t* base;
+  size_t length;
+  size_t size_bytes;
+} SignalOwnedBufferOfMaxAlignedi32;
+static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedi32, base) == 0);
+static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedi32, length) == 8);
+static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedi32, size_bytes) == 16);
+static_assert_64bit(sizeof(SignalOwnedBufferOfMaxAlignedi32) == 24);
+static_assert_64bit(alignof(SignalOwnedBufferOfMaxAlignedi32) == 8);
+typedef struct {
+  SignalOwnedBuffer user_handle;
+  SignalOwnedBufferOfMaxAlignedi32 allowed_algorithms;
+  SignalOwnedBufferOfMaxAlignedOwnedBuffer exclude_credential_ids;
+} SignalBridgeWebAuthnCreateParametersFfiResult;
+static_assert_64bit(offsetof(SignalBridgeWebAuthnCreateParametersFfiResult, user_handle) == 0);
+static_assert_64bit(offsetof(SignalBridgeWebAuthnCreateParametersFfiResult, allowed_algorithms) == 16);
+static_assert_64bit(offsetof(SignalBridgeWebAuthnCreateParametersFfiResult, exclude_credential_ids) == 40);
+static_assert_64bit(sizeof(SignalBridgeWebAuthnCreateParametersFfiResult) == 64);
+static_assert_64bit(alignof(SignalBridgeWebAuthnCreateParametersFfiResult) == 8);
+typedef const SignalBridgeWebAuthnCreateParametersFfiResult* SignalType_ConstPointer_SignalBridgeWebAuthnCreateParametersFfiResult;
+static_assert_64bit(sizeof(SignalType_ConstPointer_SignalBridgeWebAuthnCreateParametersFfiResult) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_SignalBridgeWebAuthnCreateParametersFfiResult) == 8);
 typedef enum {
   SignalBridgeCopyBackupMediaResultFfiResultSuccess,
   SignalBridgeCopyBackupMediaResultFfiResultSourceNotFound,
@@ -808,15 +1029,15 @@ typedef struct SignalDeleteBackupMediaStream SignalDeleteBackupMediaStream;
 typedef const SignalDeleteBackupMediaStream* SignalType_ConstPointer_SignalDeleteBackupMediaStream;
 static_assert_64bit(sizeof(SignalType_ConstPointer_SignalDeleteBackupMediaStream) == 8);
 static_assert_64bit(alignof(SignalType_ConstPointer_SignalDeleteBackupMediaStream) == 8);
-typedef int32_t (*SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void)(SignalType_MutPointer_void);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void) == 8);
-typedef int32_t (*SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalFfiError)(SignalType_MutPointer_void, SignalType_MutPointer_SignalFfiError);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalFfiError) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalFfiError) == 8);
-typedef int32_t (*SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalBytestringArray)(SignalType_MutPointer_void, SignalBytestringArray);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalBytestringArray) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalBytestringArray) == 8);
+typedef int32_t (*SignalType_FunctionPointer_int32_t_MutPointer_void)(SignalType_MutPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_MutPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_MutPointer_void) == 8);
+typedef int32_t (*SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalFfiError)(SignalType_MutPointer_void, SignalType_MutPointer_SignalFfiError);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalFfiError) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalFfiError) == 8);
+typedef int32_t (*SignalType_FunctionPointer_int32_t_MutPointer_void_SignalBytestringArray)(SignalType_MutPointer_void, SignalBytestringArray);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_MutPointer_void_SignalBytestringArray) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_MutPointer_void_SignalBytestringArray) == 8);
 typedef struct SignalServerMessageAck SignalServerMessageAck;
 typedef SignalServerMessageAck* SignalType_MutPointer_SignalServerMessageAck;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalServerMessageAck) == 8);
@@ -827,17 +1048,17 @@ typedef struct {
 static_assert_64bit(offsetof(SignalMutPointerServerMessageAck, raw) == 0);
 static_assert_64bit(sizeof(SignalMutPointerServerMessageAck) == 8);
 static_assert_64bit(alignof(SignalMutPointerServerMessageAck) == 8);
-typedef int32_t (*SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalOwnedBuffer_uint64_t_SignalMutPointerServerMessageAck)(SignalType_MutPointer_void, SignalOwnedBuffer, uint64_t, SignalMutPointerServerMessageAck);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalOwnedBuffer_uint64_t_SignalMutPointerServerMessageAck) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalOwnedBuffer_uint64_t_SignalMutPointerServerMessageAck) == 8);
+typedef int32_t (*SignalType_FunctionPointer_int32_t_MutPointer_void_SignalOwnedBuffer_uint64_t_SignalMutPointerServerMessageAck)(SignalType_MutPointer_void, SignalOwnedBuffer, uint64_t, SignalMutPointerServerMessageAck);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_MutPointer_void_SignalOwnedBuffer_uint64_t_SignalMutPointerServerMessageAck) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_MutPointer_void_SignalOwnedBuffer_uint64_t_SignalMutPointerServerMessageAck) == 8);
 typedef struct {
   void* ctx;
-  SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalOwnedBuffer_uint64_t_SignalMutPointerServerMessageAck received_incoming_message;
-  SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void received_queue_empty;
-  SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalBytestringArray received_alerts;
-  SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_uint64_t received_server_timestamp;
-  SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalFfiError connection_interrupted;
-  SignalType_FunctionPointer_void_SignalType_MutPointer_void destroy;
+  SignalType_FunctionPointer_int32_t_MutPointer_void_SignalOwnedBuffer_uint64_t_SignalMutPointerServerMessageAck received_incoming_message;
+  SignalType_FunctionPointer_int32_t_MutPointer_void received_queue_empty;
+  SignalType_FunctionPointer_int32_t_MutPointer_void_SignalBytestringArray received_alerts;
+  SignalType_FunctionPointer_int32_t_MutPointer_void_uint64_t received_server_timestamp;
+  SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalFfiError connection_interrupted;
+  SignalType_FunctionPointer_void_MutPointer_void destroy;
 } SignalFfiChatListenerStruct;
 static_assert_64bit(offsetof(SignalFfiChatListenerStruct, ctx) == 0);
 static_assert_64bit(offsetof(SignalFfiChatListenerStruct, received_incoming_message) == 8);
@@ -851,18 +1072,18 @@ static_assert_64bit(alignof(SignalFfiChatListenerStruct) == 8);
 typedef const SignalFfiChatListenerStruct* SignalType_ConstPointer_SignalFfiChatListenerStruct;
 static_assert_64bit(sizeof(SignalType_ConstPointer_SignalFfiChatListenerStruct) == 8);
 static_assert_64bit(alignof(SignalType_ConstPointer_SignalFfiChatListenerStruct) == 8);
-typedef int32_t (*SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalCStringPtr_SignalMutPointerServerMessageAck)(SignalType_MutPointer_void, SignalCStringPtr, SignalMutPointerServerMessageAck);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalCStringPtr_SignalMutPointerServerMessageAck) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalCStringPtr_SignalMutPointerServerMessageAck) == 8);
-typedef int32_t (*SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalOwnedBuffer_SignalMutPointerServerMessageAck)(SignalType_MutPointer_void, SignalOwnedBuffer, SignalMutPointerServerMessageAck);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalOwnedBuffer_SignalMutPointerServerMessageAck) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalOwnedBuffer_SignalMutPointerServerMessageAck) == 8);
+typedef int32_t (*SignalType_FunctionPointer_int32_t_MutPointer_void_SignalCStringPtr_SignalMutPointerServerMessageAck)(SignalType_MutPointer_void, SignalCStringPtr, SignalMutPointerServerMessageAck);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_MutPointer_void_SignalCStringPtr_SignalMutPointerServerMessageAck) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_MutPointer_void_SignalCStringPtr_SignalMutPointerServerMessageAck) == 8);
+typedef int32_t (*SignalType_FunctionPointer_int32_t_MutPointer_void_SignalOwnedBuffer_SignalMutPointerServerMessageAck)(SignalType_MutPointer_void, SignalOwnedBuffer, SignalMutPointerServerMessageAck);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_MutPointer_void_SignalOwnedBuffer_SignalMutPointerServerMessageAck) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_MutPointer_void_SignalOwnedBuffer_SignalMutPointerServerMessageAck) == 8);
 typedef struct {
   void* ctx;
-  SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalCStringPtr_SignalMutPointerServerMessageAck received_address;
-  SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalOwnedBuffer_SignalMutPointerServerMessageAck received_envelope;
-  SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalFfiError connection_interrupted;
-  SignalType_FunctionPointer_void_SignalType_MutPointer_void destroy;
+  SignalType_FunctionPointer_int32_t_MutPointer_void_SignalCStringPtr_SignalMutPointerServerMessageAck received_address;
+  SignalType_FunctionPointer_int32_t_MutPointer_void_SignalOwnedBuffer_SignalMutPointerServerMessageAck received_envelope;
+  SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalFfiError connection_interrupted;
+  SignalType_FunctionPointer_void_MutPointer_void destroy;
 } SignalFfiProvisioningListenerStruct;
 static_assert_64bit(offsetof(SignalFfiProvisioningListenerStruct, ctx) == 0);
 static_assert_64bit(offsetof(SignalFfiProvisioningListenerStruct, received_address) == 8);
@@ -887,6 +1108,232 @@ static_assert_64bit(alignof(SignalType_ConstPointer_SignalServerMessageAck) == 8
 typedef const SignalUnauthenticatedChatConnection* SignalType_ConstPointer_SignalUnauthenticatedChatConnection;
 static_assert_64bit(sizeof(SignalType_ConstPointer_SignalUnauthenticatedChatConnection) == 8);
 static_assert_64bit(alignof(SignalType_ConstPointer_SignalUnauthenticatedChatConnection) == 8);
+typedef struct {
+  int64_t level;
+  uint64_t expiration;
+} SignalBackupEntitlementFfiResult;
+static_assert_64bit(offsetof(SignalBackupEntitlementFfiResult, level) == 0);
+static_assert_64bit(offsetof(SignalBackupEntitlementFfiResult, expiration) == 8);
+static_assert_64bit(sizeof(SignalBackupEntitlementFfiResult) == 16);
+static_assert_64bit(alignof(SignalBackupEntitlementFfiResult) == 8);
+typedef SignalBackupEntitlementFfiResult MaybeUninitOfBackupEntitlementFfiResult;
+static_assert_64bit(sizeof(MaybeUninitOfBackupEntitlementFfiResult) == 16);
+static_assert_64bit(alignof(MaybeUninitOfBackupEntitlementFfiResult) == 8);
+typedef struct {
+  bool present;
+  MaybeUninitOfBackupEntitlementFfiResult value;
+} SignalOptionalOfBackupEntitlementFfiResult;
+static_assert_64bit(offsetof(SignalOptionalOfBackupEntitlementFfiResult, present) == 0);
+static_assert_64bit(offsetof(SignalOptionalOfBackupEntitlementFfiResult, value) == 8);
+static_assert_64bit(sizeof(SignalOptionalOfBackupEntitlementFfiResult) == 24);
+static_assert_64bit(alignof(SignalOptionalOfBackupEntitlementFfiResult) == 8);
+typedef struct {
+  const int8_t* badge_id;
+  uint64_t expiration;
+  bool visible;
+} SignalBadgeEntitlementFfiResult;
+static_assert_64bit(offsetof(SignalBadgeEntitlementFfiResult, badge_id) == 0);
+static_assert_64bit(offsetof(SignalBadgeEntitlementFfiResult, expiration) == 8);
+static_assert_64bit(offsetof(SignalBadgeEntitlementFfiResult, visible) == 16);
+static_assert_64bit(sizeof(SignalBadgeEntitlementFfiResult) == 24);
+static_assert_64bit(alignof(SignalBadgeEntitlementFfiResult) == 8);
+typedef SignalBadgeEntitlementFfiResult* SignalType_MutPointer_SignalBadgeEntitlementFfiResult;
+static_assert_64bit(sizeof(SignalType_MutPointer_SignalBadgeEntitlementFfiResult) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_SignalBadgeEntitlementFfiResult) == 8);
+typedef struct {
+  SignalBadgeEntitlementFfiResult* base;
+  size_t length;
+  size_t size_bytes;
+} SignalOwnedBufferOfMaxAlignedBadgeEntitlementFfiResult;
+static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedBadgeEntitlementFfiResult, base) == 0);
+static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedBadgeEntitlementFfiResult, length) == 8);
+static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedBadgeEntitlementFfiResult, size_bytes) == 16);
+static_assert_64bit(sizeof(SignalOwnedBufferOfMaxAlignedBadgeEntitlementFfiResult) == 24);
+static_assert_64bit(alignof(SignalOwnedBufferOfMaxAlignedBadgeEntitlementFfiResult) == 8);
+typedef struct {
+  SignalOwnedBufferOfMaxAlignedBadgeEntitlementFfiResult badges;
+  SignalOptionalOfBackupEntitlementFfiResult backup;
+} SignalAccountEntitlementsFfiResult;
+static_assert_64bit(offsetof(SignalAccountEntitlementsFfiResult, badges) == 0);
+static_assert_64bit(offsetof(SignalAccountEntitlementsFfiResult, backup) == 24);
+static_assert_64bit(sizeof(SignalAccountEntitlementsFfiResult) == 48);
+static_assert_64bit(alignof(SignalAccountEntitlementsFfiResult) == 8);
+typedef const SignalAccountEntitlementsFfiResult* SignalType_ConstPointer_SignalAccountEntitlementsFfiResult;
+static_assert_64bit(sizeof(SignalType_ConstPointer_SignalAccountEntitlementsFfiResult) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_SignalAccountEntitlementsFfiResult) == 8);
+typedef SignalPairOfCStringPtrCStringPtr* SignalType_MutPointer_SignalPairOfCStringPtrCStringPtr;
+static_assert_64bit(sizeof(SignalType_MutPointer_SignalPairOfCStringPtrCStringPtr) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_SignalPairOfCStringPtrCStringPtr) == 8);
+typedef struct {
+  SignalPairOfCStringPtrCStringPtr* base;
+  size_t length;
+  size_t size_bytes;
+} SignalOwnedBufferOfMaxAlignedPairOfCStringPtrCStringPtr;
+static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedPairOfCStringPtrCStringPtr, base) == 0);
+static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedPairOfCStringPtrCStringPtr, length) == 8);
+static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedPairOfCStringPtrCStringPtr, size_bytes) == 16);
+static_assert_64bit(sizeof(SignalOwnedBufferOfMaxAlignedPairOfCStringPtrCStringPtr) == 24);
+static_assert_64bit(alignof(SignalOwnedBufferOfMaxAlignedPairOfCStringPtrCStringPtr) == 8);
+typedef struct {
+  const int8_t* base;
+  SignalOwnedBufferOfMaxAlignedPairOfCStringPtrCStringPtr conversions;
+} SignalCurrencyInternalFfiResult;
+static_assert_64bit(offsetof(SignalCurrencyInternalFfiResult, base) == 0);
+static_assert_64bit(offsetof(SignalCurrencyInternalFfiResult, conversions) == 8);
+static_assert_64bit(sizeof(SignalCurrencyInternalFfiResult) == 32);
+static_assert_64bit(alignof(SignalCurrencyInternalFfiResult) == 8);
+typedef SignalCurrencyInternalFfiResult* SignalType_MutPointer_SignalCurrencyInternalFfiResult;
+static_assert_64bit(sizeof(SignalType_MutPointer_SignalCurrencyInternalFfiResult) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_SignalCurrencyInternalFfiResult) == 8);
+typedef struct {
+  SignalCurrencyInternalFfiResult* base;
+  size_t length;
+  size_t size_bytes;
+} SignalOwnedBufferOfMaxAlignedCurrencyInternalFfiResult;
+static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedCurrencyInternalFfiResult, base) == 0);
+static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedCurrencyInternalFfiResult, length) == 8);
+static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedCurrencyInternalFfiResult, size_bytes) == 16);
+static_assert_64bit(sizeof(SignalOwnedBufferOfMaxAlignedCurrencyInternalFfiResult) == 24);
+static_assert_64bit(alignof(SignalOwnedBufferOfMaxAlignedCurrencyInternalFfiResult) == 8);
+typedef struct {
+  uint64_t timestamp_ms;
+  SignalOwnedBufferOfMaxAlignedCurrencyInternalFfiResult currencies;
+} SignalCurrencyConversionsInternalFfiResult;
+static_assert_64bit(offsetof(SignalCurrencyConversionsInternalFfiResult, timestamp_ms) == 0);
+static_assert_64bit(offsetof(SignalCurrencyConversionsInternalFfiResult, currencies) == 8);
+static_assert_64bit(sizeof(SignalCurrencyConversionsInternalFfiResult) == 32);
+static_assert_64bit(alignof(SignalCurrencyConversionsInternalFfiResult) == 8);
+typedef const SignalCurrencyConversionsInternalFfiResult* SignalType_ConstPointer_SignalCurrencyConversionsInternalFfiResult;
+static_assert_64bit(sizeof(SignalType_ConstPointer_SignalCurrencyConversionsInternalFfiResult) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_SignalCurrencyConversionsInternalFfiResult) == 8);
+typedef enum {
+  SignalDeviceCapabilityInternalFfiArgStorage,
+  SignalDeviceCapabilityInternalFfiArgTransfer,
+  SignalDeviceCapabilityInternalFfiArgAttachmentBackfill,
+  SignalDeviceCapabilityInternalFfiArgSparsePostQuantumRatchet,
+  SignalDeviceCapabilityInternalFfiArgProfilesV2,
+  SignalDeviceCapabilityInternalFfiArgUsernameChangeSyncMessage,
+  SignalDeviceCapabilityInternalFfiArgOptionalPhoneNumber,
+} SignalDeviceCapabilityInternalFfiArg;
+static_assert_64bit(sizeof(SignalDeviceCapabilityInternalFfiArg) == 4);
+static_assert_64bit(alignof(SignalDeviceCapabilityInternalFfiArg) == 4);
+typedef const SignalDeviceCapabilityInternalFfiArg* SignalType_ConstPointer_SignalDeviceCapabilityInternalFfiArg;
+static_assert_64bit(sizeof(SignalType_ConstPointer_SignalDeviceCapabilityInternalFfiArg) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_SignalDeviceCapabilityInternalFfiArg) == 8);
+typedef struct {
+  const int8_t* key;
+  const int8_t* credential;
+  const int8_t* acl;
+  const int8_t* algorithm;
+  const int8_t* date;
+  const int8_t* policy;
+  const int8_t* signature;
+} SignalS3UploadFormInternalFfiResult;
+static_assert_64bit(offsetof(SignalS3UploadFormInternalFfiResult, key) == 0);
+static_assert_64bit(offsetof(SignalS3UploadFormInternalFfiResult, credential) == 8);
+static_assert_64bit(offsetof(SignalS3UploadFormInternalFfiResult, acl) == 16);
+static_assert_64bit(offsetof(SignalS3UploadFormInternalFfiResult, algorithm) == 24);
+static_assert_64bit(offsetof(SignalS3UploadFormInternalFfiResult, date) == 32);
+static_assert_64bit(offsetof(SignalS3UploadFormInternalFfiResult, policy) == 40);
+static_assert_64bit(offsetof(SignalS3UploadFormInternalFfiResult, signature) == 48);
+static_assert_64bit(sizeof(SignalS3UploadFormInternalFfiResult) == 56);
+static_assert_64bit(alignof(SignalS3UploadFormInternalFfiResult) == 8);
+typedef SignalS3UploadFormInternalFfiResult* SignalType_MutPointer_SignalS3UploadFormInternalFfiResult;
+static_assert_64bit(sizeof(SignalType_MutPointer_SignalS3UploadFormInternalFfiResult) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_SignalS3UploadFormInternalFfiResult) == 8);
+typedef struct {
+  SignalS3UploadFormInternalFfiResult* base;
+  size_t length;
+  size_t size_bytes;
+} SignalOwnedBufferOfMaxAlignedS3UploadFormInternalFfiResult;
+static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedS3UploadFormInternalFfiResult, base) == 0);
+static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedS3UploadFormInternalFfiResult, length) == 8);
+static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedS3UploadFormInternalFfiResult, size_bytes) == 16);
+static_assert_64bit(sizeof(SignalOwnedBufferOfMaxAlignedS3UploadFormInternalFfiResult) == 24);
+static_assert_64bit(alignof(SignalOwnedBufferOfMaxAlignedS3UploadFormInternalFfiResult) == 8);
+typedef struct {
+  const int8_t* pack_id;
+  SignalS3UploadFormInternalFfiResult manifest_upload_form;
+  SignalOwnedBufferOfMaxAlignedS3UploadFormInternalFfiResult sticker_upload_forms;
+} SignalGetStickerUploadFormsResponseFfiResult;
+static_assert_64bit(offsetof(SignalGetStickerUploadFormsResponseFfiResult, pack_id) == 0);
+static_assert_64bit(offsetof(SignalGetStickerUploadFormsResponseFfiResult, manifest_upload_form) == 8);
+static_assert_64bit(offsetof(SignalGetStickerUploadFormsResponseFfiResult, sticker_upload_forms) == 64);
+static_assert_64bit(sizeof(SignalGetStickerUploadFormsResponseFfiResult) == 88);
+static_assert_64bit(alignof(SignalGetStickerUploadFormsResponseFfiResult) == 8);
+typedef const SignalGetStickerUploadFormsResponseFfiResult* SignalType_ConstPointer_SignalGetStickerUploadFormsResponseFfiResult;
+static_assert_64bit(sizeof(SignalType_ConstPointer_SignalGetStickerUploadFormsResponseFfiResult) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_SignalGetStickerUploadFormsResponseFfiResult) == 8);
+typedef struct {
+  int32_t cdn;
+  SignalType_FixedArray15_uint8_t media_id;
+  int64_t object_length;
+} SignalListMediaItemFfiResult;
+static_assert_64bit(offsetof(SignalListMediaItemFfiResult, cdn) == 0);
+static_assert_64bit(offsetof(SignalListMediaItemFfiResult, media_id) == 4);
+static_assert_64bit(offsetof(SignalListMediaItemFfiResult, object_length) == 24);
+static_assert_64bit(sizeof(SignalListMediaItemFfiResult) == 32);
+static_assert_64bit(alignof(SignalListMediaItemFfiResult) == 8);
+typedef SignalListMediaItemFfiResult* SignalType_MutPointer_SignalListMediaItemFfiResult;
+static_assert_64bit(sizeof(SignalType_MutPointer_SignalListMediaItemFfiResult) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_SignalListMediaItemFfiResult) == 8);
+typedef struct {
+  SignalListMediaItemFfiResult* base;
+  size_t length;
+  size_t size_bytes;
+} SignalOwnedBufferOfMaxAlignedListMediaItemFfiResult;
+static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedListMediaItemFfiResult, base) == 0);
+static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedListMediaItemFfiResult, length) == 8);
+static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedListMediaItemFfiResult, size_bytes) == 16);
+static_assert_64bit(sizeof(SignalOwnedBufferOfMaxAlignedListMediaItemFfiResult) == 24);
+static_assert_64bit(alignof(SignalOwnedBufferOfMaxAlignedListMediaItemFfiResult) == 8);
+typedef struct {
+  SignalOwnedBufferOfMaxAlignedListMediaItemFfiResult items;
+  const int8_t* backup_dir;
+  const int8_t* media_dir;
+  const int8_t* cursor;
+} SignalListMediaResponseFfiResult;
+static_assert_64bit(offsetof(SignalListMediaResponseFfiResult, items) == 0);
+static_assert_64bit(offsetof(SignalListMediaResponseFfiResult, backup_dir) == 24);
+static_assert_64bit(offsetof(SignalListMediaResponseFfiResult, media_dir) == 32);
+static_assert_64bit(offsetof(SignalListMediaResponseFfiResult, cursor) == 40);
+static_assert_64bit(sizeof(SignalListMediaResponseFfiResult) == 48);
+static_assert_64bit(alignof(SignalListMediaResponseFfiResult) == 8);
+typedef const SignalListMediaResponseFfiResult* SignalType_ConstPointer_SignalListMediaResponseFfiResult;
+static_assert_64bit(sizeof(SignalType_ConstPointer_SignalListMediaResponseFfiResult) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_SignalListMediaResponseFfiResult) == 8);
+typedef struct {
+  SignalOwnedBuffer challenge;
+  int32_t timeout_seconds;
+  SignalOwnedBufferOfMaxAlignedOwnedBuffer allowed_credential_ids;
+} SignalBridgeWebAuthnAuthenticationParametersFfiResult;
+static_assert_64bit(offsetof(SignalBridgeWebAuthnAuthenticationParametersFfiResult, challenge) == 0);
+static_assert_64bit(offsetof(SignalBridgeWebAuthnAuthenticationParametersFfiResult, timeout_seconds) == 16);
+static_assert_64bit(offsetof(SignalBridgeWebAuthnAuthenticationParametersFfiResult, allowed_credential_ids) == 24);
+static_assert_64bit(sizeof(SignalBridgeWebAuthnAuthenticationParametersFfiResult) == 48);
+static_assert_64bit(alignof(SignalBridgeWebAuthnAuthenticationParametersFfiResult) == 8);
+typedef SignalBridgeWebAuthnAuthenticationParametersFfiResult MaybeUninitOfBridgeWebAuthnAuthenticationParametersFfiResult;
+static_assert_64bit(sizeof(MaybeUninitOfBridgeWebAuthnAuthenticationParametersFfiResult) == 48);
+static_assert_64bit(alignof(MaybeUninitOfBridgeWebAuthnAuthenticationParametersFfiResult) == 8);
+typedef struct {
+  bool present;
+  MaybeUninitOfBridgeWebAuthnAuthenticationParametersFfiResult value;
+} SignalOptionalOfBridgeWebAuthnAuthenticationParametersFfiResult;
+static_assert_64bit(offsetof(SignalOptionalOfBridgeWebAuthnAuthenticationParametersFfiResult, present) == 0);
+static_assert_64bit(offsetof(SignalOptionalOfBridgeWebAuthnAuthenticationParametersFfiResult, value) == 8);
+static_assert_64bit(sizeof(SignalOptionalOfBridgeWebAuthnAuthenticationParametersFfiResult) == 56);
+static_assert_64bit(alignof(SignalOptionalOfBridgeWebAuthnAuthenticationParametersFfiResult) == 8);
+typedef struct {
+  bool has_totp;
+  SignalOptionalOfBridgeWebAuthnAuthenticationParametersFfiResult webauthn_params;
+} SignalStartMfaVerificationResponseFfiResult;
+static_assert_64bit(offsetof(SignalStartMfaVerificationResponseFfiResult, has_totp) == 0);
+static_assert_64bit(offsetof(SignalStartMfaVerificationResponseFfiResult, webauthn_params) == 8);
+static_assert_64bit(sizeof(SignalStartMfaVerificationResponseFfiResult) == 64);
+static_assert_64bit(alignof(SignalStartMfaVerificationResponseFfiResult) == 8);
+typedef const SignalStartMfaVerificationResponseFfiResult* SignalType_ConstPointer_SignalStartMfaVerificationResponseFfiResult;
+static_assert_64bit(sizeof(SignalType_ConstPointer_SignalStartMfaVerificationResponseFfiResult) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_SignalStartMfaVerificationResponseFfiResult) == 8);
 typedef struct SignalRegistrationAccountAttributes SignalRegistrationAccountAttributes;
 typedef const SignalRegistrationAccountAttributes* SignalType_ConstPointer_SignalRegistrationAccountAttributes;
 static_assert_64bit(sizeof(SignalType_ConstPointer_SignalRegistrationAccountAttributes) == 8);
@@ -914,15 +1361,15 @@ typedef struct {
 static_assert_64bit(offsetof(SignalMutPointerProtocolAddress, raw) == 0);
 static_assert_64bit(sizeof(SignalMutPointerProtocolAddress) == 8);
 static_assert_64bit(alignof(SignalMutPointerProtocolAddress) == 8);
-typedef int32_t (*SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_bool_SignalMutPointerProtocolAddress_SignalMutPointerPublicKey_uint32_t)(SignalType_MutPointer_void, SignalType_MutPointer_bool, SignalMutPointerProtocolAddress, SignalMutPointerPublicKey, uint32_t);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_bool_SignalMutPointerProtocolAddress_SignalMutPointerPublicKey_uint32_t) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_bool_SignalMutPointerProtocolAddress_SignalMutPointerPublicKey_uint32_t) == 8);
+typedef int32_t (*SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_bool_SignalMutPointerProtocolAddress_SignalMutPointerPublicKey_uint32_t)(SignalType_MutPointer_void, SignalType_MutPointer_bool, SignalMutPointerProtocolAddress, SignalMutPointerPublicKey, uint32_t);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_bool_SignalMutPointerProtocolAddress_SignalMutPointerPublicKey_uint32_t) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_bool_SignalMutPointerProtocolAddress_SignalMutPointerPublicKey_uint32_t) == 8);
 typedef SignalMutPointerPublicKey* SignalType_MutPointer_SignalMutPointerPublicKey;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalMutPointerPublicKey) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalMutPointerPublicKey) == 8);
-typedef int32_t (*SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalMutPointerPublicKey_SignalMutPointerProtocolAddress)(SignalType_MutPointer_void, SignalType_MutPointer_SignalMutPointerPublicKey, SignalMutPointerProtocolAddress);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalMutPointerPublicKey_SignalMutPointerProtocolAddress) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalMutPointerPublicKey_SignalMutPointerProtocolAddress) == 8);
+typedef int32_t (*SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalMutPointerPublicKey_SignalMutPointerProtocolAddress)(SignalType_MutPointer_void, SignalType_MutPointer_SignalMutPointerPublicKey, SignalMutPointerProtocolAddress);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalMutPointerPublicKey_SignalMutPointerProtocolAddress) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalMutPointerPublicKey_SignalMutPointerProtocolAddress) == 8);
 typedef struct SignalPrivateKey SignalPrivateKey;
 typedef SignalPrivateKey* SignalType_MutPointer_SignalPrivateKey;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalPrivateKey) == 8);
@@ -944,26 +1391,26 @@ static_assert_64bit(alignof(SignalPairOfMutPointerPrivateKeyMutPointerPublicKey)
 typedef SignalPairOfMutPointerPrivateKeyMutPointerPublicKey* SignalType_MutPointer_SignalPairOfMutPointerPrivateKeyMutPointerPublicKey;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalPairOfMutPointerPrivateKeyMutPointerPublicKey) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalPairOfMutPointerPrivateKeyMutPointerPublicKey) == 8);
-typedef int32_t (*SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalPairOfMutPointerPrivateKeyMutPointerPublicKey)(SignalType_MutPointer_void, SignalType_MutPointer_SignalPairOfMutPointerPrivateKeyMutPointerPublicKey);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalPairOfMutPointerPrivateKeyMutPointerPublicKey) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalPairOfMutPointerPrivateKeyMutPointerPublicKey) == 8);
+typedef int32_t (*SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalPairOfMutPointerPrivateKeyMutPointerPublicKey)(SignalType_MutPointer_void, SignalType_MutPointer_SignalPairOfMutPointerPrivateKeyMutPointerPublicKey);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalPairOfMutPointerPrivateKeyMutPointerPublicKey) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalPairOfMutPointerPrivateKeyMutPointerPublicKey) == 8);
 typedef uint32_t* SignalType_MutPointer_uint32_t;
 static_assert_64bit(sizeof(SignalType_MutPointer_uint32_t) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_uint32_t) == 8);
-typedef int32_t (*SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_uint32_t)(SignalType_MutPointer_void, SignalType_MutPointer_uint32_t);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_uint32_t) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_uint32_t) == 8);
-typedef int32_t (*SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_uint8_t_SignalMutPointerProtocolAddress_SignalMutPointerPublicKey)(SignalType_MutPointer_void, SignalType_MutPointer_uint8_t, SignalMutPointerProtocolAddress, SignalMutPointerPublicKey);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_uint8_t_SignalMutPointerProtocolAddress_SignalMutPointerPublicKey) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_uint8_t_SignalMutPointerProtocolAddress_SignalMutPointerPublicKey) == 8);
+typedef int32_t (*SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_uint32_t)(SignalType_MutPointer_void, SignalType_MutPointer_uint32_t);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_uint32_t) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_uint32_t) == 8);
+typedef int32_t (*SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_uint8_t_SignalMutPointerProtocolAddress_SignalMutPointerPublicKey)(SignalType_MutPointer_void, SignalType_MutPointer_uint8_t, SignalMutPointerProtocolAddress, SignalMutPointerPublicKey);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_uint8_t_SignalMutPointerProtocolAddress_SignalMutPointerPublicKey) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_uint8_t_SignalMutPointerProtocolAddress_SignalMutPointerPublicKey) == 8);
 typedef struct {
   void* ctx;
-  SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalPairOfMutPointerPrivateKeyMutPointerPublicKey get_local_identity_key_pair;
-  SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_uint32_t get_local_registration_id;
-  SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalMutPointerPublicKey_SignalMutPointerProtocolAddress get_identity_key;
-  SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_uint8_t_SignalMutPointerProtocolAddress_SignalMutPointerPublicKey save_identity_key;
-  SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_bool_SignalMutPointerProtocolAddress_SignalMutPointerPublicKey_uint32_t is_trusted_identity;
-  SignalType_FunctionPointer_void_SignalType_MutPointer_void destroy;
+  SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalPairOfMutPointerPrivateKeyMutPointerPublicKey get_local_identity_key_pair;
+  SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_uint32_t get_local_registration_id;
+  SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalMutPointerPublicKey_SignalMutPointerProtocolAddress get_identity_key;
+  SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_uint8_t_SignalMutPointerProtocolAddress_SignalMutPointerPublicKey save_identity_key;
+  SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_bool_SignalMutPointerProtocolAddress_SignalMutPointerPublicKey_uint32_t is_trusted_identity;
+  SignalType_FunctionPointer_void_MutPointer_void destroy;
 } SignalFfiIdentityKeyStoreStruct;
 static_assert_64bit(offsetof(SignalFfiIdentityKeyStoreStruct, ctx) == 0);
 static_assert_64bit(offsetof(SignalFfiIdentityKeyStoreStruct, get_local_identity_key_pair) == 8);
@@ -990,21 +1437,21 @@ static_assert_64bit(alignof(SignalMutPointerKyberPreKeyRecord) == 8);
 typedef SignalMutPointerKyberPreKeyRecord* SignalType_MutPointer_SignalMutPointerKyberPreKeyRecord;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalMutPointerKyberPreKeyRecord) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalMutPointerKyberPreKeyRecord) == 8);
-typedef int32_t (*SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalMutPointerKyberPreKeyRecord_uint32_t)(SignalType_MutPointer_void, SignalType_MutPointer_SignalMutPointerKyberPreKeyRecord, uint32_t);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalMutPointerKyberPreKeyRecord_uint32_t) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalMutPointerKyberPreKeyRecord_uint32_t) == 8);
-typedef int32_t (*SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_uint32_t_SignalMutPointerKyberPreKeyRecord)(SignalType_MutPointer_void, uint32_t, SignalMutPointerKyberPreKeyRecord);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_uint32_t_SignalMutPointerKyberPreKeyRecord) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_uint32_t_SignalMutPointerKyberPreKeyRecord) == 8);
-typedef int32_t (*SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_uint32_t_uint32_t_SignalMutPointerPublicKey)(SignalType_MutPointer_void, uint32_t, uint32_t, SignalMutPointerPublicKey);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_uint32_t_uint32_t_SignalMutPointerPublicKey) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_uint32_t_uint32_t_SignalMutPointerPublicKey) == 8);
+typedef int32_t (*SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalMutPointerKyberPreKeyRecord_uint32_t)(SignalType_MutPointer_void, SignalType_MutPointer_SignalMutPointerKyberPreKeyRecord, uint32_t);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalMutPointerKyberPreKeyRecord_uint32_t) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalMutPointerKyberPreKeyRecord_uint32_t) == 8);
+typedef int32_t (*SignalType_FunctionPointer_int32_t_MutPointer_void_uint32_t_SignalMutPointerKyberPreKeyRecord)(SignalType_MutPointer_void, uint32_t, SignalMutPointerKyberPreKeyRecord);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_MutPointer_void_uint32_t_SignalMutPointerKyberPreKeyRecord) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_MutPointer_void_uint32_t_SignalMutPointerKyberPreKeyRecord) == 8);
+typedef int32_t (*SignalType_FunctionPointer_int32_t_MutPointer_void_uint32_t_uint32_t_SignalMutPointerPublicKey)(SignalType_MutPointer_void, uint32_t, uint32_t, SignalMutPointerPublicKey);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_MutPointer_void_uint32_t_uint32_t_SignalMutPointerPublicKey) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_MutPointer_void_uint32_t_uint32_t_SignalMutPointerPublicKey) == 8);
 typedef struct {
   void* ctx;
-  SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalMutPointerKyberPreKeyRecord_uint32_t load_kyber_pre_key;
-  SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_uint32_t_SignalMutPointerKyberPreKeyRecord store_kyber_pre_key;
-  SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_uint32_t_uint32_t_SignalMutPointerPublicKey mark_kyber_pre_key_used;
-  SignalType_FunctionPointer_void_SignalType_MutPointer_void destroy;
+  SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalMutPointerKyberPreKeyRecord_uint32_t load_kyber_pre_key;
+  SignalType_FunctionPointer_int32_t_MutPointer_void_uint32_t_SignalMutPointerKyberPreKeyRecord store_kyber_pre_key;
+  SignalType_FunctionPointer_int32_t_MutPointer_void_uint32_t_uint32_t_SignalMutPointerPublicKey mark_kyber_pre_key_used;
+  SignalType_FunctionPointer_void_MutPointer_void destroy;
 } SignalFfiKyberPreKeyStoreStruct;
 static_assert_64bit(offsetof(SignalFfiKyberPreKeyStoreStruct, ctx) == 0);
 static_assert_64bit(offsetof(SignalFfiKyberPreKeyStoreStruct, load_kyber_pre_key) == 8);
@@ -1029,21 +1476,21 @@ static_assert_64bit(alignof(SignalMutPointerPreKeyRecord) == 8);
 typedef SignalMutPointerPreKeyRecord* SignalType_MutPointer_SignalMutPointerPreKeyRecord;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalMutPointerPreKeyRecord) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalMutPointerPreKeyRecord) == 8);
-typedef int32_t (*SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalMutPointerPreKeyRecord_uint32_t)(SignalType_MutPointer_void, SignalType_MutPointer_SignalMutPointerPreKeyRecord, uint32_t);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalMutPointerPreKeyRecord_uint32_t) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalMutPointerPreKeyRecord_uint32_t) == 8);
-typedef int32_t (*SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_uint32_t)(SignalType_MutPointer_void, uint32_t);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_uint32_t) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_uint32_t) == 8);
-typedef int32_t (*SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_uint32_t_SignalMutPointerPreKeyRecord)(SignalType_MutPointer_void, uint32_t, SignalMutPointerPreKeyRecord);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_uint32_t_SignalMutPointerPreKeyRecord) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_uint32_t_SignalMutPointerPreKeyRecord) == 8);
+typedef int32_t (*SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalMutPointerPreKeyRecord_uint32_t)(SignalType_MutPointer_void, SignalType_MutPointer_SignalMutPointerPreKeyRecord, uint32_t);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalMutPointerPreKeyRecord_uint32_t) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalMutPointerPreKeyRecord_uint32_t) == 8);
+typedef int32_t (*SignalType_FunctionPointer_int32_t_MutPointer_void_uint32_t)(SignalType_MutPointer_void, uint32_t);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_MutPointer_void_uint32_t) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_MutPointer_void_uint32_t) == 8);
+typedef int32_t (*SignalType_FunctionPointer_int32_t_MutPointer_void_uint32_t_SignalMutPointerPreKeyRecord)(SignalType_MutPointer_void, uint32_t, SignalMutPointerPreKeyRecord);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_MutPointer_void_uint32_t_SignalMutPointerPreKeyRecord) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_MutPointer_void_uint32_t_SignalMutPointerPreKeyRecord) == 8);
 typedef struct {
   void* ctx;
-  SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalMutPointerPreKeyRecord_uint32_t load_pre_key;
-  SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_uint32_t_SignalMutPointerPreKeyRecord store_pre_key;
-  SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_uint32_t remove_pre_key;
-  SignalType_FunctionPointer_void_SignalType_MutPointer_void destroy;
+  SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalMutPointerPreKeyRecord_uint32_t load_pre_key;
+  SignalType_FunctionPointer_int32_t_MutPointer_void_uint32_t_SignalMutPointerPreKeyRecord store_pre_key;
+  SignalType_FunctionPointer_int32_t_MutPointer_void_uint32_t remove_pre_key;
+  SignalType_FunctionPointer_void_MutPointer_void destroy;
 } SignalFfiPreKeyStoreStruct;
 static_assert_64bit(offsetof(SignalFfiPreKeyStoreStruct, ctx) == 0);
 static_assert_64bit(offsetof(SignalFfiPreKeyStoreStruct, load_pre_key) == 8);
@@ -1068,17 +1515,17 @@ static_assert_64bit(alignof(SignalMutPointerSenderKeyRecord) == 8);
 typedef SignalMutPointerSenderKeyRecord* SignalType_MutPointer_SignalMutPointerSenderKeyRecord;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalMutPointerSenderKeyRecord) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalMutPointerSenderKeyRecord) == 8);
-typedef int32_t (*SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalMutPointerSenderKeyRecord_SignalMutPointerProtocolAddress_SignalUuid)(SignalType_MutPointer_void, SignalType_MutPointer_SignalMutPointerSenderKeyRecord, SignalMutPointerProtocolAddress, SignalUuid);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalMutPointerSenderKeyRecord_SignalMutPointerProtocolAddress_SignalUuid) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalMutPointerSenderKeyRecord_SignalMutPointerProtocolAddress_SignalUuid) == 8);
-typedef int32_t (*SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalMutPointerProtocolAddress_SignalUuid_SignalMutPointerSenderKeyRecord)(SignalType_MutPointer_void, SignalMutPointerProtocolAddress, SignalUuid, SignalMutPointerSenderKeyRecord);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalMutPointerProtocolAddress_SignalUuid_SignalMutPointerSenderKeyRecord) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalMutPointerProtocolAddress_SignalUuid_SignalMutPointerSenderKeyRecord) == 8);
+typedef int32_t (*SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalMutPointerSenderKeyRecord_SignalMutPointerProtocolAddress_SignalUuid)(SignalType_MutPointer_void, SignalType_MutPointer_SignalMutPointerSenderKeyRecord, SignalMutPointerProtocolAddress, SignalUuid);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalMutPointerSenderKeyRecord_SignalMutPointerProtocolAddress_SignalUuid) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalMutPointerSenderKeyRecord_SignalMutPointerProtocolAddress_SignalUuid) == 8);
+typedef int32_t (*SignalType_FunctionPointer_int32_t_MutPointer_void_SignalMutPointerProtocolAddress_SignalUuid_SignalMutPointerSenderKeyRecord)(SignalType_MutPointer_void, SignalMutPointerProtocolAddress, SignalUuid, SignalMutPointerSenderKeyRecord);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_MutPointer_void_SignalMutPointerProtocolAddress_SignalUuid_SignalMutPointerSenderKeyRecord) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_MutPointer_void_SignalMutPointerProtocolAddress_SignalUuid_SignalMutPointerSenderKeyRecord) == 8);
 typedef struct {
   void* ctx;
-  SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalMutPointerSenderKeyRecord_SignalMutPointerProtocolAddress_SignalUuid load_sender_key;
-  SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalMutPointerProtocolAddress_SignalUuid_SignalMutPointerSenderKeyRecord store_sender_key;
-  SignalType_FunctionPointer_void_SignalType_MutPointer_void destroy;
+  SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalMutPointerSenderKeyRecord_SignalMutPointerProtocolAddress_SignalUuid load_sender_key;
+  SignalType_FunctionPointer_int32_t_MutPointer_void_SignalMutPointerProtocolAddress_SignalUuid_SignalMutPointerSenderKeyRecord store_sender_key;
+  SignalType_FunctionPointer_void_MutPointer_void destroy;
 } SignalFfiSenderKeyStoreStruct;
 static_assert_64bit(offsetof(SignalFfiSenderKeyStoreStruct, ctx) == 0);
 static_assert_64bit(offsetof(SignalFfiSenderKeyStoreStruct, load_sender_key) == 8);
@@ -1101,17 +1548,17 @@ static_assert_64bit(alignof(SignalMutPointerSessionRecord) == 8);
 typedef SignalMutPointerSessionRecord* SignalType_MutPointer_SignalMutPointerSessionRecord;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalMutPointerSessionRecord) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalMutPointerSessionRecord) == 8);
-typedef int32_t (*SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalMutPointerSessionRecord_SignalMutPointerProtocolAddress)(SignalType_MutPointer_void, SignalType_MutPointer_SignalMutPointerSessionRecord, SignalMutPointerProtocolAddress);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalMutPointerSessionRecord_SignalMutPointerProtocolAddress) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalMutPointerSessionRecord_SignalMutPointerProtocolAddress) == 8);
-typedef int32_t (*SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalMutPointerProtocolAddress_SignalMutPointerSessionRecord)(SignalType_MutPointer_void, SignalMutPointerProtocolAddress, SignalMutPointerSessionRecord);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalMutPointerProtocolAddress_SignalMutPointerSessionRecord) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalMutPointerProtocolAddress_SignalMutPointerSessionRecord) == 8);
+typedef int32_t (*SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalMutPointerSessionRecord_SignalMutPointerProtocolAddress)(SignalType_MutPointer_void, SignalType_MutPointer_SignalMutPointerSessionRecord, SignalMutPointerProtocolAddress);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalMutPointerSessionRecord_SignalMutPointerProtocolAddress) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalMutPointerSessionRecord_SignalMutPointerProtocolAddress) == 8);
+typedef int32_t (*SignalType_FunctionPointer_int32_t_MutPointer_void_SignalMutPointerProtocolAddress_SignalMutPointerSessionRecord)(SignalType_MutPointer_void, SignalMutPointerProtocolAddress, SignalMutPointerSessionRecord);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_MutPointer_void_SignalMutPointerProtocolAddress_SignalMutPointerSessionRecord) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_MutPointer_void_SignalMutPointerProtocolAddress_SignalMutPointerSessionRecord) == 8);
 typedef struct {
   void* ctx;
-  SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalMutPointerSessionRecord_SignalMutPointerProtocolAddress load_session;
-  SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalMutPointerProtocolAddress_SignalMutPointerSessionRecord store_session;
-  SignalType_FunctionPointer_void_SignalType_MutPointer_void destroy;
+  SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalMutPointerSessionRecord_SignalMutPointerProtocolAddress load_session;
+  SignalType_FunctionPointer_int32_t_MutPointer_void_SignalMutPointerProtocolAddress_SignalMutPointerSessionRecord store_session;
+  SignalType_FunctionPointer_void_MutPointer_void destroy;
 } SignalFfiSessionStoreStruct;
 static_assert_64bit(offsetof(SignalFfiSessionStoreStruct, ctx) == 0);
 static_assert_64bit(offsetof(SignalFfiSessionStoreStruct, load_session) == 8);
@@ -1135,17 +1582,17 @@ static_assert_64bit(alignof(SignalMutPointerSignedPreKeyRecord) == 8);
 typedef SignalMutPointerSignedPreKeyRecord* SignalType_MutPointer_SignalMutPointerSignedPreKeyRecord;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalMutPointerSignedPreKeyRecord) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalMutPointerSignedPreKeyRecord) == 8);
-typedef int32_t (*SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalMutPointerSignedPreKeyRecord_uint32_t)(SignalType_MutPointer_void, SignalType_MutPointer_SignalMutPointerSignedPreKeyRecord, uint32_t);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalMutPointerSignedPreKeyRecord_uint32_t) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalMutPointerSignedPreKeyRecord_uint32_t) == 8);
-typedef int32_t (*SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_uint32_t_SignalMutPointerSignedPreKeyRecord)(SignalType_MutPointer_void, uint32_t, SignalMutPointerSignedPreKeyRecord);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_uint32_t_SignalMutPointerSignedPreKeyRecord) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_uint32_t_SignalMutPointerSignedPreKeyRecord) == 8);
+typedef int32_t (*SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalMutPointerSignedPreKeyRecord_uint32_t)(SignalType_MutPointer_void, SignalType_MutPointer_SignalMutPointerSignedPreKeyRecord, uint32_t);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalMutPointerSignedPreKeyRecord_uint32_t) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalMutPointerSignedPreKeyRecord_uint32_t) == 8);
+typedef int32_t (*SignalType_FunctionPointer_int32_t_MutPointer_void_uint32_t_SignalMutPointerSignedPreKeyRecord)(SignalType_MutPointer_void, uint32_t, SignalMutPointerSignedPreKeyRecord);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_MutPointer_void_uint32_t_SignalMutPointerSignedPreKeyRecord) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_MutPointer_void_uint32_t_SignalMutPointerSignedPreKeyRecord) == 8);
 typedef struct {
   void* ctx;
-  SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalMutPointerSignedPreKeyRecord_uint32_t load_signed_pre_key;
-  SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_uint32_t_SignalMutPointerSignedPreKeyRecord store_signed_pre_key;
-  SignalType_FunctionPointer_void_SignalType_MutPointer_void destroy;
+  SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalMutPointerSignedPreKeyRecord_uint32_t load_signed_pre_key;
+  SignalType_FunctionPointer_int32_t_MutPointer_void_uint32_t_SignalMutPointerSignedPreKeyRecord store_signed_pre_key;
+  SignalType_FunctionPointer_void_MutPointer_void destroy;
 } SignalFfiSignedPreKeyStoreStruct;
 static_assert_64bit(offsetof(SignalFfiSignedPreKeyStoreStruct, ctx) == 0);
 static_assert_64bit(offsetof(SignalFfiSignedPreKeyStoreStruct, load_signed_pre_key) == 8);
@@ -1192,10 +1639,6 @@ typedef struct SignalFingerprint SignalFingerprint;
 typedef const SignalFingerprint* SignalType_ConstPointer_SignalFingerprint;
 static_assert_64bit(sizeof(SignalType_ConstPointer_SignalFingerprint) == 8);
 static_assert_64bit(alignof(SignalType_ConstPointer_SignalFingerprint) == 8);
-typedef struct SignalKyberPublicKey SignalKyberPublicKey;
-typedef const SignalKyberPublicKey* SignalType_ConstPointer_SignalKyberPublicKey;
-static_assert_64bit(sizeof(SignalType_ConstPointer_SignalKyberPublicKey) == 8);
-static_assert_64bit(alignof(SignalType_ConstPointer_SignalKyberPublicKey) == 8);
 typedef struct SignalKyberSecretKey SignalKyberSecretKey;
 typedef const SignalKyberSecretKey* SignalType_ConstPointer_SignalKyberSecretKey;
 static_assert_64bit(sizeof(SignalType_ConstPointer_SignalKyberSecretKey) == 8);
@@ -1255,6 +1698,10 @@ static_assert_64bit(alignof(SignalType_ConstPointer_SignalPreKeyRecord) == 8);
 typedef const SignalSignedPreKeyRecord* SignalType_ConstPointer_SignalSignedPreKeyRecord;
 static_assert_64bit(sizeof(SignalType_ConstPointer_SignalSignedPreKeyRecord) == 8);
 static_assert_64bit(alignof(SignalType_ConstPointer_SignalSignedPreKeyRecord) == 8);
+typedef struct SignalRecvProvisionCiphertextState SignalRecvProvisionCiphertextState;
+typedef const SignalRecvProvisionCiphertextState* SignalType_ConstPointer_SignalRecvProvisionCiphertextState;
+static_assert_64bit(sizeof(SignalType_ConstPointer_SignalRecvProvisionCiphertextState) == 8);
+static_assert_64bit(alignof(SignalType_ConstPointer_SignalRecvProvisionCiphertextState) == 8);
 typedef const uint32_t* SignalType_ConstPointer_uint32_t;
 static_assert_64bit(sizeof(SignalType_ConstPointer_uint32_t) == 8);
 static_assert_64bit(alignof(SignalType_ConstPointer_uint32_t) == 8);
@@ -1269,51 +1716,54 @@ typedef struct SignalServerSecretParams SignalServerSecretParams;
 typedef const SignalServerSecretParams* SignalType_ConstPointer_SignalServerSecretParams;
 static_assert_64bit(sizeof(SignalType_ConstPointer_SignalServerSecretParams) == 8);
 static_assert_64bit(alignof(SignalType_ConstPointer_SignalServerSecretParams) == 8);
-typedef SignalType_FixedArray129_uint8_t* SignalType_MutPointer_SignalType_FixedArray129_uint8_t;
-static_assert_64bit(sizeof(SignalType_MutPointer_SignalType_FixedArray129_uint8_t) == 8);
-static_assert_64bit(alignof(SignalType_MutPointer_SignalType_FixedArray129_uint8_t) == 8);
-typedef SignalType_FixedArray153_uint8_t* SignalType_MutPointer_SignalType_FixedArray153_uint8_t;
-static_assert_64bit(sizeof(SignalType_MutPointer_SignalType_FixedArray153_uint8_t) == 8);
-static_assert_64bit(alignof(SignalType_MutPointer_SignalType_FixedArray153_uint8_t) == 8);
-typedef SignalType_FixedArray15_uint8_t* SignalType_MutPointer_SignalType_FixedArray15_uint8_t;
-static_assert_64bit(sizeof(SignalType_MutPointer_SignalType_FixedArray15_uint8_t) == 8);
-static_assert_64bit(alignof(SignalType_MutPointer_SignalType_FixedArray15_uint8_t) == 8);
-typedef SignalType_FixedArray16_uint8_t* SignalType_MutPointer_SignalType_FixedArray16_uint8_t;
-static_assert_64bit(sizeof(SignalType_MutPointer_SignalType_FixedArray16_uint8_t) == 8);
-static_assert_64bit(alignof(SignalType_MutPointer_SignalType_FixedArray16_uint8_t) == 8);
-typedef SignalType_FixedArray177_uint8_t* SignalType_MutPointer_SignalType_FixedArray177_uint8_t;
-static_assert_64bit(sizeof(SignalType_MutPointer_SignalType_FixedArray177_uint8_t) == 8);
-static_assert_64bit(alignof(SignalType_MutPointer_SignalType_FixedArray177_uint8_t) == 8);
-typedef SignalType_FixedArray289_uint8_t* SignalType_MutPointer_SignalType_FixedArray289_uint8_t;
-static_assert_64bit(sizeof(SignalType_MutPointer_SignalType_FixedArray289_uint8_t) == 8);
-static_assert_64bit(alignof(SignalType_MutPointer_SignalType_FixedArray289_uint8_t) == 8);
-typedef SignalType_FixedArray329_uint8_t* SignalType_MutPointer_SignalType_FixedArray329_uint8_t;
-static_assert_64bit(sizeof(SignalType_MutPointer_SignalType_FixedArray329_uint8_t) == 8);
-static_assert_64bit(alignof(SignalType_MutPointer_SignalType_FixedArray329_uint8_t) == 8);
-typedef SignalType_FixedArray32_uint8_t* SignalType_MutPointer_SignalType_FixedArray32_uint8_t;
-static_assert_64bit(sizeof(SignalType_MutPointer_SignalType_FixedArray32_uint8_t) == 8);
-static_assert_64bit(alignof(SignalType_MutPointer_SignalType_FixedArray32_uint8_t) == 8);
-typedef SignalType_FixedArray409_uint8_t* SignalType_MutPointer_SignalType_FixedArray409_uint8_t;
-static_assert_64bit(sizeof(SignalType_MutPointer_SignalType_FixedArray409_uint8_t) == 8);
-static_assert_64bit(alignof(SignalType_MutPointer_SignalType_FixedArray409_uint8_t) == 8);
-typedef SignalType_FixedArray473_uint8_t* SignalType_MutPointer_SignalType_FixedArray473_uint8_t;
-static_assert_64bit(sizeof(SignalType_MutPointer_SignalType_FixedArray473_uint8_t) == 8);
-static_assert_64bit(alignof(SignalType_MutPointer_SignalType_FixedArray473_uint8_t) == 8);
-typedef SignalType_FixedArray497_uint8_t* SignalType_MutPointer_SignalType_FixedArray497_uint8_t;
-static_assert_64bit(sizeof(SignalType_MutPointer_SignalType_FixedArray497_uint8_t) == 8);
-static_assert_64bit(alignof(SignalType_MutPointer_SignalType_FixedArray497_uint8_t) == 8);
-typedef SignalType_FixedArray64_uint8_t* SignalType_MutPointer_SignalType_FixedArray64_uint8_t;
-static_assert_64bit(sizeof(SignalType_MutPointer_SignalType_FixedArray64_uint8_t) == 8);
-static_assert_64bit(alignof(SignalType_MutPointer_SignalType_FixedArray64_uint8_t) == 8);
-typedef SignalType_FixedArray65_uint8_t* SignalType_MutPointer_SignalType_FixedArray65_uint8_t;
-static_assert_64bit(sizeof(SignalType_MutPointer_SignalType_FixedArray65_uint8_t) == 8);
-static_assert_64bit(alignof(SignalType_MutPointer_SignalType_FixedArray65_uint8_t) == 8);
-typedef SignalType_FixedArray97_uint8_t* SignalType_MutPointer_SignalType_FixedArray97_uint8_t;
-static_assert_64bit(sizeof(SignalType_MutPointer_SignalType_FixedArray97_uint8_t) == 8);
-static_assert_64bit(alignof(SignalType_MutPointer_SignalType_FixedArray97_uint8_t) == 8);
-typedef int32_t* SignalType_MutPointer_int32_t;
-static_assert_64bit(sizeof(SignalType_MutPointer_int32_t) == 8);
-static_assert_64bit(alignof(SignalType_MutPointer_int32_t) == 8);
+typedef SignalType_FixedArray129_uint8_t* SignalType_MutPointer_FixedArray129_uint8_t;
+static_assert_64bit(sizeof(SignalType_MutPointer_FixedArray129_uint8_t) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_FixedArray129_uint8_t) == 8);
+typedef SignalType_FixedArray153_uint8_t* SignalType_MutPointer_FixedArray153_uint8_t;
+static_assert_64bit(sizeof(SignalType_MutPointer_FixedArray153_uint8_t) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_FixedArray153_uint8_t) == 8);
+typedef SignalType_FixedArray15_uint8_t* SignalType_MutPointer_FixedArray15_uint8_t;
+static_assert_64bit(sizeof(SignalType_MutPointer_FixedArray15_uint8_t) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_FixedArray15_uint8_t) == 8);
+typedef SignalType_FixedArray16_uint8_t* SignalType_MutPointer_FixedArray16_uint8_t;
+static_assert_64bit(sizeof(SignalType_MutPointer_FixedArray16_uint8_t) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_FixedArray16_uint8_t) == 8);
+typedef SignalType_FixedArray177_uint8_t* SignalType_MutPointer_FixedArray177_uint8_t;
+static_assert_64bit(sizeof(SignalType_MutPointer_FixedArray177_uint8_t) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_FixedArray177_uint8_t) == 8);
+typedef SignalType_FixedArray289_uint8_t* SignalType_MutPointer_FixedArray289_uint8_t;
+static_assert_64bit(sizeof(SignalType_MutPointer_FixedArray289_uint8_t) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_FixedArray289_uint8_t) == 8);
+typedef SignalType_FixedArray329_uint8_t* SignalType_MutPointer_FixedArray329_uint8_t;
+static_assert_64bit(sizeof(SignalType_MutPointer_FixedArray329_uint8_t) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_FixedArray329_uint8_t) == 8);
+typedef SignalType_FixedArray32_uint8_t* SignalType_MutPointer_FixedArray32_uint8_t;
+static_assert_64bit(sizeof(SignalType_MutPointer_FixedArray32_uint8_t) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_FixedArray32_uint8_t) == 8);
+typedef SignalType_FixedArray33_uint8_t* SignalType_MutPointer_FixedArray33_uint8_t;
+static_assert_64bit(sizeof(SignalType_MutPointer_FixedArray33_uint8_t) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_FixedArray33_uint8_t) == 8);
+typedef SignalType_FixedArray409_uint8_t* SignalType_MutPointer_FixedArray409_uint8_t;
+static_assert_64bit(sizeof(SignalType_MutPointer_FixedArray409_uint8_t) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_FixedArray409_uint8_t) == 8);
+typedef SignalType_FixedArray473_uint8_t* SignalType_MutPointer_FixedArray473_uint8_t;
+static_assert_64bit(sizeof(SignalType_MutPointer_FixedArray473_uint8_t) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_FixedArray473_uint8_t) == 8);
+typedef SignalType_FixedArray497_uint8_t* SignalType_MutPointer_FixedArray497_uint8_t;
+static_assert_64bit(sizeof(SignalType_MutPointer_FixedArray497_uint8_t) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_FixedArray497_uint8_t) == 8);
+typedef SignalType_FixedArray64_uint8_t* SignalType_MutPointer_FixedArray64_uint8_t;
+static_assert_64bit(sizeof(SignalType_MutPointer_FixedArray64_uint8_t) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_FixedArray64_uint8_t) == 8);
+typedef SignalType_FixedArray65_uint8_t* SignalType_MutPointer_FixedArray65_uint8_t;
+static_assert_64bit(sizeof(SignalType_MutPointer_FixedArray65_uint8_t) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_FixedArray65_uint8_t) == 8);
+typedef SignalType_FixedArray97_uint8_t* SignalType_MutPointer_FixedArray97_uint8_t;
+static_assert_64bit(sizeof(SignalType_MutPointer_FixedArray97_uint8_t) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_FixedArray97_uint8_t) == 8);
+typedef SignalAes256GcmSiv* SignalType_MutPointer_SignalAes256GcmSiv;
+static_assert_64bit(sizeof(SignalType_MutPointer_SignalAes256GcmSiv) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_SignalAes256GcmSiv) == 8);
 typedef SignalPinHash* SignalType_MutPointer_SignalPinHash;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalPinHash) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalPinHash) == 8);
@@ -1325,9 +1775,6 @@ typedef struct SignalAes256GcmEncryption SignalAes256GcmEncryption;
 typedef SignalAes256GcmEncryption* SignalType_MutPointer_SignalAes256GcmEncryption;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalAes256GcmEncryption) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalAes256GcmEncryption) == 8);
-typedef SignalAes256GcmSiv* SignalType_MutPointer_SignalAes256GcmSiv;
-static_assert_64bit(sizeof(SignalType_MutPointer_SignalAes256GcmSiv) == 8);
-static_assert_64bit(alignof(SignalType_MutPointer_SignalAes256GcmSiv) == 8);
 typedef SignalBytestringArray* SignalType_MutPointer_SignalBytestringArray;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalBytestringArray) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalBytestringArray) == 8);
@@ -1370,6 +1817,15 @@ typedef SignalFfiRegisterResponseBadge* SignalType_MutPointer_SignalFfiRegisterR
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalFfiRegisterResponseBadge) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalFfiRegisterResponseBadge) == 8);
 typedef struct {
+  SignalAes256GcmSiv* raw;
+} SignalMutPointerAes256GcmSiv;
+static_assert_64bit(offsetof(SignalMutPointerAes256GcmSiv, raw) == 0);
+static_assert_64bit(sizeof(SignalMutPointerAes256GcmSiv) == 8);
+static_assert_64bit(alignof(SignalMutPointerAes256GcmSiv) == 8);
+typedef SignalMutPointerAes256GcmSiv* SignalType_MutPointer_SignalMutPointerAes256GcmSiv;
+static_assert_64bit(sizeof(SignalType_MutPointer_SignalMutPointerAes256GcmSiv) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_SignalMutPointerAes256GcmSiv) == 8);
+typedef struct {
   SignalPinHash* raw;
 } SignalMutPointerPinHash;
 static_assert_64bit(offsetof(SignalMutPointerPinHash, raw) == 0);
@@ -1396,15 +1852,6 @@ static_assert_64bit(alignof(SignalMutPointerAes256GcmEncryption) == 8);
 typedef SignalMutPointerAes256GcmEncryption* SignalType_MutPointer_SignalMutPointerAes256GcmEncryption;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalMutPointerAes256GcmEncryption) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalMutPointerAes256GcmEncryption) == 8);
-typedef struct {
-  SignalAes256GcmSiv* raw;
-} SignalMutPointerAes256GcmSiv;
-static_assert_64bit(offsetof(SignalMutPointerAes256GcmSiv, raw) == 0);
-static_assert_64bit(sizeof(SignalMutPointerAes256GcmSiv) == 8);
-static_assert_64bit(alignof(SignalMutPointerAes256GcmSiv) == 8);
-typedef SignalMutPointerAes256GcmSiv* SignalType_MutPointer_SignalMutPointerAes256GcmSiv;
-static_assert_64bit(sizeof(SignalType_MutPointer_SignalMutPointerAes256GcmSiv) == 8);
-static_assert_64bit(alignof(SignalType_MutPointer_SignalMutPointerAes256GcmSiv) == 8);
 typedef SignalHsmEnclaveClient* SignalType_MutPointer_SignalHsmEnclaveClient;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalHsmEnclaveClient) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalHsmEnclaveClient) == 8);
@@ -1443,6 +1890,18 @@ static_assert_64bit(alignof(SignalMutPointerValidatingMac) == 8);
 typedef SignalMutPointerValidatingMac* SignalType_MutPointer_SignalMutPointerValidatingMac;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalMutPointerValidatingMac) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalMutPointerValidatingMac) == 8);
+typedef SignalBackupJsonExporter* SignalType_MutPointer_SignalBackupJsonExporter;
+static_assert_64bit(sizeof(SignalType_MutPointer_SignalBackupJsonExporter) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_SignalBackupJsonExporter) == 8);
+typedef struct {
+  SignalBackupJsonExporter* raw;
+} SignalMutPointerBackupJsonExporter;
+static_assert_64bit(offsetof(SignalMutPointerBackupJsonExporter, raw) == 0);
+static_assert_64bit(sizeof(SignalMutPointerBackupJsonExporter) == 8);
+static_assert_64bit(alignof(SignalMutPointerBackupJsonExporter) == 8);
+typedef SignalMutPointerBackupJsonExporter* SignalType_MutPointer_SignalMutPointerBackupJsonExporter;
+static_assert_64bit(sizeof(SignalType_MutPointer_SignalMutPointerBackupJsonExporter) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_SignalMutPointerBackupJsonExporter) == 8);
 typedef SignalMessageBackupKey* SignalType_MutPointer_SignalMessageBackupKey;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalMessageBackupKey) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalMessageBackupKey) == 8);
@@ -1810,6 +2269,18 @@ static_assert_64bit(alignof(SignalMutPointerUnidentifiedSenderMessageContent) ==
 typedef SignalMutPointerUnidentifiedSenderMessageContent* SignalType_MutPointer_SignalMutPointerUnidentifiedSenderMessageContent;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalMutPointerUnidentifiedSenderMessageContent) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalMutPointerUnidentifiedSenderMessageContent) == 8);
+typedef SignalRecvProvisionCiphertextState* SignalType_MutPointer_SignalRecvProvisionCiphertextState;
+static_assert_64bit(sizeof(SignalType_MutPointer_SignalRecvProvisionCiphertextState) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_SignalRecvProvisionCiphertextState) == 8);
+typedef struct {
+  SignalRecvProvisionCiphertextState* raw;
+} SignalMutPointerRecvProvisionCiphertextState;
+static_assert_64bit(offsetof(SignalMutPointerRecvProvisionCiphertextState, raw) == 0);
+static_assert_64bit(sizeof(SignalMutPointerRecvProvisionCiphertextState) == 8);
+static_assert_64bit(alignof(SignalMutPointerRecvProvisionCiphertextState) == 8);
+typedef SignalMutPointerRecvProvisionCiphertextState* SignalType_MutPointer_SignalMutPointerRecvProvisionCiphertextState;
+static_assert_64bit(sizeof(SignalType_MutPointer_SignalMutPointerRecvProvisionCiphertextState) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_SignalMutPointerRecvProvisionCiphertextState) == 8);
 typedef struct SignalAes256Ctr32 SignalAes256Ctr32;
 typedef SignalAes256Ctr32* SignalType_MutPointer_SignalAes256Ctr32;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalAes256Ctr32) == 8);
@@ -1847,6 +2318,44 @@ static_assert_64bit(alignof(SignalMutPointerServerSecretParams) == 8);
 typedef SignalMutPointerServerSecretParams* SignalType_MutPointer_SignalMutPointerServerSecretParams;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalMutPointerServerSecretParams) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalMutPointerServerSecretParams) == 8);
+typedef enum {
+  SignalPaymentProviderInternalFfiResultGooglePlayBilling,
+  SignalPaymentProviderInternalFfiResultAppleAppStore,
+  SignalPaymentProviderInternalFfiResultStripe,
+  SignalPaymentProviderInternalFfiResultBraintree,
+} SignalPaymentProviderInternalFfiResult;
+static_assert_64bit(sizeof(SignalPaymentProviderInternalFfiResult) == 4);
+static_assert_64bit(alignof(SignalPaymentProviderInternalFfiResult) == 4);
+typedef struct {
+  SignalPaymentProviderInternalFfiResult processor;
+  const int8_t* code;
+  const int8_t* message;
+  const int8_t* outcome_network_status;
+  const int8_t* outcome_reason;
+  const int8_t* outcome_type;
+} SignalChargeFailureFfiResult;
+static_assert_64bit(offsetof(SignalChargeFailureFfiResult, processor) == 0);
+static_assert_64bit(offsetof(SignalChargeFailureFfiResult, code) == 8);
+static_assert_64bit(offsetof(SignalChargeFailureFfiResult, message) == 16);
+static_assert_64bit(offsetof(SignalChargeFailureFfiResult, outcome_network_status) == 24);
+static_assert_64bit(offsetof(SignalChargeFailureFfiResult, outcome_reason) == 32);
+static_assert_64bit(offsetof(SignalChargeFailureFfiResult, outcome_type) == 40);
+static_assert_64bit(sizeof(SignalChargeFailureFfiResult) == 48);
+static_assert_64bit(alignof(SignalChargeFailureFfiResult) == 8);
+typedef SignalChargeFailureFfiResult MaybeUninitOfChargeFailureFfiResult;
+static_assert_64bit(sizeof(MaybeUninitOfChargeFailureFfiResult) == 48);
+static_assert_64bit(alignof(MaybeUninitOfChargeFailureFfiResult) == 8);
+typedef struct {
+  bool present;
+  MaybeUninitOfChargeFailureFfiResult value;
+} SignalOptionalOfChargeFailureFfiResult;
+static_assert_64bit(offsetof(SignalOptionalOfChargeFailureFfiResult, present) == 0);
+static_assert_64bit(offsetof(SignalOptionalOfChargeFailureFfiResult, value) == 8);
+static_assert_64bit(sizeof(SignalOptionalOfChargeFailureFfiResult) == 56);
+static_assert_64bit(alignof(SignalOptionalOfChargeFailureFfiResult) == 8);
+typedef SignalOptionalOfChargeFailureFfiResult* SignalType_MutPointer_SignalOptionalOfChargeFailureFfiResult;
+static_assert_64bit(sizeof(SignalType_MutPointer_SignalOptionalOfChargeFailureFfiResult) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_SignalOptionalOfChargeFailureFfiResult) == 8);
 typedef SignalOptionalUuid* SignalType_MutPointer_SignalOptionalUuid;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalOptionalUuid) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalOptionalUuid) == 8);
@@ -1872,42 +2381,9 @@ static_assert_64bit(alignof(SignalOwnedBufferOfFfiRegisterResponseBadge) == 8);
 typedef SignalOwnedBufferOfFfiRegisterResponseBadge* SignalType_MutPointer_SignalOwnedBufferOfFfiRegisterResponseBadge;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalOwnedBufferOfFfiRegisterResponseBadge) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalOwnedBufferOfFfiRegisterResponseBadge) == 8);
-typedef SignalOwnedBuffer* SignalType_MutPointer_SignalOwnedBuffer;
-static_assert_64bit(sizeof(SignalType_MutPointer_SignalOwnedBuffer) == 8);
-static_assert_64bit(alignof(SignalType_MutPointer_SignalOwnedBuffer) == 8);
-typedef struct {
-  int32_t source_attachment_cdn;
-  const int8_t* source_key;
-  int64_t object_length;
-  SignalType_FixedArray15_uint8_t media_id;
-  SignalType_FixedArray64_uint8_t encryption_key;
-} SignalBridgeCopyBackupMediaItemFfiResult;
-static_assert_64bit(offsetof(SignalBridgeCopyBackupMediaItemFfiResult, source_attachment_cdn) == 0);
-static_assert_64bit(offsetof(SignalBridgeCopyBackupMediaItemFfiResult, source_key) == 8);
-static_assert_64bit(offsetof(SignalBridgeCopyBackupMediaItemFfiResult, object_length) == 16);
-static_assert_64bit(offsetof(SignalBridgeCopyBackupMediaItemFfiResult, media_id) == 24);
-static_assert_64bit(offsetof(SignalBridgeCopyBackupMediaItemFfiResult, encryption_key) == 39);
-static_assert_64bit(sizeof(SignalBridgeCopyBackupMediaItemFfiResult) == 104);
-static_assert_64bit(alignof(SignalBridgeCopyBackupMediaItemFfiResult) == 8);
-typedef SignalBridgeCopyBackupMediaItemFfiResult* SignalType_MutPointer_SignalBridgeCopyBackupMediaItemFfiResult;
-static_assert_64bit(sizeof(SignalType_MutPointer_SignalBridgeCopyBackupMediaItemFfiResult) == 8);
-static_assert_64bit(alignof(SignalType_MutPointer_SignalBridgeCopyBackupMediaItemFfiResult) == 8);
-typedef struct {
-  SignalBridgeCopyBackupMediaItemFfiResult* base;
-  size_t length;
-  size_t size_bytes;
-} SignalOwnedBufferOfMaxAlignedBridgeCopyBackupMediaItemFfiResult;
-static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedBridgeCopyBackupMediaItemFfiResult, base) == 0);
-static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedBridgeCopyBackupMediaItemFfiResult, length) == 8);
-static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedBridgeCopyBackupMediaItemFfiResult, size_bytes) == 16);
-static_assert_64bit(sizeof(SignalOwnedBufferOfMaxAlignedBridgeCopyBackupMediaItemFfiResult) == 24);
-static_assert_64bit(alignof(SignalOwnedBufferOfMaxAlignedBridgeCopyBackupMediaItemFfiResult) == 8);
-typedef SignalOwnedBufferOfMaxAlignedBridgeCopyBackupMediaItemFfiResult* SignalType_MutPointer_SignalOwnedBufferOfMaxAlignedBridgeCopyBackupMediaItemFfiResult;
-static_assert_64bit(sizeof(SignalType_MutPointer_SignalOwnedBufferOfMaxAlignedBridgeCopyBackupMediaItemFfiResult) == 8);
-static_assert_64bit(alignof(SignalType_MutPointer_SignalOwnedBufferOfMaxAlignedBridgeCopyBackupMediaItemFfiResult) == 8);
-typedef SignalPairOfCStringPtrCStringPtr* SignalType_MutPointer_SignalPairOfCStringPtrCStringPtr;
-static_assert_64bit(sizeof(SignalType_MutPointer_SignalPairOfCStringPtrCStringPtr) == 8);
-static_assert_64bit(alignof(SignalType_MutPointer_SignalPairOfCStringPtrCStringPtr) == 8);
+typedef SignalOwnedBufferOfMaxAlignedPairOfCStringPtrCStringPtr* SignalType_MutPointer_SignalOwnedBufferOfMaxAlignedPairOfCStringPtrCStringPtr;
+static_assert_64bit(sizeof(SignalType_MutPointer_SignalOwnedBufferOfMaxAlignedPairOfCStringPtrCStringPtr) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_SignalOwnedBufferOfMaxAlignedPairOfCStringPtrCStringPtr) == 8);
 typedef struct {
   const int8_t* first;
   bool second;
@@ -1963,11 +2439,27 @@ static_assert_64bit(alignof(SignalType_MutPointer_SignalPairOfPairOfCStringPtrOw
 typedef SignalUuid* SignalType_MutPointer_SignalUuid;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalUuid) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalUuid) == 8);
-typedef void (*SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalType_FixedArray32_uint8_t_SignalType_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalType_FixedArray32_uint8_t, SignalType_ConstPointer_void);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalType_FixedArray32_uint8_t_SignalType_ConstPointer_void) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalType_FixedArray32_uint8_t_SignalType_ConstPointer_void) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_FixedArray153_uint8_t_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_FixedArray153_uint8_t, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_FixedArray153_uint8_t_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_FixedArray153_uint8_t_ConstPointer_void) == 8);
 typedef struct {
-  SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalType_FixedArray32_uint8_t_SignalType_ConstPointer_void complete;
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_FixedArray153_uint8_t_ConstPointer_void complete;
+  const void* context;
+  uint64_t cancellation_id;
+} SignalCPromisec_uchar153;
+static_assert_64bit(offsetof(SignalCPromisec_uchar153, complete) == 0);
+static_assert_64bit(offsetof(SignalCPromisec_uchar153, context) == 8);
+static_assert_64bit(offsetof(SignalCPromisec_uchar153, cancellation_id) == 16);
+static_assert_64bit(sizeof(SignalCPromisec_uchar153) == 24);
+static_assert_64bit(alignof(SignalCPromisec_uchar153) == 8);
+typedef SignalCPromisec_uchar153* SignalType_MutPointer_SignalCPromisec_uchar153;
+static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromisec_uchar153) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromisec_uchar153) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_FixedArray32_uint8_t_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_FixedArray32_uint8_t, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_FixedArray32_uint8_t_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_FixedArray32_uint8_t_ConstPointer_void) == 8);
+typedef struct {
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_FixedArray32_uint8_t_ConstPointer_void complete;
   const void* context;
   uint64_t cancellation_id;
 } SignalCPromisec_uchar32;
@@ -1979,11 +2471,11 @@ static_assert_64bit(alignof(SignalCPromisec_uchar32) == 8);
 typedef SignalCPromisec_uchar32* SignalType_MutPointer_SignalCPromisec_uchar32;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromisec_uchar32) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromisec_uchar32) == 8);
-typedef void (*SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_bool_SignalType_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_bool, SignalType_ConstPointer_void);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_bool_SignalType_ConstPointer_void) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_bool_SignalType_ConstPointer_void) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_bool_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_bool, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_bool_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_bool_ConstPointer_void) == 8);
 typedef struct {
-  SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_bool_SignalType_ConstPointer_void complete;
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_bool_ConstPointer_void complete;
   const void* context;
   uint64_t cancellation_id;
 } SignalCPromisebool;
@@ -1995,11 +2487,27 @@ static_assert_64bit(alignof(SignalCPromisebool) == 8);
 typedef SignalCPromisebool* SignalType_MutPointer_SignalCPromisebool;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromisebool) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromisebool) == 8);
-typedef void (*SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalFfiCdsiLookupResponse_SignalType_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalFfiCdsiLookupResponse, SignalType_ConstPointer_void);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalFfiCdsiLookupResponse_SignalType_ConstPointer_void) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalFfiCdsiLookupResponse_SignalType_ConstPointer_void) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_int32_t_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_int32_t, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_int32_t_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_int32_t_ConstPointer_void) == 8);
 typedef struct {
-  SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalFfiCdsiLookupResponse_SignalType_ConstPointer_void complete;
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_int32_t_ConstPointer_void complete;
+  const void* context;
+  uint64_t cancellation_id;
+} SignalCPromisei32;
+static_assert_64bit(offsetof(SignalCPromisei32, complete) == 0);
+static_assert_64bit(offsetof(SignalCPromisei32, context) == 8);
+static_assert_64bit(offsetof(SignalCPromisei32, cancellation_id) == 16);
+static_assert_64bit(sizeof(SignalCPromisei32) == 24);
+static_assert_64bit(alignof(SignalCPromisei32) == 8);
+typedef SignalCPromisei32* SignalType_MutPointer_SignalCPromisei32;
+static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromisei32) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromisei32) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalFfiCdsiLookupResponse_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalFfiCdsiLookupResponse, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalFfiCdsiLookupResponse_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalFfiCdsiLookupResponse_ConstPointer_void) == 8);
+typedef struct {
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalFfiCdsiLookupResponse_ConstPointer_void complete;
   const void* context;
   uint64_t cancellation_id;
 } SignalCPromiseFfiCdsiLookupResponse;
@@ -2011,11 +2519,11 @@ static_assert_64bit(alignof(SignalCPromiseFfiCdsiLookupResponse) == 8);
 typedef SignalCPromiseFfiCdsiLookupResponse* SignalType_MutPointer_SignalCPromiseFfiCdsiLookupResponse;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseFfiCdsiLookupResponse) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseFfiCdsiLookupResponse) == 8);
-typedef void (*SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalFfiChatResponse_SignalType_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalFfiChatResponse, SignalType_ConstPointer_void);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalFfiChatResponse_SignalType_ConstPointer_void) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalFfiChatResponse_SignalType_ConstPointer_void) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalFfiChatResponse_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalFfiChatResponse, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalFfiChatResponse_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalFfiChatResponse_ConstPointer_void) == 8);
 typedef struct {
-  SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalFfiChatResponse_SignalType_ConstPointer_void complete;
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalFfiChatResponse_ConstPointer_void complete;
   const void* context;
   uint64_t cancellation_id;
 } SignalCPromiseFfiChatResponse;
@@ -2027,11 +2535,11 @@ static_assert_64bit(alignof(SignalCPromiseFfiChatResponse) == 8);
 typedef SignalCPromiseFfiChatResponse* SignalType_MutPointer_SignalCPromiseFfiChatResponse;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseFfiChatResponse) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseFfiChatResponse) == 8);
-typedef void (*SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalFfiCheckSvr2CredentialsResponse_SignalType_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalFfiCheckSvr2CredentialsResponse, SignalType_ConstPointer_void);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalFfiCheckSvr2CredentialsResponse_SignalType_ConstPointer_void) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalFfiCheckSvr2CredentialsResponse_SignalType_ConstPointer_void) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalFfiCheckSvr2CredentialsResponse_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalFfiCheckSvr2CredentialsResponse, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalFfiCheckSvr2CredentialsResponse_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalFfiCheckSvr2CredentialsResponse_ConstPointer_void) == 8);
 typedef struct {
-  SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalFfiCheckSvr2CredentialsResponse_SignalType_ConstPointer_void complete;
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalFfiCheckSvr2CredentialsResponse_ConstPointer_void complete;
   const void* context;
   uint64_t cancellation_id;
 } SignalCPromiseFfiCheckSvr2CredentialsResponse;
@@ -2043,11 +2551,11 @@ static_assert_64bit(alignof(SignalCPromiseFfiCheckSvr2CredentialsResponse) == 8)
 typedef SignalCPromiseFfiCheckSvr2CredentialsResponse* SignalType_MutPointer_SignalCPromiseFfiCheckSvr2CredentialsResponse;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseFfiCheckSvr2CredentialsResponse) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseFfiCheckSvr2CredentialsResponse) == 8);
-typedef void (*SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalFfiPreKeysResponse_SignalType_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalFfiPreKeysResponse, SignalType_ConstPointer_void);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalFfiPreKeysResponse_SignalType_ConstPointer_void) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalFfiPreKeysResponse_SignalType_ConstPointer_void) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalFfiPreKeysResponse_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalFfiPreKeysResponse, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalFfiPreKeysResponse_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalFfiPreKeysResponse_ConstPointer_void) == 8);
 typedef struct {
-  SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalFfiPreKeysResponse_SignalType_ConstPointer_void complete;
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalFfiPreKeysResponse_ConstPointer_void complete;
   const void* context;
   uint64_t cancellation_id;
 } SignalCPromiseFfiPreKeysResponse;
@@ -2059,11 +2567,11 @@ static_assert_64bit(alignof(SignalCPromiseFfiPreKeysResponse) == 8);
 typedef SignalCPromiseFfiPreKeysResponse* SignalType_MutPointer_SignalCPromiseFfiPreKeysResponse;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseFfiPreKeysResponse) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseFfiPreKeysResponse) == 8);
-typedef void (*SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalFfiUploadForm_SignalType_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalFfiUploadForm, SignalType_ConstPointer_void);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalFfiUploadForm_SignalType_ConstPointer_void) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalFfiUploadForm_SignalType_ConstPointer_void) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalFfiUploadForm_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalFfiUploadForm, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalFfiUploadForm_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalFfiUploadForm_ConstPointer_void) == 8);
 typedef struct {
-  SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalFfiUploadForm_SignalType_ConstPointer_void complete;
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalFfiUploadForm_ConstPointer_void complete;
   const void* context;
   uint64_t cancellation_id;
 } SignalCPromiseFfiUploadForm;
@@ -2075,11 +2583,11 @@ static_assert_64bit(alignof(SignalCPromiseFfiUploadForm) == 8);
 typedef SignalCPromiseFfiUploadForm* SignalType_MutPointer_SignalCPromiseFfiUploadForm;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseFfiUploadForm) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseFfiUploadForm) == 8);
-typedef void (*SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalMutPointerCdsiLookup_SignalType_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalMutPointerCdsiLookup, SignalType_ConstPointer_void);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalMutPointerCdsiLookup_SignalType_ConstPointer_void) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalMutPointerCdsiLookup_SignalType_ConstPointer_void) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalMutPointerCdsiLookup_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalMutPointerCdsiLookup, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalMutPointerCdsiLookup_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalMutPointerCdsiLookup_ConstPointer_void) == 8);
 typedef struct {
-  SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalMutPointerCdsiLookup_SignalType_ConstPointer_void complete;
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalMutPointerCdsiLookup_ConstPointer_void complete;
   const void* context;
   uint64_t cancellation_id;
 } SignalCPromiseMutPointerCdsiLookup;
@@ -2091,11 +2599,11 @@ static_assert_64bit(alignof(SignalCPromiseMutPointerCdsiLookup) == 8);
 typedef SignalCPromiseMutPointerCdsiLookup* SignalType_MutPointer_SignalCPromiseMutPointerCdsiLookup;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseMutPointerCdsiLookup) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseMutPointerCdsiLookup) == 8);
-typedef void (*SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalMutPointerAuthenticatedChatConnection_SignalType_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalMutPointerAuthenticatedChatConnection, SignalType_ConstPointer_void);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalMutPointerAuthenticatedChatConnection_SignalType_ConstPointer_void) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalMutPointerAuthenticatedChatConnection_SignalType_ConstPointer_void) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalMutPointerAuthenticatedChatConnection_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalMutPointerAuthenticatedChatConnection, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalMutPointerAuthenticatedChatConnection_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalMutPointerAuthenticatedChatConnection_ConstPointer_void) == 8);
 typedef struct {
-  SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalMutPointerAuthenticatedChatConnection_SignalType_ConstPointer_void complete;
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalMutPointerAuthenticatedChatConnection_ConstPointer_void complete;
   const void* context;
   uint64_t cancellation_id;
 } SignalCPromiseMutPointerAuthenticatedChatConnection;
@@ -2107,11 +2615,11 @@ static_assert_64bit(alignof(SignalCPromiseMutPointerAuthenticatedChatConnection)
 typedef SignalCPromiseMutPointerAuthenticatedChatConnection* SignalType_MutPointer_SignalCPromiseMutPointerAuthenticatedChatConnection;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseMutPointerAuthenticatedChatConnection) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseMutPointerAuthenticatedChatConnection) == 8);
-typedef void (*SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalMutPointerProvisioningChatConnection_SignalType_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalMutPointerProvisioningChatConnection, SignalType_ConstPointer_void);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalMutPointerProvisioningChatConnection_SignalType_ConstPointer_void) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalMutPointerProvisioningChatConnection_SignalType_ConstPointer_void) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalMutPointerProvisioningChatConnection_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalMutPointerProvisioningChatConnection, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalMutPointerProvisioningChatConnection_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalMutPointerProvisioningChatConnection_ConstPointer_void) == 8);
 typedef struct {
-  SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalMutPointerProvisioningChatConnection_SignalType_ConstPointer_void complete;
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalMutPointerProvisioningChatConnection_ConstPointer_void complete;
   const void* context;
   uint64_t cancellation_id;
 } SignalCPromiseMutPointerProvisioningChatConnection;
@@ -2123,11 +2631,11 @@ static_assert_64bit(alignof(SignalCPromiseMutPointerProvisioningChatConnection) 
 typedef SignalCPromiseMutPointerProvisioningChatConnection* SignalType_MutPointer_SignalCPromiseMutPointerProvisioningChatConnection;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseMutPointerProvisioningChatConnection) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseMutPointerProvisioningChatConnection) == 8);
-typedef void (*SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalMutPointerUnauthenticatedChatConnection_SignalType_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalMutPointerUnauthenticatedChatConnection, SignalType_ConstPointer_void);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalMutPointerUnauthenticatedChatConnection_SignalType_ConstPointer_void) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalMutPointerUnauthenticatedChatConnection_SignalType_ConstPointer_void) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalMutPointerUnauthenticatedChatConnection_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalMutPointerUnauthenticatedChatConnection, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalMutPointerUnauthenticatedChatConnection_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalMutPointerUnauthenticatedChatConnection_ConstPointer_void) == 8);
 typedef struct {
-  SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalMutPointerUnauthenticatedChatConnection_SignalType_ConstPointer_void complete;
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalMutPointerUnauthenticatedChatConnection_ConstPointer_void complete;
   const void* context;
   uint64_t cancellation_id;
 } SignalCPromiseMutPointerUnauthenticatedChatConnection;
@@ -2139,11 +2647,11 @@ static_assert_64bit(alignof(SignalCPromiseMutPointerUnauthenticatedChatConnectio
 typedef SignalCPromiseMutPointerUnauthenticatedChatConnection* SignalType_MutPointer_SignalCPromiseMutPointerUnauthenticatedChatConnection;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseMutPointerUnauthenticatedChatConnection) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseMutPointerUnauthenticatedChatConnection) == 8);
-typedef void (*SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalMutPointerRegistrationService_SignalType_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalMutPointerRegistrationService, SignalType_ConstPointer_void);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalMutPointerRegistrationService_SignalType_ConstPointer_void) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalMutPointerRegistrationService_SignalType_ConstPointer_void) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalMutPointerRegistrationService_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalMutPointerRegistrationService, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalMutPointerRegistrationService_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalMutPointerRegistrationService_ConstPointer_void) == 8);
 typedef struct {
-  SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalMutPointerRegistrationService_SignalType_ConstPointer_void complete;
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalMutPointerRegistrationService_ConstPointer_void complete;
   const void* context;
   uint64_t cancellation_id;
 } SignalCPromiseMutPointerRegistrationService;
@@ -2155,11 +2663,11 @@ static_assert_64bit(alignof(SignalCPromiseMutPointerRegistrationService) == 8);
 typedef SignalCPromiseMutPointerRegistrationService* SignalType_MutPointer_SignalCPromiseMutPointerRegistrationService;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseMutPointerRegistrationService) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseMutPointerRegistrationService) == 8);
-typedef void (*SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalMutPointerBackupRestoreResponse_SignalType_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalMutPointerBackupRestoreResponse, SignalType_ConstPointer_void);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalMutPointerBackupRestoreResponse_SignalType_ConstPointer_void) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalMutPointerBackupRestoreResponse_SignalType_ConstPointer_void) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalMutPointerBackupRestoreResponse_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalMutPointerBackupRestoreResponse, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalMutPointerBackupRestoreResponse_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalMutPointerBackupRestoreResponse_ConstPointer_void) == 8);
 typedef struct {
-  SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalMutPointerBackupRestoreResponse_SignalType_ConstPointer_void complete;
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalMutPointerBackupRestoreResponse_ConstPointer_void complete;
   const void* context;
   uint64_t cancellation_id;
 } SignalCPromiseMutPointerBackupRestoreResponse;
@@ -2171,11 +2679,11 @@ static_assert_64bit(alignof(SignalCPromiseMutPointerBackupRestoreResponse) == 8)
 typedef SignalCPromiseMutPointerBackupRestoreResponse* SignalType_MutPointer_SignalCPromiseMutPointerBackupRestoreResponse;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseMutPointerBackupRestoreResponse) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseMutPointerBackupRestoreResponse) == 8);
-typedef void (*SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalMutPointerBackupStoreResponse_SignalType_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalMutPointerBackupStoreResponse, SignalType_ConstPointer_void);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalMutPointerBackupStoreResponse_SignalType_ConstPointer_void) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalMutPointerBackupStoreResponse_SignalType_ConstPointer_void) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalMutPointerBackupStoreResponse_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalMutPointerBackupStoreResponse, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalMutPointerBackupStoreResponse_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalMutPointerBackupStoreResponse_ConstPointer_void) == 8);
 typedef struct {
-  SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalMutPointerBackupStoreResponse_SignalType_ConstPointer_void complete;
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalMutPointerBackupStoreResponse_ConstPointer_void complete;
   const void* context;
   uint64_t cancellation_id;
 } SignalCPromiseMutPointerBackupStoreResponse;
@@ -2187,11 +2695,11 @@ static_assert_64bit(alignof(SignalCPromiseMutPointerBackupStoreResponse) == 8);
 typedef SignalCPromiseMutPointerBackupStoreResponse* SignalType_MutPointer_SignalCPromiseMutPointerBackupStoreResponse;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseMutPointerBackupStoreResponse) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseMutPointerBackupStoreResponse) == 8);
-typedef void (*SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalMutPointerRegisterAccountResponse_SignalType_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalMutPointerRegisterAccountResponse, SignalType_ConstPointer_void);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalMutPointerRegisterAccountResponse_SignalType_ConstPointer_void) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalMutPointerRegisterAccountResponse_SignalType_ConstPointer_void) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalMutPointerRegisterAccountResponse_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalMutPointerRegisterAccountResponse, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalMutPointerRegisterAccountResponse_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalMutPointerRegisterAccountResponse_ConstPointer_void) == 8);
 typedef struct {
-  SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalMutPointerRegisterAccountResponse_SignalType_ConstPointer_void complete;
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalMutPointerRegisterAccountResponse_ConstPointer_void complete;
   const void* context;
   uint64_t cancellation_id;
 } SignalCPromiseMutPointerRegisterAccountResponse;
@@ -2203,11 +2711,11 @@ static_assert_64bit(alignof(SignalCPromiseMutPointerRegisterAccountResponse) == 
 typedef SignalCPromiseMutPointerRegisterAccountResponse* SignalType_MutPointer_SignalCPromiseMutPointerRegisterAccountResponse;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseMutPointerRegisterAccountResponse) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseMutPointerRegisterAccountResponse) == 8);
-typedef void (*SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalOptionalPairOfCStringPtrc_uchar32_SignalType_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalOptionalPairOfCStringPtrc_uchar32, SignalType_ConstPointer_void);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalOptionalPairOfCStringPtrc_uchar32_SignalType_ConstPointer_void) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalOptionalPairOfCStringPtrc_uchar32_SignalType_ConstPointer_void) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOptionalPairOfCStringPtrc_uchar32_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalOptionalPairOfCStringPtrc_uchar32, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOptionalPairOfCStringPtrc_uchar32_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOptionalPairOfCStringPtrc_uchar32_ConstPointer_void) == 8);
 typedef struct {
-  SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalOptionalPairOfCStringPtrc_uchar32_SignalType_ConstPointer_void complete;
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOptionalPairOfCStringPtrc_uchar32_ConstPointer_void complete;
   const void* context;
   uint64_t cancellation_id;
 } SignalCPromiseOptionalPairOfCStringPtrc_uchar32;
@@ -2219,11 +2727,11 @@ static_assert_64bit(alignof(SignalCPromiseOptionalPairOfCStringPtrc_uchar32) == 
 typedef SignalCPromiseOptionalPairOfCStringPtrc_uchar32* SignalType_MutPointer_SignalCPromiseOptionalPairOfCStringPtrc_uchar32;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseOptionalPairOfCStringPtrc_uchar32) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseOptionalPairOfCStringPtrc_uchar32) == 8);
-typedef void (*SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalOptionalUuid_SignalType_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalOptionalUuid, SignalType_ConstPointer_void);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalOptionalUuid_SignalType_ConstPointer_void) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalOptionalUuid_SignalType_ConstPointer_void) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOptionalUuid_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalOptionalUuid, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOptionalUuid_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOptionalUuid_ConstPointer_void) == 8);
 typedef struct {
-  SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalOptionalUuid_SignalType_ConstPointer_void complete;
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOptionalUuid_ConstPointer_void complete;
   const void* context;
   uint64_t cancellation_id;
 } SignalCPromiseOptionalUuid;
@@ -2235,11 +2743,11 @@ static_assert_64bit(alignof(SignalCPromiseOptionalUuid) == 8);
 typedef SignalCPromiseOptionalUuid* SignalType_MutPointer_SignalCPromiseOptionalUuid;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseOptionalUuid) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseOptionalUuid) == 8);
-typedef void (*SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalOwnedBufferOfc_uchar17_SignalType_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalOwnedBufferOfc_uchar17, SignalType_ConstPointer_void);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalOwnedBufferOfc_uchar17_SignalType_ConstPointer_void) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalOwnedBufferOfc_uchar17_SignalType_ConstPointer_void) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOwnedBufferOfc_uchar17_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalOwnedBufferOfc_uchar17, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOwnedBufferOfc_uchar17_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOwnedBufferOfc_uchar17_ConstPointer_void) == 8);
 typedef struct {
-  SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalOwnedBufferOfc_uchar17_SignalType_ConstPointer_void complete;
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOwnedBufferOfc_uchar17_ConstPointer_void complete;
   const void* context;
   uint64_t cancellation_id;
 } SignalCPromiseOwnedBufferOfc_uchar17;
@@ -2251,11 +2759,11 @@ static_assert_64bit(alignof(SignalCPromiseOwnedBufferOfc_uchar17) == 8);
 typedef SignalCPromiseOwnedBufferOfc_uchar17* SignalType_MutPointer_SignalCPromiseOwnedBufferOfc_uchar17;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseOwnedBufferOfc_uchar17) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseOwnedBufferOfc_uchar17) == 8);
-typedef void (*SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalOwnedBuffer_SignalType_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalOwnedBuffer, SignalType_ConstPointer_void);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalOwnedBuffer_SignalType_ConstPointer_void) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalOwnedBuffer_SignalType_ConstPointer_void) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOwnedBuffer_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalOwnedBuffer, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOwnedBuffer_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOwnedBuffer_ConstPointer_void) == 8);
 typedef struct {
-  SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalOwnedBuffer_SignalType_ConstPointer_void complete;
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOwnedBuffer_ConstPointer_void complete;
   const void* context;
   uint64_t cancellation_id;
 } SignalCPromiseOwnedBuffer;
@@ -2267,11 +2775,75 @@ static_assert_64bit(alignof(SignalCPromiseOwnedBuffer) == 8);
 typedef SignalCPromiseOwnedBuffer* SignalType_MutPointer_SignalCPromiseOwnedBuffer;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseOwnedBuffer) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseOwnedBuffer) == 8);
-typedef void (*SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalOwnedBufferOfMaxAlignedLinkedDeviceInternalFfiResult_SignalType_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalOwnedBufferOfMaxAlignedLinkedDeviceInternalFfiResult, SignalType_ConstPointer_void);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalOwnedBufferOfMaxAlignedLinkedDeviceInternalFfiResult_SignalType_ConstPointer_void) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalOwnedBufferOfMaxAlignedLinkedDeviceInternalFfiResult_SignalType_ConstPointer_void) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOwnedBufferOfMaxAlignedOwnedBuffer_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalOwnedBufferOfMaxAlignedOwnedBuffer, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOwnedBufferOfMaxAlignedOwnedBuffer_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOwnedBufferOfMaxAlignedOwnedBuffer_ConstPointer_void) == 8);
 typedef struct {
-  SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalOwnedBufferOfMaxAlignedLinkedDeviceInternalFfiResult_SignalType_ConstPointer_void complete;
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOwnedBufferOfMaxAlignedOwnedBuffer_ConstPointer_void complete;
+  const void* context;
+  uint64_t cancellation_id;
+} SignalCPromiseOwnedBufferOfMaxAlignedOwnedBuffer;
+static_assert_64bit(offsetof(SignalCPromiseOwnedBufferOfMaxAlignedOwnedBuffer, complete) == 0);
+static_assert_64bit(offsetof(SignalCPromiseOwnedBufferOfMaxAlignedOwnedBuffer, context) == 8);
+static_assert_64bit(offsetof(SignalCPromiseOwnedBufferOfMaxAlignedOwnedBuffer, cancellation_id) == 16);
+static_assert_64bit(sizeof(SignalCPromiseOwnedBufferOfMaxAlignedOwnedBuffer) == 24);
+static_assert_64bit(alignof(SignalCPromiseOwnedBufferOfMaxAlignedOwnedBuffer) == 8);
+typedef SignalCPromiseOwnedBufferOfMaxAlignedOwnedBuffer* SignalType_MutPointer_SignalCPromiseOwnedBufferOfMaxAlignedOwnedBuffer;
+static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseOwnedBufferOfMaxAlignedOwnedBuffer) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseOwnedBufferOfMaxAlignedOwnedBuffer) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOwnedBufferOfMaxAlignedPairOfCStringPtrAuthCheckResultFfiResult_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalOwnedBufferOfMaxAlignedPairOfCStringPtrAuthCheckResultFfiResult, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOwnedBufferOfMaxAlignedPairOfCStringPtrAuthCheckResultFfiResult_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOwnedBufferOfMaxAlignedPairOfCStringPtrAuthCheckResultFfiResult_ConstPointer_void) == 8);
+typedef struct {
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOwnedBufferOfMaxAlignedPairOfCStringPtrAuthCheckResultFfiResult_ConstPointer_void complete;
+  const void* context;
+  uint64_t cancellation_id;
+} SignalCPromiseOwnedBufferOfMaxAlignedPairOfCStringPtrAuthCheckResultFfiResult;
+static_assert_64bit(offsetof(SignalCPromiseOwnedBufferOfMaxAlignedPairOfCStringPtrAuthCheckResultFfiResult, complete) == 0);
+static_assert_64bit(offsetof(SignalCPromiseOwnedBufferOfMaxAlignedPairOfCStringPtrAuthCheckResultFfiResult, context) == 8);
+static_assert_64bit(offsetof(SignalCPromiseOwnedBufferOfMaxAlignedPairOfCStringPtrAuthCheckResultFfiResult, cancellation_id) == 16);
+static_assert_64bit(sizeof(SignalCPromiseOwnedBufferOfMaxAlignedPairOfCStringPtrAuthCheckResultFfiResult) == 24);
+static_assert_64bit(alignof(SignalCPromiseOwnedBufferOfMaxAlignedPairOfCStringPtrAuthCheckResultFfiResult) == 8);
+typedef SignalCPromiseOwnedBufferOfMaxAlignedPairOfCStringPtrAuthCheckResultFfiResult* SignalType_MutPointer_SignalCPromiseOwnedBufferOfMaxAlignedPairOfCStringPtrAuthCheckResultFfiResult;
+static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseOwnedBufferOfMaxAlignedPairOfCStringPtrAuthCheckResultFfiResult) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseOwnedBufferOfMaxAlignedPairOfCStringPtrAuthCheckResultFfiResult) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOwnedBufferOfMaxAlignedBridgeConfirmedMfaKeyFfiResult_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalOwnedBufferOfMaxAlignedBridgeConfirmedMfaKeyFfiResult, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOwnedBufferOfMaxAlignedBridgeConfirmedMfaKeyFfiResult_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOwnedBufferOfMaxAlignedBridgeConfirmedMfaKeyFfiResult_ConstPointer_void) == 8);
+typedef struct {
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOwnedBufferOfMaxAlignedBridgeConfirmedMfaKeyFfiResult_ConstPointer_void complete;
+  const void* context;
+  uint64_t cancellation_id;
+} SignalCPromiseOwnedBufferOfMaxAlignedBridgeConfirmedMfaKeyFfiResult;
+static_assert_64bit(offsetof(SignalCPromiseOwnedBufferOfMaxAlignedBridgeConfirmedMfaKeyFfiResult, complete) == 0);
+static_assert_64bit(offsetof(SignalCPromiseOwnedBufferOfMaxAlignedBridgeConfirmedMfaKeyFfiResult, context) == 8);
+static_assert_64bit(offsetof(SignalCPromiseOwnedBufferOfMaxAlignedBridgeConfirmedMfaKeyFfiResult, cancellation_id) == 16);
+static_assert_64bit(sizeof(SignalCPromiseOwnedBufferOfMaxAlignedBridgeConfirmedMfaKeyFfiResult) == 24);
+static_assert_64bit(alignof(SignalCPromiseOwnedBufferOfMaxAlignedBridgeConfirmedMfaKeyFfiResult) == 8);
+typedef SignalCPromiseOwnedBufferOfMaxAlignedBridgeConfirmedMfaKeyFfiResult* SignalType_MutPointer_SignalCPromiseOwnedBufferOfMaxAlignedBridgeConfirmedMfaKeyFfiResult;
+static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseOwnedBufferOfMaxAlignedBridgeConfirmedMfaKeyFfiResult) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseOwnedBufferOfMaxAlignedBridgeConfirmedMfaKeyFfiResult) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOwnedBufferOfMaxAlignedDeviceCapabilityInternalFfiResult_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalOwnedBufferOfMaxAlignedDeviceCapabilityInternalFfiResult, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOwnedBufferOfMaxAlignedDeviceCapabilityInternalFfiResult_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOwnedBufferOfMaxAlignedDeviceCapabilityInternalFfiResult_ConstPointer_void) == 8);
+typedef struct {
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOwnedBufferOfMaxAlignedDeviceCapabilityInternalFfiResult_ConstPointer_void complete;
+  const void* context;
+  uint64_t cancellation_id;
+} SignalCPromiseOwnedBufferOfMaxAlignedDeviceCapabilityInternalFfiResult;
+static_assert_64bit(offsetof(SignalCPromiseOwnedBufferOfMaxAlignedDeviceCapabilityInternalFfiResult, complete) == 0);
+static_assert_64bit(offsetof(SignalCPromiseOwnedBufferOfMaxAlignedDeviceCapabilityInternalFfiResult, context) == 8);
+static_assert_64bit(offsetof(SignalCPromiseOwnedBufferOfMaxAlignedDeviceCapabilityInternalFfiResult, cancellation_id) == 16);
+static_assert_64bit(sizeof(SignalCPromiseOwnedBufferOfMaxAlignedDeviceCapabilityInternalFfiResult) == 24);
+static_assert_64bit(alignof(SignalCPromiseOwnedBufferOfMaxAlignedDeviceCapabilityInternalFfiResult) == 8);
+typedef SignalCPromiseOwnedBufferOfMaxAlignedDeviceCapabilityInternalFfiResult* SignalType_MutPointer_SignalCPromiseOwnedBufferOfMaxAlignedDeviceCapabilityInternalFfiResult;
+static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseOwnedBufferOfMaxAlignedDeviceCapabilityInternalFfiResult) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseOwnedBufferOfMaxAlignedDeviceCapabilityInternalFfiResult) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOwnedBufferOfMaxAlignedLinkedDeviceInternalFfiResult_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalOwnedBufferOfMaxAlignedLinkedDeviceInternalFfiResult, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOwnedBufferOfMaxAlignedLinkedDeviceInternalFfiResult_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOwnedBufferOfMaxAlignedLinkedDeviceInternalFfiResult_ConstPointer_void) == 8);
+typedef struct {
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalOwnedBufferOfMaxAlignedLinkedDeviceInternalFfiResult_ConstPointer_void complete;
   const void* context;
   uint64_t cancellation_id;
 } SignalCPromiseOwnedBufferOfMaxAlignedLinkedDeviceInternalFfiResult;
@@ -2283,11 +2855,11 @@ static_assert_64bit(alignof(SignalCPromiseOwnedBufferOfMaxAlignedLinkedDeviceInt
 typedef SignalCPromiseOwnedBufferOfMaxAlignedLinkedDeviceInternalFfiResult* SignalType_MutPointer_SignalCPromiseOwnedBufferOfMaxAlignedLinkedDeviceInternalFfiResult;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseOwnedBufferOfMaxAlignedLinkedDeviceInternalFfiResult) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseOwnedBufferOfMaxAlignedLinkedDeviceInternalFfiResult) == 8);
-typedef void (*SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalPairOfCStringPtrCStringPtr_SignalType_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalPairOfCStringPtrCStringPtr, SignalType_ConstPointer_void);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalPairOfCStringPtrCStringPtr_SignalType_ConstPointer_void) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalPairOfCStringPtrCStringPtr_SignalType_ConstPointer_void) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalPairOfCStringPtrCStringPtr_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalPairOfCStringPtrCStringPtr, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalPairOfCStringPtrCStringPtr_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalPairOfCStringPtrCStringPtr_ConstPointer_void) == 8);
 typedef struct {
-  SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalPairOfCStringPtrCStringPtr_SignalType_ConstPointer_void complete;
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalPairOfCStringPtrCStringPtr_ConstPointer_void complete;
   const void* context;
   uint64_t cancellation_id;
 } SignalCPromisePairOfCStringPtrCStringPtr;
@@ -2299,11 +2871,11 @@ static_assert_64bit(alignof(SignalCPromisePairOfCStringPtrCStringPtr) == 8);
 typedef SignalCPromisePairOfCStringPtrCStringPtr* SignalType_MutPointer_SignalCPromisePairOfCStringPtrCStringPtr;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromisePairOfCStringPtrCStringPtr) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromisePairOfCStringPtrCStringPtr) == 8);
-typedef void (*SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalPairOfOwnedBufferOfCStringPtrOwnedBufferOfCStringPtr_SignalType_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalPairOfOwnedBufferOfCStringPtrOwnedBufferOfCStringPtr, SignalType_ConstPointer_void);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalPairOfOwnedBufferOfCStringPtrOwnedBufferOfCStringPtr_SignalType_ConstPointer_void) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalPairOfOwnedBufferOfCStringPtrOwnedBufferOfCStringPtr_SignalType_ConstPointer_void) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalPairOfOwnedBufferOfCStringPtrOwnedBufferOfCStringPtr_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalPairOfOwnedBufferOfCStringPtrOwnedBufferOfCStringPtr, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalPairOfOwnedBufferOfCStringPtrOwnedBufferOfCStringPtr_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalPairOfOwnedBufferOfCStringPtrOwnedBufferOfCStringPtr_ConstPointer_void) == 8);
 typedef struct {
-  SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalPairOfOwnedBufferOfCStringPtrOwnedBufferOfCStringPtr_SignalType_ConstPointer_void complete;
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalPairOfOwnedBufferOfCStringPtrOwnedBufferOfCStringPtr_ConstPointer_void complete;
   const void* context;
   uint64_t cancellation_id;
 } SignalCPromisePairOfOwnedBufferOfCStringPtrOwnedBufferOfCStringPtr;
@@ -2315,11 +2887,11 @@ static_assert_64bit(alignof(SignalCPromisePairOfOwnedBufferOfCStringPtrOwnedBuff
 typedef SignalCPromisePairOfOwnedBufferOfCStringPtrOwnedBufferOfCStringPtr* SignalType_MutPointer_SignalCPromisePairOfOwnedBufferOfCStringPtrOwnedBufferOfCStringPtr;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromisePairOfOwnedBufferOfCStringPtrOwnedBufferOfCStringPtr) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromisePairOfOwnedBufferOfCStringPtrOwnedBufferOfCStringPtr) == 8);
-typedef void (*SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalPairOfOwnedBufferOwnedBuffer_SignalType_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalPairOfOwnedBufferOwnedBuffer, SignalType_ConstPointer_void);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalPairOfOwnedBufferOwnedBuffer_SignalType_ConstPointer_void) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalPairOfOwnedBufferOwnedBuffer_SignalType_ConstPointer_void) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalPairOfOwnedBufferOwnedBuffer_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalPairOfOwnedBufferOwnedBuffer, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalPairOfOwnedBufferOwnedBuffer_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalPairOfOwnedBufferOwnedBuffer_ConstPointer_void) == 8);
 typedef struct {
-  SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalPairOfOwnedBufferOwnedBuffer_SignalType_ConstPointer_void complete;
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalPairOfOwnedBufferOwnedBuffer_ConstPointer_void complete;
   const void* context;
   uint64_t cancellation_id;
 } SignalCPromisePairOfOwnedBufferOwnedBuffer;
@@ -2331,11 +2903,11 @@ static_assert_64bit(alignof(SignalCPromisePairOfOwnedBufferOwnedBuffer) == 8);
 typedef SignalCPromisePairOfOwnedBufferOwnedBuffer* SignalType_MutPointer_SignalCPromisePairOfOwnedBufferOwnedBuffer;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromisePairOfOwnedBufferOwnedBuffer) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromisePairOfOwnedBufferOwnedBuffer) == 8);
-typedef void (*SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalUuid_SignalType_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalUuid, SignalType_ConstPointer_void);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalUuid_SignalType_ConstPointer_void) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalUuid_SignalType_ConstPointer_void) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalUuid_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalUuid, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalUuid_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalUuid_ConstPointer_void) == 8);
 typedef struct {
-  SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalUuid_SignalType_ConstPointer_void complete;
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalUuid_ConstPointer_void complete;
   const void* context;
   uint64_t cancellation_id;
 } SignalCPromiseUuid;
@@ -2347,11 +2919,11 @@ static_assert_64bit(alignof(SignalCPromiseUuid) == 8);
 typedef SignalCPromiseUuid* SignalType_MutPointer_SignalCPromiseUuid;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseUuid) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseUuid) == 8);
-typedef void (*SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalBridgeMediaBackupInfoFfiResult_SignalType_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalBridgeMediaBackupInfoFfiResult, SignalType_ConstPointer_void);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalBridgeMediaBackupInfoFfiResult_SignalType_ConstPointer_void) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalBridgeMediaBackupInfoFfiResult_SignalType_ConstPointer_void) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalBridgeMediaBackupInfoFfiResult_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalBridgeMediaBackupInfoFfiResult, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalBridgeMediaBackupInfoFfiResult_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalBridgeMediaBackupInfoFfiResult_ConstPointer_void) == 8);
 typedef struct {
-  SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalBridgeMediaBackupInfoFfiResult_SignalType_ConstPointer_void complete;
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalBridgeMediaBackupInfoFfiResult_ConstPointer_void complete;
   const void* context;
   uint64_t cancellation_id;
 } SignalCPromiseBridgeMediaBackupInfoFfiResult;
@@ -2363,11 +2935,11 @@ static_assert_64bit(alignof(SignalCPromiseBridgeMediaBackupInfoFfiResult) == 8);
 typedef SignalCPromiseBridgeMediaBackupInfoFfiResult* SignalType_MutPointer_SignalCPromiseBridgeMediaBackupInfoFfiResult;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseBridgeMediaBackupInfoFfiResult) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseBridgeMediaBackupInfoFfiResult) == 8);
-typedef void (*SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalBridgeMessageBackupInfoFfiResult_SignalType_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalBridgeMessageBackupInfoFfiResult, SignalType_ConstPointer_void);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalBridgeMessageBackupInfoFfiResult_SignalType_ConstPointer_void) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalBridgeMessageBackupInfoFfiResult_SignalType_ConstPointer_void) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalBridgeMessageBackupInfoFfiResult_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalBridgeMessageBackupInfoFfiResult, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalBridgeMessageBackupInfoFfiResult_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalBridgeMessageBackupInfoFfiResult_ConstPointer_void) == 8);
 typedef struct {
-  SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalBridgeMessageBackupInfoFfiResult_SignalType_ConstPointer_void complete;
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalBridgeMessageBackupInfoFfiResult_ConstPointer_void complete;
   const void* context;
   uint64_t cancellation_id;
 } SignalCPromiseBridgeMessageBackupInfoFfiResult;
@@ -2379,11 +2951,59 @@ static_assert_64bit(alignof(SignalCPromiseBridgeMessageBackupInfoFfiResult) == 8
 typedef SignalCPromiseBridgeMessageBackupInfoFfiResult* SignalType_MutPointer_SignalCPromiseBridgeMessageBackupInfoFfiResult;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseBridgeMessageBackupInfoFfiResult) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseBridgeMessageBackupInfoFfiResult) == 8);
-typedef void (*SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalCopyBackupMediaNextChunkFfiResult_SignalType_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalCopyBackupMediaNextChunkFfiResult, SignalType_ConstPointer_void);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalCopyBackupMediaNextChunkFfiResult_SignalType_ConstPointer_void) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalCopyBackupMediaNextChunkFfiResult_SignalType_ConstPointer_void) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalBridgePendingTotpKeyFfiResult_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalBridgePendingTotpKeyFfiResult, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalBridgePendingTotpKeyFfiResult_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalBridgePendingTotpKeyFfiResult_ConstPointer_void) == 8);
 typedef struct {
-  SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalCopyBackupMediaNextChunkFfiResult_SignalType_ConstPointer_void complete;
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalBridgePendingTotpKeyFfiResult_ConstPointer_void complete;
+  const void* context;
+  uint64_t cancellation_id;
+} SignalCPromiseBridgePendingTotpKeyFfiResult;
+static_assert_64bit(offsetof(SignalCPromiseBridgePendingTotpKeyFfiResult, complete) == 0);
+static_assert_64bit(offsetof(SignalCPromiseBridgePendingTotpKeyFfiResult, context) == 8);
+static_assert_64bit(offsetof(SignalCPromiseBridgePendingTotpKeyFfiResult, cancellation_id) == 16);
+static_assert_64bit(sizeof(SignalCPromiseBridgePendingTotpKeyFfiResult) == 24);
+static_assert_64bit(alignof(SignalCPromiseBridgePendingTotpKeyFfiResult) == 8);
+typedef SignalCPromiseBridgePendingTotpKeyFfiResult* SignalType_MutPointer_SignalCPromiseBridgePendingTotpKeyFfiResult;
+static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseBridgePendingTotpKeyFfiResult) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseBridgePendingTotpKeyFfiResult) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalBridgePreKeyCountsFfiResult_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalBridgePreKeyCountsFfiResult, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalBridgePreKeyCountsFfiResult_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalBridgePreKeyCountsFfiResult_ConstPointer_void) == 8);
+typedef struct {
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalBridgePreKeyCountsFfiResult_ConstPointer_void complete;
+  const void* context;
+  uint64_t cancellation_id;
+} SignalCPromiseBridgePreKeyCountsFfiResult;
+static_assert_64bit(offsetof(SignalCPromiseBridgePreKeyCountsFfiResult, complete) == 0);
+static_assert_64bit(offsetof(SignalCPromiseBridgePreKeyCountsFfiResult, context) == 8);
+static_assert_64bit(offsetof(SignalCPromiseBridgePreKeyCountsFfiResult, cancellation_id) == 16);
+static_assert_64bit(sizeof(SignalCPromiseBridgePreKeyCountsFfiResult) == 24);
+static_assert_64bit(alignof(SignalCPromiseBridgePreKeyCountsFfiResult) == 8);
+typedef SignalCPromiseBridgePreKeyCountsFfiResult* SignalType_MutPointer_SignalCPromiseBridgePreKeyCountsFfiResult;
+static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseBridgePreKeyCountsFfiResult) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseBridgePreKeyCountsFfiResult) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalBridgeWebAuthnCreateParametersFfiResult_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalBridgeWebAuthnCreateParametersFfiResult, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalBridgeWebAuthnCreateParametersFfiResult_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalBridgeWebAuthnCreateParametersFfiResult_ConstPointer_void) == 8);
+typedef struct {
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalBridgeWebAuthnCreateParametersFfiResult_ConstPointer_void complete;
+  const void* context;
+  uint64_t cancellation_id;
+} SignalCPromiseBridgeWebAuthnCreateParametersFfiResult;
+static_assert_64bit(offsetof(SignalCPromiseBridgeWebAuthnCreateParametersFfiResult, complete) == 0);
+static_assert_64bit(offsetof(SignalCPromiseBridgeWebAuthnCreateParametersFfiResult, context) == 8);
+static_assert_64bit(offsetof(SignalCPromiseBridgeWebAuthnCreateParametersFfiResult, cancellation_id) == 16);
+static_assert_64bit(sizeof(SignalCPromiseBridgeWebAuthnCreateParametersFfiResult) == 24);
+static_assert_64bit(alignof(SignalCPromiseBridgeWebAuthnCreateParametersFfiResult) == 8);
+typedef SignalCPromiseBridgeWebAuthnCreateParametersFfiResult* SignalType_MutPointer_SignalCPromiseBridgeWebAuthnCreateParametersFfiResult;
+static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseBridgeWebAuthnCreateParametersFfiResult) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseBridgeWebAuthnCreateParametersFfiResult) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalCopyBackupMediaNextChunkFfiResult_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalCopyBackupMediaNextChunkFfiResult, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalCopyBackupMediaNextChunkFfiResult_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalCopyBackupMediaNextChunkFfiResult_ConstPointer_void) == 8);
+typedef struct {
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalCopyBackupMediaNextChunkFfiResult_ConstPointer_void complete;
   const void* context;
   uint64_t cancellation_id;
 } SignalCPromiseCopyBackupMediaNextChunkFfiResult;
@@ -2395,11 +3015,11 @@ static_assert_64bit(alignof(SignalCPromiseCopyBackupMediaNextChunkFfiResult) == 
 typedef SignalCPromiseCopyBackupMediaNextChunkFfiResult* SignalType_MutPointer_SignalCPromiseCopyBackupMediaNextChunkFfiResult;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseCopyBackupMediaNextChunkFfiResult) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseCopyBackupMediaNextChunkFfiResult) == 8);
-typedef void (*SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalDeleteBackupMediaNextChunkFfiResult_SignalType_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalDeleteBackupMediaNextChunkFfiResult, SignalType_ConstPointer_void);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalDeleteBackupMediaNextChunkFfiResult_SignalType_ConstPointer_void) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalDeleteBackupMediaNextChunkFfiResult_SignalType_ConstPointer_void) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalDeleteBackupMediaNextChunkFfiResult_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalDeleteBackupMediaNextChunkFfiResult, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalDeleteBackupMediaNextChunkFfiResult_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalDeleteBackupMediaNextChunkFfiResult_ConstPointer_void) == 8);
 typedef struct {
-  SignalType_FunctionPointer_void_SignalType_MutPointer_SignalFfiError_SignalType_ConstPointer_SignalDeleteBackupMediaNextChunkFfiResult_SignalType_ConstPointer_void complete;
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalDeleteBackupMediaNextChunkFfiResult_ConstPointer_void complete;
   const void* context;
   uint64_t cancellation_id;
 } SignalCPromiseDeleteBackupMediaNextChunkFfiResult;
@@ -2411,12 +3031,100 @@ static_assert_64bit(alignof(SignalCPromiseDeleteBackupMediaNextChunkFfiResult) =
 typedef SignalCPromiseDeleteBackupMediaNextChunkFfiResult* SignalType_MutPointer_SignalCPromiseDeleteBackupMediaNextChunkFfiResult;
 static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseDeleteBackupMediaNextChunkFfiResult) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseDeleteBackupMediaNextChunkFfiResult) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalAccountEntitlementsFfiResult_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalAccountEntitlementsFfiResult, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalAccountEntitlementsFfiResult_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalAccountEntitlementsFfiResult_ConstPointer_void) == 8);
+typedef struct {
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalAccountEntitlementsFfiResult_ConstPointer_void complete;
+  const void* context;
+  uint64_t cancellation_id;
+} SignalCPromiseAccountEntitlementsFfiResult;
+static_assert_64bit(offsetof(SignalCPromiseAccountEntitlementsFfiResult, complete) == 0);
+static_assert_64bit(offsetof(SignalCPromiseAccountEntitlementsFfiResult, context) == 8);
+static_assert_64bit(offsetof(SignalCPromiseAccountEntitlementsFfiResult, cancellation_id) == 16);
+static_assert_64bit(sizeof(SignalCPromiseAccountEntitlementsFfiResult) == 24);
+static_assert_64bit(alignof(SignalCPromiseAccountEntitlementsFfiResult) == 8);
+typedef SignalCPromiseAccountEntitlementsFfiResult* SignalType_MutPointer_SignalCPromiseAccountEntitlementsFfiResult;
+static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseAccountEntitlementsFfiResult) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseAccountEntitlementsFfiResult) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalCurrencyConversionsInternalFfiResult_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalCurrencyConversionsInternalFfiResult, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalCurrencyConversionsInternalFfiResult_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalCurrencyConversionsInternalFfiResult_ConstPointer_void) == 8);
+typedef struct {
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalCurrencyConversionsInternalFfiResult_ConstPointer_void complete;
+  const void* context;
+  uint64_t cancellation_id;
+} SignalCPromiseCurrencyConversionsInternalFfiResult;
+static_assert_64bit(offsetof(SignalCPromiseCurrencyConversionsInternalFfiResult, complete) == 0);
+static_assert_64bit(offsetof(SignalCPromiseCurrencyConversionsInternalFfiResult, context) == 8);
+static_assert_64bit(offsetof(SignalCPromiseCurrencyConversionsInternalFfiResult, cancellation_id) == 16);
+static_assert_64bit(sizeof(SignalCPromiseCurrencyConversionsInternalFfiResult) == 24);
+static_assert_64bit(alignof(SignalCPromiseCurrencyConversionsInternalFfiResult) == 8);
+typedef SignalCPromiseCurrencyConversionsInternalFfiResult* SignalType_MutPointer_SignalCPromiseCurrencyConversionsInternalFfiResult;
+static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseCurrencyConversionsInternalFfiResult) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseCurrencyConversionsInternalFfiResult) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalGetStickerUploadFormsResponseFfiResult_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalGetStickerUploadFormsResponseFfiResult, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalGetStickerUploadFormsResponseFfiResult_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalGetStickerUploadFormsResponseFfiResult_ConstPointer_void) == 8);
+typedef struct {
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalGetStickerUploadFormsResponseFfiResult_ConstPointer_void complete;
+  const void* context;
+  uint64_t cancellation_id;
+} SignalCPromiseGetStickerUploadFormsResponseFfiResult;
+static_assert_64bit(offsetof(SignalCPromiseGetStickerUploadFormsResponseFfiResult, complete) == 0);
+static_assert_64bit(offsetof(SignalCPromiseGetStickerUploadFormsResponseFfiResult, context) == 8);
+static_assert_64bit(offsetof(SignalCPromiseGetStickerUploadFormsResponseFfiResult, cancellation_id) == 16);
+static_assert_64bit(sizeof(SignalCPromiseGetStickerUploadFormsResponseFfiResult) == 24);
+static_assert_64bit(alignof(SignalCPromiseGetStickerUploadFormsResponseFfiResult) == 8);
+typedef SignalCPromiseGetStickerUploadFormsResponseFfiResult* SignalType_MutPointer_SignalCPromiseGetStickerUploadFormsResponseFfiResult;
+static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseGetStickerUploadFormsResponseFfiResult) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseGetStickerUploadFormsResponseFfiResult) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalListMediaResponseFfiResult_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalListMediaResponseFfiResult, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalListMediaResponseFfiResult_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalListMediaResponseFfiResult_ConstPointer_void) == 8);
+typedef struct {
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalListMediaResponseFfiResult_ConstPointer_void complete;
+  const void* context;
+  uint64_t cancellation_id;
+} SignalCPromiseListMediaResponseFfiResult;
+static_assert_64bit(offsetof(SignalCPromiseListMediaResponseFfiResult, complete) == 0);
+static_assert_64bit(offsetof(SignalCPromiseListMediaResponseFfiResult, context) == 8);
+static_assert_64bit(offsetof(SignalCPromiseListMediaResponseFfiResult, cancellation_id) == 16);
+static_assert_64bit(sizeof(SignalCPromiseListMediaResponseFfiResult) == 24);
+static_assert_64bit(alignof(SignalCPromiseListMediaResponseFfiResult) == 8);
+typedef SignalCPromiseListMediaResponseFfiResult* SignalType_MutPointer_SignalCPromiseListMediaResponseFfiResult;
+static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseListMediaResponseFfiResult) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseListMediaResponseFfiResult) == 8);
+typedef void (*SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalStartMfaVerificationResponseFfiResult_ConstPointer_void)(SignalType_MutPointer_SignalFfiError, SignalType_ConstPointer_SignalStartMfaVerificationResponseFfiResult, SignalType_ConstPointer_void);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalStartMfaVerificationResponseFfiResult_ConstPointer_void) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalStartMfaVerificationResponseFfiResult_ConstPointer_void) == 8);
+typedef struct {
+  SignalType_FunctionPointer_void_MutPointer_SignalFfiError_ConstPointer_SignalStartMfaVerificationResponseFfiResult_ConstPointer_void complete;
+  const void* context;
+  uint64_t cancellation_id;
+} SignalCPromiseStartMfaVerificationResponseFfiResult;
+static_assert_64bit(offsetof(SignalCPromiseStartMfaVerificationResponseFfiResult, complete) == 0);
+static_assert_64bit(offsetof(SignalCPromiseStartMfaVerificationResponseFfiResult, context) == 8);
+static_assert_64bit(offsetof(SignalCPromiseStartMfaVerificationResponseFfiResult, cancellation_id) == 16);
+static_assert_64bit(sizeof(SignalCPromiseStartMfaVerificationResponseFfiResult) == 24);
+static_assert_64bit(alignof(SignalCPromiseStartMfaVerificationResponseFfiResult) == 8);
+typedef SignalCPromiseStartMfaVerificationResponseFfiResult* SignalType_MutPointer_SignalCPromiseStartMfaVerificationResponseFfiResult;
+static_assert_64bit(sizeof(SignalType_MutPointer_SignalCPromiseStartMfaVerificationResponseFfiResult) == 8);
+static_assert_64bit(alignof(SignalType_MutPointer_SignalCPromiseStartMfaVerificationResponseFfiResult) == 8);
 typedef uint16_t* SignalType_MutPointer_uint16_t;
 static_assert_64bit(sizeof(SignalType_MutPointer_uint16_t) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_uint16_t) == 8);
 typedef uint64_t* SignalType_MutPointer_uint64_t;
 static_assert_64bit(sizeof(SignalType_MutPointer_uint64_t) == 8);
 static_assert_64bit(alignof(SignalType_MutPointer_uint64_t) == 8);
+static_assert_64bit(sizeof(float) == 4);
+static_assert_64bit(alignof(float) == 4);
+typedef float MaybeUninitOff32;
+static_assert_64bit(sizeof(MaybeUninitOff32) == 4);
+static_assert_64bit(alignof(MaybeUninitOff32) == 4);
+typedef SignalBorrowedBuffer MaybeUninitOfBorrowedBuffer;
+static_assert_64bit(sizeof(MaybeUninitOfBorrowedBuffer) == 16);
+static_assert_64bit(alignof(MaybeUninitOfBorrowedBuffer) == 8);
 typedef enum {
   SignalLogLevelError = 1,
   SignalLogLevelWarn = 2,
@@ -2426,9 +3134,9 @@ typedef enum {
 } SignalLogLevel;
 static_assert_64bit(sizeof(SignalLogLevel) == 4);
 static_assert_64bit(alignof(SignalLogLevel) == 4);
-typedef int32_t (*SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalLogLevel_SignalCStringPtr_uint32_t_SignalCStringPtr)(SignalType_MutPointer_void, SignalLogLevel, SignalCStringPtr, uint32_t, SignalCStringPtr);
-static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalLogLevel_SignalCStringPtr_uint32_t_SignalCStringPtr) == 8);
-static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalLogLevel_SignalCStringPtr_uint32_t_SignalCStringPtr) == 8);
+typedef int32_t (*SignalType_FunctionPointer_int32_t_MutPointer_void_SignalLogLevel_SignalCStringPtr_uint32_t_SignalCStringPtr)(SignalType_MutPointer_void, SignalLogLevel, SignalCStringPtr, uint32_t, SignalCStringPtr);
+static_assert_64bit(sizeof(SignalType_FunctionPointer_int32_t_MutPointer_void_SignalLogLevel_SignalCStringPtr_uint32_t_SignalCStringPtr) == 8);
+static_assert_64bit(alignof(SignalType_FunctionPointer_int32_t_MutPointer_void_SignalLogLevel_SignalCStringPtr_uint32_t_SignalCStringPtr) == 8);
 typedef struct {
   const size_t* base;
   size_t length;
@@ -2446,13 +3154,21 @@ static_assert_64bit(offsetof(SignalBorrowedBytestringArray, lengths) == 16);
 static_assert_64bit(sizeof(SignalBorrowedBytestringArray) == 32);
 static_assert_64bit(alignof(SignalBorrowedBytestringArray) == 8);
 typedef struct {
-  const SignalType_ConstPointer_SignalType_FixedArray32_uint8_t* base;
+  const SignalType_ConstPointer_FixedArray32_uint8_t* base;
   size_t length;
 } SignalBorrowedSliceOfc_uchar32;
 static_assert_64bit(offsetof(SignalBorrowedSliceOfc_uchar32, base) == 0);
 static_assert_64bit(offsetof(SignalBorrowedSliceOfc_uchar32, length) == 8);
 static_assert_64bit(sizeof(SignalBorrowedSliceOfc_uchar32) == 16);
 static_assert_64bit(alignof(SignalBorrowedSliceOfc_uchar32) == 8);
+typedef struct {
+  const SignalCStringPtr* base;
+  size_t length;
+} SignalBorrowedSliceOfCStringPtr;
+static_assert_64bit(offsetof(SignalBorrowedSliceOfCStringPtr, base) == 0);
+static_assert_64bit(offsetof(SignalBorrowedSliceOfCStringPtr, length) == 8);
+static_assert_64bit(sizeof(SignalBorrowedSliceOfCStringPtr) == 16);
+static_assert_64bit(alignof(SignalBorrowedSliceOfCStringPtr) == 8);
 typedef struct {
   const SignalBorrowedBuffer* base;
   size_t length;
@@ -2477,6 +3193,14 @@ static_assert_64bit(offsetof(SignalBorrowedSliceOfConstPointerPublicKey, base) =
 static_assert_64bit(offsetof(SignalBorrowedSliceOfConstPointerPublicKey, length) == 8);
 static_assert_64bit(sizeof(SignalBorrowedSliceOfConstPointerPublicKey) == 16);
 static_assert_64bit(alignof(SignalBorrowedSliceOfConstPointerPublicKey) == 8);
+typedef struct {
+  const SignalConstPointerKyberPublicKey* base;
+  size_t length;
+} SignalBorrowedSliceOfConstPointerKyberPublicKey;
+static_assert_64bit(offsetof(SignalBorrowedSliceOfConstPointerKyberPublicKey, base) == 0);
+static_assert_64bit(offsetof(SignalBorrowedSliceOfConstPointerKyberPublicKey, length) == 8);
+static_assert_64bit(sizeof(SignalBorrowedSliceOfConstPointerKyberPublicKey) == 16);
+static_assert_64bit(alignof(SignalBorrowedSliceOfConstPointerKyberPublicKey) == 8);
 typedef struct {
   const SignalConstPointerCiphertextMessage* base;
   size_t length;
@@ -2510,6 +3234,14 @@ static_assert_64bit(offsetof(SignalBorrowedSliceOfBridgeDeleteBackupMediaItemFfi
 static_assert_64bit(sizeof(SignalBorrowedSliceOfBridgeDeleteBackupMediaItemFfiArg) == 16);
 static_assert_64bit(alignof(SignalBorrowedSliceOfBridgeDeleteBackupMediaItemFfiArg) == 8);
 typedef struct {
+  const SignalDeviceCapabilityInternalFfiArg* base;
+  size_t length;
+} SignalBorrowedSliceOfDeviceCapabilityInternalFfiArg;
+static_assert_64bit(offsetof(SignalBorrowedSliceOfDeviceCapabilityInternalFfiArg, base) == 0);
+static_assert_64bit(offsetof(SignalBorrowedSliceOfDeviceCapabilityInternalFfiArg, length) == 8);
+static_assert_64bit(sizeof(SignalBorrowedSliceOfDeviceCapabilityInternalFfiArg) == 16);
+static_assert_64bit(alignof(SignalBorrowedSliceOfDeviceCapabilityInternalFfiArg) == 8);
+typedef struct {
   const uint32_t* base;
   size_t length;
 } SignalBorrowedSliceOfu32;
@@ -2518,17 +3250,17 @@ static_assert_64bit(offsetof(SignalBorrowedSliceOfu32, length) == 8);
 static_assert_64bit(sizeof(SignalBorrowedSliceOfu32) == 16);
 static_assert_64bit(alignof(SignalBorrowedSliceOfu32) == 8);
 typedef struct {
-  const SignalPinHash* raw;
-} SignalConstPointerPinHash;
-static_assert_64bit(offsetof(SignalConstPointerPinHash, raw) == 0);
-static_assert_64bit(sizeof(SignalConstPointerPinHash) == 8);
-static_assert_64bit(alignof(SignalConstPointerPinHash) == 8);
-typedef struct {
   const SignalAes256GcmSiv* raw;
 } SignalConstPointerAes256GcmSiv;
 static_assert_64bit(offsetof(SignalConstPointerAes256GcmSiv, raw) == 0);
 static_assert_64bit(sizeof(SignalConstPointerAes256GcmSiv) == 8);
 static_assert_64bit(alignof(SignalConstPointerAes256GcmSiv) == 8);
+typedef struct {
+  const SignalPinHash* raw;
+} SignalConstPointerPinHash;
+static_assert_64bit(offsetof(SignalConstPointerPinHash, raw) == 0);
+static_assert_64bit(sizeof(SignalConstPointerPinHash) == 8);
+static_assert_64bit(alignof(SignalConstPointerPinHash) == 8);
 typedef struct {
   const SignalFfiConnectChatBridgeStruct* raw;
 } SignalConstPointerFfiConnectChatBridgeStruct;
@@ -2547,6 +3279,12 @@ typedef struct {
 static_assert_64bit(offsetof(SignalConstPointerFfiSyncInputStreamStruct, raw) == 0);
 static_assert_64bit(sizeof(SignalConstPointerFfiSyncInputStreamStruct) == 8);
 static_assert_64bit(alignof(SignalConstPointerFfiSyncInputStreamStruct) == 8);
+typedef struct {
+  const SignalBackupJsonExporter* raw;
+} SignalConstPointerBackupJsonExporter;
+static_assert_64bit(offsetof(SignalConstPointerBackupJsonExporter, raw) == 0);
+static_assert_64bit(sizeof(SignalConstPointerBackupJsonExporter) == 8);
+static_assert_64bit(alignof(SignalConstPointerBackupJsonExporter) == 8);
 typedef struct {
   const SignalMessageBackupKey* raw;
 } SignalConstPointerMessageBackupKey;
@@ -2752,12 +3490,6 @@ static_assert_64bit(offsetof(SignalConstPointerFingerprint, raw) == 0);
 static_assert_64bit(sizeof(SignalConstPointerFingerprint) == 8);
 static_assert_64bit(alignof(SignalConstPointerFingerprint) == 8);
 typedef struct {
-  const SignalKyberPublicKey* raw;
-} SignalConstPointerKyberPublicKey;
-static_assert_64bit(offsetof(SignalConstPointerKyberPublicKey, raw) == 0);
-static_assert_64bit(sizeof(SignalConstPointerKyberPublicKey) == 8);
-static_assert_64bit(alignof(SignalConstPointerKyberPublicKey) == 8);
-typedef struct {
   const SignalKyberSecretKey* raw;
 } SignalConstPointerKyberSecretKey;
 static_assert_64bit(offsetof(SignalConstPointerKyberSecretKey, raw) == 0);
@@ -2854,6 +3586,12 @@ static_assert_64bit(offsetof(SignalConstPointerSignedPreKeyRecord, raw) == 0);
 static_assert_64bit(sizeof(SignalConstPointerSignedPreKeyRecord) == 8);
 static_assert_64bit(alignof(SignalConstPointerSignedPreKeyRecord) == 8);
 typedef struct {
+  const SignalRecvProvisionCiphertextState* raw;
+} SignalConstPointerRecvProvisionCiphertextState;
+static_assert_64bit(offsetof(SignalConstPointerRecvProvisionCiphertextState, raw) == 0);
+static_assert_64bit(sizeof(SignalConstPointerRecvProvisionCiphertextState) == 8);
+static_assert_64bit(alignof(SignalConstPointerRecvProvisionCiphertextState) == 8);
+typedef struct {
   const SignalServerPublicParams* raw;
 } SignalConstPointerServerPublicParams;
 static_assert_64bit(offsetof(SignalConstPointerServerPublicParams, raw) == 0);
@@ -2905,15 +3643,31 @@ static_assert_64bit(offsetof(SignalOptionalBorrowedSliceOfc_uchar, value) == 8);
 static_assert_64bit(sizeof(SignalOptionalBorrowedSliceOfc_uchar) == 24);
 static_assert_64bit(alignof(SignalOptionalBorrowedSliceOfc_uchar) == 8);
 typedef struct {
+  bool present;
+  MaybeUninitOff32 value;
+} SignalOptionalOff32;
+static_assert_64bit(offsetof(SignalOptionalOff32, present) == 0);
+static_assert_64bit(offsetof(SignalOptionalOff32, value) == 4);
+static_assert_64bit(sizeof(SignalOptionalOff32) == 8);
+static_assert_64bit(alignof(SignalOptionalOff32) == 4);
+typedef struct {
+  bool present;
+  MaybeUninitOfBorrowedBuffer value;
+} SignalOptionalOfBorrowedBuffer;
+static_assert_64bit(offsetof(SignalOptionalOfBorrowedBuffer, present) == 0);
+static_assert_64bit(offsetof(SignalOptionalOfBorrowedBuffer, value) == 8);
+static_assert_64bit(sizeof(SignalOptionalOfBorrowedBuffer) == 24);
+static_assert_64bit(alignof(SignalOptionalOfBorrowedBuffer) == 8);
+typedef struct {
   void* base;
   size_t length;
   size_t size_bytes;
-} SignalOwnedBufferOfMaxAlignedc_void;
-static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedc_void, base) == 0);
-static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedc_void, length) == 8);
-static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedc_void, size_bytes) == 16);
-static_assert_64bit(sizeof(SignalOwnedBufferOfMaxAlignedc_void) == 24);
-static_assert_64bit(alignof(SignalOwnedBufferOfMaxAlignedc_void) == 8);
+} SignalOwnedBufferOfMaxAlignedErased;
+static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedErased, base) == 0);
+static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedErased, length) == 8);
+static_assert_64bit(offsetof(SignalOwnedBufferOfMaxAlignedErased, size_bytes) == 16);
+static_assert_64bit(sizeof(SignalOwnedBufferOfMaxAlignedErased) == 24);
+static_assert_64bit(alignof(SignalOwnedBufferOfMaxAlignedErased) == 8);
 typedef enum {
   SignalErrorCodeUnknownError = 1,
   SignalErrorCodeInvalidState = 2,
@@ -2991,6 +3745,11 @@ typedef enum {
   SignalErrorCodeRegistrationDeviceTransferPossible = 199,
   SignalErrorCodeRegistrationRecoveryVerificationFailed = 200,
   SignalErrorCodeRegistrationLock = 201,
+  SignalErrorCodeRegisterAccountRequestRejected = 202,
+  SignalErrorCodeRegistrationRecoveryPasswordRequired = 203,
+  SignalErrorCodeRegistrationOneTimePasswordRequired = 204,
+  SignalErrorCodeRegistrationInvalidSession = 205,
+  SignalErrorCodeRegistrationInvalidReceipt = 206,
   SignalErrorCodeKeyTransparencyError = 210,
   SignalErrorCodeKeyTransparencyVerificationFailed = 211,
   SignalErrorCodeRequestUnauthorized = 220,
@@ -3000,6 +3759,20 @@ typedef enum {
   SignalErrorCodeDeviceIdNotFound = 224,
   SignalErrorCodeUsernameNotAvailable = 225,
   SignalErrorCodeUsernameNotSet = 226,
+  SignalErrorCodeUsernameReservationNotFound = 227,
+  SignalErrorCodeInvalidReceipt = 228,
+  SignalErrorCodeMissingBackupId = 229,
+  SignalErrorCodeReceiptCredentialErrorPaymentStillProcessing = 230,
+  SignalErrorCodeReceiptCredentialErrorPaymentRequired = 231,
+  SignalErrorCodeReceiptCredentialErrorPaymentNotFound = 232,
+  SignalErrorCodeReceiptCredentialErrorReceiptAlreadyIssued = 233,
+  SignalErrorCodeTooManyTotpKeys = 234,
+  SignalErrorCodeTooManyMfaKeys = 235,
+  SignalErrorCodeMfaNotVerified = 236,
+  SignalErrorCodeMfaKeyNotFound = 237,
+  SignalErrorCodeWebAuthnRegistrationUnsuccessful = 238,
+  SignalErrorCodeProfileNotFound = 239,
+  SignalErrorCodeReceiptAlreadyRedeemed = 240,
 } SignalErrorCode;
 static_assert_64bit(sizeof(SignalErrorCode) == 4);
 static_assert_64bit(alignof(SignalErrorCode) == 4);
@@ -3024,6 +3797,113 @@ typedef uint8_t SignalSvr2CredentialsResult;
 static_assert_64bit(sizeof(SignalSvr2CredentialsResult) == 1);
 static_assert_64bit(alignof(SignalSvr2CredentialsResult) == 1);
 typedef enum {
+  SignalBadgeVisibilityFfiArgDoNotSet,
+  SignalBadgeVisibilityFfiArgSetVisible,
+  SignalBadgeVisibilityFfiArgSetPrimary,
+} SignalBadgeVisibilityFfiArg;
+static_assert_64bit(sizeof(SignalBadgeVisibilityFfiArg) == 4);
+static_assert_64bit(alignof(SignalBadgeVisibilityFfiArg) == 4);
+typedef enum {
+  SignalBridgeChallengeAnswerFfiArgPush,
+  SignalBridgeChallengeAnswerFfiArgCaptcha,
+} SignalBridgeChallengeAnswerFfiArg_Tag;
+typedef struct {
+  const int8_t* _0;
+} SignalBridgeChallengeAnswerFfiArgSignalPush_Body;
+typedef struct {
+  const int8_t* _0;
+} SignalBridgeChallengeAnswerFfiArgSignalCaptcha_Body;
+typedef struct {
+  SignalBridgeChallengeAnswerFfiArg_Tag tag;
+  union {
+    SignalBridgeChallengeAnswerFfiArgSignalPush_Body push;
+    SignalBridgeChallengeAnswerFfiArgSignalCaptcha_Body captcha;
+  };
+} SignalBridgeChallengeAnswerFfiArg;
+static_assert_64bit(sizeof(SignalBridgeChallengeAnswerFfiArg) == 16);
+static_assert_64bit(alignof(SignalBridgeChallengeAnswerFfiArg) == 8);
+typedef enum {
+  SignalBridgeMfaVerificationCredentialFfiArgTotp,
+  SignalBridgeMfaVerificationCredentialFfiArgWebAuthn,
+} SignalBridgeMfaVerificationCredentialFfiArg_Tag;
+typedef struct {
+  int32_t password;
+} SignalBridgeMfaVerificationCredentialFfiArgSignalTotp_Body;
+typedef struct {
+  const int8_t* json;
+} SignalBridgeMfaVerificationCredentialFfiArgSignalWebAuthn_Body;
+typedef struct {
+  SignalBridgeMfaVerificationCredentialFfiArg_Tag tag;
+  union {
+    SignalBridgeMfaVerificationCredentialFfiArgSignalTotp_Body totp;
+    SignalBridgeMfaVerificationCredentialFfiArgSignalWebAuthn_Body web_authn;
+  };
+} SignalBridgeMfaVerificationCredentialFfiArg;
+static_assert_64bit(sizeof(SignalBridgeMfaVerificationCredentialFfiArg) == 16);
+static_assert_64bit(alignof(SignalBridgeMfaVerificationCredentialFfiArg) == 8);
+typedef struct {
+  bool user_satisfied;
+  SignalBorrowedSliceOfCStringPtr call_quality_issues;
+  const int8_t* additional_issues_description;
+  const int8_t* debug_log_url;
+  uint64_t start_timestamp;
+  uint64_t end_timestamp;
+  const int8_t* call_type;
+  bool success;
+  const int8_t* call_end_reason;
+  SignalOptionalOff32 connection_rtt_median;
+  SignalOptionalOff32 audio_rtt_median;
+  SignalOptionalOff32 video_rtt_median;
+  SignalOptionalOff32 audio_recv_jitter_median;
+  SignalOptionalOff32 video_recv_jitter_median;
+  SignalOptionalOff32 audio_send_jitter_median;
+  SignalOptionalOff32 video_send_jitter_median;
+  SignalOptionalOff32 audio_recv_packet_loss_fraction;
+  SignalOptionalOff32 video_recv_packet_loss_fraction;
+  SignalOptionalOff32 audio_send_packet_loss_fraction;
+  SignalOptionalOff32 video_send_packet_loss_fraction;
+  SignalOptionalOfBorrowedBuffer call_telemetry;
+  SignalOptionalOfBorrowedBuffer call_id_hash;
+} SignalCallQualitySurveyInternalFfiArg;
+static_assert_64bit(offsetof(SignalCallQualitySurveyInternalFfiArg, user_satisfied) == 0);
+static_assert_64bit(offsetof(SignalCallQualitySurveyInternalFfiArg, call_quality_issues) == 8);
+static_assert_64bit(offsetof(SignalCallQualitySurveyInternalFfiArg, additional_issues_description) == 24);
+static_assert_64bit(offsetof(SignalCallQualitySurveyInternalFfiArg, debug_log_url) == 32);
+static_assert_64bit(offsetof(SignalCallQualitySurveyInternalFfiArg, start_timestamp) == 40);
+static_assert_64bit(offsetof(SignalCallQualitySurveyInternalFfiArg, end_timestamp) == 48);
+static_assert_64bit(offsetof(SignalCallQualitySurveyInternalFfiArg, call_type) == 56);
+static_assert_64bit(offsetof(SignalCallQualitySurveyInternalFfiArg, success) == 64);
+static_assert_64bit(offsetof(SignalCallQualitySurveyInternalFfiArg, call_end_reason) == 72);
+static_assert_64bit(offsetof(SignalCallQualitySurveyInternalFfiArg, connection_rtt_median) == 80);
+static_assert_64bit(offsetof(SignalCallQualitySurveyInternalFfiArg, audio_rtt_median) == 88);
+static_assert_64bit(offsetof(SignalCallQualitySurveyInternalFfiArg, video_rtt_median) == 96);
+static_assert_64bit(offsetof(SignalCallQualitySurveyInternalFfiArg, audio_recv_jitter_median) == 104);
+static_assert_64bit(offsetof(SignalCallQualitySurveyInternalFfiArg, video_recv_jitter_median) == 112);
+static_assert_64bit(offsetof(SignalCallQualitySurveyInternalFfiArg, audio_send_jitter_median) == 120);
+static_assert_64bit(offsetof(SignalCallQualitySurveyInternalFfiArg, video_send_jitter_median) == 128);
+static_assert_64bit(offsetof(SignalCallQualitySurveyInternalFfiArg, audio_recv_packet_loss_fraction) == 136);
+static_assert_64bit(offsetof(SignalCallQualitySurveyInternalFfiArg, video_recv_packet_loss_fraction) == 144);
+static_assert_64bit(offsetof(SignalCallQualitySurveyInternalFfiArg, audio_send_packet_loss_fraction) == 152);
+static_assert_64bit(offsetof(SignalCallQualitySurveyInternalFfiArg, video_send_packet_loss_fraction) == 160);
+static_assert_64bit(offsetof(SignalCallQualitySurveyInternalFfiArg, call_telemetry) == 168);
+static_assert_64bit(offsetof(SignalCallQualitySurveyInternalFfiArg, call_id_hash) == 192);
+static_assert_64bit(sizeof(SignalCallQualitySurveyInternalFfiArg) == 216);
+static_assert_64bit(alignof(SignalCallQualitySurveyInternalFfiArg) == 8);
+typedef enum {
+  SignalLoginReceiptLevelFfiArgNormal,
+  SignalLoginReceiptLevelFfiArgSandbox,
+} SignalLoginReceiptLevelFfiArg;
+static_assert_64bit(sizeof(SignalLoginReceiptLevelFfiArg) == 4);
+static_assert_64bit(alignof(SignalLoginReceiptLevelFfiArg) == 4);
+typedef enum {
+  SignalPaymentProviderInternalFfiArgGooglePlayBilling,
+  SignalPaymentProviderInternalFfiArgAppleAppStore,
+  SignalPaymentProviderInternalFfiArgStripe,
+  SignalPaymentProviderInternalFfiArgBraintree,
+} SignalPaymentProviderInternalFfiArg;
+static_assert_64bit(sizeof(SignalPaymentProviderInternalFfiArg) == 4);
+static_assert_64bit(alignof(SignalPaymentProviderInternalFfiArg) == 4);
+typedef enum {
   SignalCiphertextMessageTypeWhisper = 2,
   SignalCiphertextMessageTypePreKey = 3,
   SignalCiphertextMessageTypeSenderKey = 7,
@@ -3046,9 +3926,9 @@ static_assert_64bit(sizeof(SignalDirection) == 4);
 static_assert_64bit(alignof(SignalDirection) == 4);
 typedef struct {
   void* ctx;
-  SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalLogLevel_SignalCStringPtr_uint32_t_SignalCStringPtr log;
-  SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void flush;
-  SignalType_FunctionPointer_void_SignalType_MutPointer_void destroy;
+  SignalType_FunctionPointer_int32_t_MutPointer_void_SignalLogLevel_SignalCStringPtr_uint32_t_SignalCStringPtr log;
+  SignalType_FunctionPointer_int32_t_MutPointer_void flush;
+  SignalType_FunctionPointer_void_MutPointer_void destroy;
 } SignalFfiLoggerStruct;
 static_assert_64bit(offsetof(SignalFfiLoggerStruct, ctx) == 0);
 static_assert_64bit(offsetof(SignalFfiLoggerStruct, log) == 8);
@@ -3187,6 +4067,13 @@ SignalFfiError* signal_auth_credential_with_pni_check_valid_contents(
 SignalFfiError* signal_auth_credential_with_pni_response_check_valid_contents(
   SignalBorrowedBuffer bytes
 );
+SignalFfiError* signal_authenticated_chat_connection_answer_challenge(
+  SignalCPromisebool* promise,
+  SignalConstPointerTokioAsyncContext async_runtime,
+  SignalConstPointerAuthenticatedChatConnection chat,
+  const int8_t* token,
+  SignalBridgeChallengeAnswerFfiArg answer
+);
 SignalFfiError* signal_authenticated_chat_connection_clear_push_token(
   SignalCPromisebool* promise,
   SignalConstPointerTokioAsyncContext async_runtime,
@@ -3197,6 +4084,24 @@ SignalFfiError* signal_authenticated_chat_connection_clear_registration_lock(
   SignalConstPointerTokioAsyncContext async_runtime,
   SignalConstPointerAuthenticatedChatConnection chat
 );
+SignalFfiError* signal_authenticated_chat_connection_confirm_totp_key(
+  SignalCPromisei32* promise,
+  SignalConstPointerTokioAsyncContext async_runtime,
+  SignalConstPointerAuthenticatedChatConnection chat,
+  int32_t one_time_password,
+  const int8_t* name,
+  uint64_t created_at,
+  const SignalType_FixedArray32_uint8_t* svr_key,
+  int64_t rng
+);
+SignalFfiError* signal_authenticated_chat_connection_confirm_username(
+  SignalCPromiseUuid* promise,
+  SignalConstPointerTokioAsyncContext async_runtime,
+  SignalConstPointerAuthenticatedChatConnection chat,
+  const int8_t* username,
+  SignalBorrowedBuffer username_ciphertext,
+  int64_t rng
+);
 SignalFfiError* signal_authenticated_chat_connection_connect(
   SignalCPromiseMutPointerAuthenticatedChatConnection* promise,
   SignalConstPointerTokioAsyncContext async_runtime,
@@ -3205,6 +4110,18 @@ SignalFfiError* signal_authenticated_chat_connection_connect(
   const int8_t* password,
   bool receive_stories,
   SignalBorrowedBytestringArray languages
+);
+SignalFfiError* signal_authenticated_chat_connection_create_donation_permits(
+  SignalCPromiseOwnedBufferOfMaxAlignedOwnedBuffer* promise,
+  SignalConstPointerTokioAsyncContext async_runtime,
+  SignalConstPointerAuthenticatedChatConnection chat,
+  SignalBorrowedBuffer request_context,
+  SignalConstPointerServerPublicParams server_params
+);
+SignalFfiError* signal_authenticated_chat_connection_delete_account(
+  SignalCPromisebool* promise,
+  SignalConstPointerTokioAsyncContext async_runtime,
+  SignalConstPointerAuthenticatedChatConnection chat
 );
 SignalFfiError* signal_authenticated_chat_connection_delete_username_hash(
   SignalCPromisebool* promise,
@@ -3224,10 +4141,58 @@ SignalFfiError* signal_authenticated_chat_connection_disconnect(
   SignalConstPointerTokioAsyncContext async_runtime,
   SignalConstPointerAuthenticatedChatConnection chat
 );
+SignalFfiError* signal_authenticated_chat_connection_finish_mfa_verification(
+  SignalCPromisebool* promise,
+  SignalConstPointerTokioAsyncContext async_runtime,
+  SignalConstPointerAuthenticatedChatConnection chat,
+  SignalBridgeMfaVerificationCredentialFfiArg credential
+);
+SignalFfiError* signal_authenticated_chat_connection_finish_web_authn_registration(
+  SignalCPromisei32* promise,
+  SignalConstPointerTokioAsyncContext async_runtime,
+  SignalConstPointerAuthenticatedChatConnection chat,
+  SignalBorrowedBuffer attestation_object,
+  const int8_t* collected_client_data_json,
+  const int8_t* name,
+  uint64_t created_at,
+  const SignalType_FixedArray32_uint8_t* svr_key,
+  int64_t rng
+);
+SignalFfiError* signal_authenticated_chat_connection_generate_totp_key(
+  SignalCPromiseBridgePendingTotpKeyFfiResult* promise,
+  SignalConstPointerTokioAsyncContext async_runtime,
+  SignalConstPointerAuthenticatedChatConnection chat
+);
+SignalFfiError* signal_authenticated_chat_connection_get_capabilities(
+  SignalCPromiseOwnedBufferOfMaxAlignedDeviceCapabilityInternalFfiResult* promise,
+  SignalConstPointerTokioAsyncContext async_runtime,
+  SignalConstPointerAuthenticatedChatConnection chat
+);
+SignalFfiError* signal_authenticated_chat_connection_get_currency_conversions(
+  SignalCPromiseCurrencyConversionsInternalFfiResult* promise,
+  SignalConstPointerTokioAsyncContext async_runtime,
+  SignalConstPointerAuthenticatedChatConnection chat
+);
 SignalFfiError* signal_authenticated_chat_connection_get_devices(
   SignalCPromiseOwnedBufferOfMaxAlignedLinkedDeviceInternalFfiResult* promise,
   SignalConstPointerTokioAsyncContext async_runtime,
   SignalConstPointerAuthenticatedChatConnection chat
+);
+SignalFfiError* signal_authenticated_chat_connection_get_entitlements(
+  SignalCPromiseAccountEntitlementsFfiResult* promise,
+  SignalConstPointerTokioAsyncContext async_runtime,
+  SignalConstPointerAuthenticatedChatConnection chat
+);
+SignalFfiError* signal_authenticated_chat_connection_get_pre_key_count(
+  SignalCPromiseBridgePreKeyCountsFfiResult* promise,
+  SignalConstPointerTokioAsyncContext async_runtime,
+  SignalConstPointerAuthenticatedChatConnection chat
+);
+SignalFfiError* signal_authenticated_chat_connection_get_sticker_upload_forms(
+  SignalCPromiseGetStickerUploadFormsResponseFfiResult* promise,
+  SignalConstPointerTokioAsyncContext async_runtime,
+  SignalConstPointerAuthenticatedChatConnection chat,
+  int32_t number_of_stickers
 );
 SignalFfiError* signal_authenticated_chat_connection_get_upload_form(
   SignalCPromiseFfiUploadForm* promise,
@@ -3243,16 +4208,49 @@ SignalFfiError* signal_authenticated_chat_connection_init_listener(
   SignalConstPointerAuthenticatedChatConnection chat,
   SignalConstPointerFfiChatListenerStruct listener
 );
+SignalFfiError* signal_authenticated_chat_connection_list_mfa_keys(
+  SignalCPromiseOwnedBufferOfMaxAlignedBridgeConfirmedMfaKeyFfiResult* promise,
+  SignalConstPointerTokioAsyncContext async_runtime,
+  SignalConstPointerAuthenticatedChatConnection chat,
+  const SignalType_FixedArray32_uint8_t* svr_key
+);
 SignalFfiError* signal_authenticated_chat_connection_preconnect(
   SignalCPromisebool* promise,
   SignalConstPointerTokioAsyncContext async_runtime,
   SignalConstPointerConnectionManager connection_manager
+);
+SignalFfiError* signal_authenticated_chat_connection_redeem_backup_receipt(
+  SignalCPromisebool* promise,
+  SignalConstPointerTokioAsyncContext async_runtime,
+  SignalConstPointerAuthenticatedChatConnection chat,
+  const SignalType_FixedArray329_uint8_t* presentation
+);
+SignalFfiError* signal_authenticated_chat_connection_redeem_donation_receipt(
+  SignalCPromisebool* promise,
+  SignalConstPointerTokioAsyncContext async_runtime,
+  SignalConstPointerAuthenticatedChatConnection chat,
+  const SignalType_FixedArray329_uint8_t* presentation,
+  SignalBadgeVisibilityFfiArg visibility
 );
 SignalFfiError* signal_authenticated_chat_connection_remove_device(
   SignalCPromisebool* promise,
   SignalConstPointerTokioAsyncContext async_runtime,
   SignalConstPointerAuthenticatedChatConnection chat,
   uint8_t device_id
+);
+SignalFfiError* signal_authenticated_chat_connection_remove_mfa_key(
+  SignalCPromisebool* promise,
+  SignalConstPointerTokioAsyncContext async_runtime,
+  SignalConstPointerAuthenticatedChatConnection chat,
+  int32_t key_id
+);
+SignalFfiError* signal_authenticated_chat_connection_report_message(
+  SignalCPromisebool* promise,
+  SignalConstPointerTokioAsyncContext async_runtime,
+  SignalConstPointerAuthenticatedChatConnection chat,
+  const SignalType_FixedArray17_uint8_t* source,
+  SignalUuid message_guid,
+  SignalBorrowedBuffer report_spam_token
 );
 SignalFfiError* signal_authenticated_chat_connection_reserve_username_hash(
   SignalCPromisec_uchar32* promise,
@@ -3279,14 +4277,6 @@ SignalFfiError* signal_authenticated_chat_connection_send_message(
   bool online_only,
   bool is_urgent
 );
-SignalFfiError* signal_authenticated_chat_connection_send_raw_grpc(
-  SignalCPromiseOwnedBuffer* promise,
-  SignalConstPointerTokioAsyncContext async_runtime,
-  SignalConstPointerAuthenticatedChatConnection chat,
-  const int8_t* service,
-  const int8_t* method,
-  SignalBorrowedBuffer payload
-);
 SignalFfiError* signal_authenticated_chat_connection_send_sync_message(
   SignalCPromisebool* promise,
   SignalConstPointerTokioAsyncContext async_runtime,
@@ -3296,6 +4286,12 @@ SignalFfiError* signal_authenticated_chat_connection_send_sync_message(
   SignalBorrowedSliceOfu32 registration_ids,
   SignalBorrowedSliceOfConstPointerCiphertextMessage contents,
   bool is_urgent
+);
+SignalFfiError* signal_authenticated_chat_connection_set_capabilities(
+  SignalCPromisebool* promise,
+  SignalConstPointerTokioAsyncContext async_runtime,
+  SignalConstPointerAuthenticatedChatConnection chat,
+  SignalBorrowedSliceOfDeviceCapabilityInternalFfiArg capabilities
 );
 SignalFfiError* signal_authenticated_chat_connection_set_device_name(
   SignalCPromisebool* promise,
@@ -3309,6 +4305,42 @@ SignalFfiError* signal_authenticated_chat_connection_set_discoverable_by_phone_n
   SignalConstPointerTokioAsyncContext async_runtime,
   SignalConstPointerAuthenticatedChatConnection chat,
   bool discoverable
+);
+SignalFfiError* signal_authenticated_chat_connection_set_last_resort_kem_pre_key(
+  SignalCPromisebool* promise,
+  SignalConstPointerTokioAsyncContext async_runtime,
+  SignalConstPointerAuthenticatedChatConnection chat,
+  uint8_t identity_type,
+  uint32_t id,
+  SignalConstPointerKyberPublicKey key,
+  SignalBorrowedBuffer signature
+);
+SignalFfiError* signal_authenticated_chat_connection_set_mfa_key_metadata(
+  SignalCPromisebool* promise,
+  SignalConstPointerTokioAsyncContext async_runtime,
+  SignalConstPointerAuthenticatedChatConnection chat,
+  int32_t key_id,
+  const int8_t* name,
+  uint64_t created_at,
+  const SignalType_FixedArray32_uint8_t* svr_key,
+  int64_t rng
+);
+SignalFfiError* signal_authenticated_chat_connection_set_one_time_ec_pre_keys(
+  SignalCPromisebool* promise,
+  SignalConstPointerTokioAsyncContext async_runtime,
+  SignalConstPointerAuthenticatedChatConnection chat,
+  uint8_t identity_type,
+  SignalBorrowedSliceOfu32 pre_key_ids,
+  SignalBorrowedSliceOfConstPointerPublicKey pre_key_data
+);
+SignalFfiError* signal_authenticated_chat_connection_set_one_time_kem_pre_keys(
+  SignalCPromisebool* promise,
+  SignalConstPointerTokioAsyncContext async_runtime,
+  SignalConstPointerAuthenticatedChatConnection chat,
+  uint8_t identity_type,
+  SignalBorrowedSliceOfu32 pre_key_ids,
+  SignalBorrowedSliceOfConstPointerKyberPublicKey pre_key_data,
+  SignalBorrowedSliceOfBuffers pre_key_signatures
 );
 SignalFfiError* signal_authenticated_chat_connection_set_push_token_apns(
   SignalCPromisebool* promise,
@@ -3328,12 +4360,31 @@ SignalFfiError* signal_authenticated_chat_connection_set_registration_recovery_p
   SignalConstPointerAuthenticatedChatConnection chat,
   const SignalType_FixedArray32_uint8_t* svr_key
 );
+SignalFfiError* signal_authenticated_chat_connection_set_signed_ec_pre_key(
+  SignalCPromisebool* promise,
+  SignalConstPointerTokioAsyncContext async_runtime,
+  SignalConstPointerAuthenticatedChatConnection chat,
+  uint8_t identity_type,
+  uint32_t id,
+  SignalConstPointerPublicKey key,
+  SignalBorrowedBuffer signature
+);
 SignalFfiError* signal_authenticated_chat_connection_set_username_link(
   SignalCPromiseUuid* promise,
   SignalConstPointerTokioAsyncContext async_runtime,
   SignalConstPointerAuthenticatedChatConnection chat,
   SignalBorrowedBuffer username_ciphertext,
   bool keep_link_handle
+);
+SignalFfiError* signal_authenticated_chat_connection_start_mfa_verification(
+  SignalCPromiseStartMfaVerificationResponseFfiResult* promise,
+  SignalConstPointerTokioAsyncContext async_runtime,
+  SignalConstPointerAuthenticatedChatConnection chat
+);
+SignalFfiError* signal_authenticated_chat_connection_start_web_authn_registration(
+  SignalCPromiseBridgeWebAuthnCreateParametersFfiResult* promise,
+  SignalConstPointerTokioAsyncContext async_runtime,
+  SignalConstPointerAuthenticatedChatConnection chat
 );
 SignalFfiError* signal_avatar_upload_credential_check_valid_contents(
   SignalBorrowedBuffer credential_bytes
@@ -3467,6 +4518,26 @@ SignalFfiError* signal_backup_auth_credential_request_issue_deterministic(
 );
 SignalFfiError* signal_backup_auth_credential_response_check_valid_contents(
   SignalBorrowedBuffer response_bytes
+);
+SignalFfiError* signal_backup_json_exporter_destroy(
+  SignalMutPointerBackupJsonExporter p
+);
+SignalFfiError* signal_backup_json_exporter_export_frames(
+  SignalOwnedBufferOfMaxAlignedPairOfCStringPtrCStringPtr* out,
+  SignalMutPointerBackupJsonExporter exporter,
+  SignalBorrowedBuffer frames
+);
+SignalFfiError* signal_backup_json_exporter_finish(
+  SignalMutPointerBackupJsonExporter exporter
+);
+SignalFfiError* signal_backup_json_exporter_get_initial_chunk(
+  SignalCStringPtr* out,
+  SignalConstPointerBackupJsonExporter exporter
+);
+SignalFfiError* signal_backup_json_exporter_new(
+  SignalMutPointerBackupJsonExporter* out,
+  SignalBorrowedBuffer backup_info,
+  bool should_validate
 );
 SignalFfiError* signal_backup_key_derive_backup_id(
   SignalType_FixedArray16_uint8_t* out,
@@ -3642,6 +4713,10 @@ SignalFfiError* signal_chat_connection_info_ip_version(
   uint8_t* out,
   SignalConstPointerChatConnectionInfo connection_info
 );
+SignalFfiError* signal_chat_connection_info_is_direct(
+  bool* out,
+  SignalConstPointerChatConnectionInfo connection_info
+);
 SignalFfiError* signal_chat_connection_info_local_port(
   uint16_t* out,
   SignalConstPointerChatConnectionInfo connection_info
@@ -3713,9 +4788,6 @@ SignalFfiError* signal_copy_backup_media_stream_cancel(
 );
 SignalFfiError* signal_copy_backup_media_stream_destroy(
   SignalMutPointerCopyBackupMediaStream p
-);
-SignalFfiError* signal_copy_backup_media_stream_force_emit_vec_of_bridge_copy_backup_media_item(
-  SignalOwnedBufferOfMaxAlignedBridgeCopyBackupMediaItemFfiResult* out
 );
 SignalFfiError* signal_copy_backup_media_stream_next(
   SignalCPromiseCopyBackupMediaNextChunkFfiResult* promise,
@@ -3941,6 +5013,10 @@ SignalFfiError* signal_error_get_address(
   SignalMutPointerProtocolAddress* out,
   const SignalFfiError* err
 );
+SignalFfiError* signal_error_get_charge_failure(
+  SignalOptionalOfChargeFailureFfiResult* out,
+  const SignalFfiError* err
+);
 SignalFfiError* signal_error_get_invalid_protocol_address(
   SignalPairOfCStringPtru32* out,
   const SignalFfiError* err
@@ -4003,6 +5079,7 @@ SignalFfiError* signal_expiring_profile_key_credential_get_expiration_time(
 SignalFfiError* signal_expiring_profile_key_credential_response_check_valid_contents(
   SignalBorrowedBuffer buffer
 );
+void signal_ffi_version_0_106_2(void);
 SignalFfiError* signal_fingerprint_clone(
   SignalMutPointerFingerprint* new_obj,
   SignalConstPointerFingerprint obj
@@ -4058,7 +5135,7 @@ void signal_free_outer_buffer_list_of_prekey_bundles(
   SignalOwnedBufferOfMutPointerPreKeyBundle buffer
 );
 void signal_free_owned_buffer_of_max_aligned(
-  SignalOwnedBufferOfMaxAlignedc_void buffer
+  SignalOwnedBufferOfMaxAlignedErased buffer
 );
 void signal_free_string(
   const int8_t* buf
@@ -4514,6 +5591,16 @@ SignalFfiError* signal_message_backup_key_get_hmac_key(
   SignalType_FixedArray32_uint8_t* out,
   SignalConstPointerMessageBackupKey key
 );
+SignalFfiError* signal_message_backup_sizing_flush_interval(
+  uint64_t* out,
+  uint64_t uncompressed_len,
+  uint64_t estimated_total_uncompressed_len
+);
+SignalFfiError* signal_message_backup_sizing_padding_size(
+  uint64_t* out,
+  uint64_t max_interval_bytes,
+  uint64_t compressed_len
+);
 SignalFfiError* signal_message_backup_validation_outcome_destroy(
   SignalMutPointerMessageBackupValidationOutcome p
 );
@@ -4924,6 +6011,11 @@ SignalFfiError* signal_provisioning_chat_connection_init_listener(
   SignalConstPointerProvisioningChatConnection chat,
   SignalConstPointerFfiProvisioningListenerStruct listener
 );
+SignalFfiError* signal_provisioning_encrypt_provision_message(
+  SignalOwnedBuffer* out,
+  const SignalType_FixedArray33_uint8_t* secondary_public_key,
+  SignalBorrowedBuffer provision_message
+);
 SignalFfiError* signal_publickey_clone(
   SignalMutPointerPublicKey* new_obj,
   SignalConstPointerPublicKey obj
@@ -5000,6 +6092,21 @@ SignalFfiError* signal_receipt_credential_request_context_get_request(
 SignalFfiError* signal_receipt_credential_response_check_valid_contents(
   SignalBorrowedBuffer buffer
 );
+SignalFfiError* signal_recv_provision_ciphertext_state_decrypt_envelope(
+  SignalOwnedBuffer* out,
+  SignalConstPointerRecvProvisionCiphertextState state,
+  SignalBorrowedBuffer envelope
+);
+SignalFfiError* signal_recv_provision_ciphertext_state_destroy(
+  SignalMutPointerRecvProvisionCiphertextState p
+);
+SignalFfiError* signal_recv_provision_ciphertext_state_generate(
+  SignalMutPointerRecvProvisionCiphertextState* out
+);
+SignalFfiError* signal_recv_provision_ciphertext_state_get_public_key(
+  SignalType_FixedArray33_uint8_t* out,
+  SignalConstPointerRecvProvisionCiphertextState state
+);
 SignalFfiError* signal_register_account_request_create(
   SignalMutPointerRegisterAccountRequest* out
 );
@@ -5029,11 +6136,23 @@ SignalFfiError* signal_register_account_request_set_identity_signed_pre_key(
   uint8_t identity_type,
   SignalFfiSignedPublicPreKey signed_pre_key
 );
+SignalFfiError* signal_register_account_request_set_one_time_password(
+  SignalConstPointerRegisterAccountRequest register_account,
+  uint32_t one_time_password
+);
 SignalFfiError* signal_register_account_request_set_skip_device_transfer(
   SignalConstPointerRegisterAccountRequest register_account
 );
 SignalFfiError* signal_register_account_response_destroy(
   SignalMutPointerRegisterAccountResponse p
+);
+SignalFfiError* signal_register_account_response_get_aci(
+  SignalUuid* out,
+  SignalConstPointerRegisterAccountResponse response
+);
+SignalFfiError* signal_register_account_response_get_auth_credential_salt(
+  SignalOwnedBuffer* out,
+  SignalConstPointerRegisterAccountResponse response
 );
 SignalFfiError* signal_register_account_response_get_entitlement_backup_expiration_seconds(
   uint64_t* out,
@@ -5047,13 +6166,12 @@ SignalFfiError* signal_register_account_response_get_entitlement_badges(
   SignalOwnedBufferOfFfiRegisterResponseBadge* out,
   SignalConstPointerRegisterAccountResponse response
 );
-SignalFfiError* signal_register_account_response_get_identity(
-  SignalType_FixedArray17_uint8_t* out,
-  SignalConstPointerRegisterAccountResponse response,
-  uint8_t identity_type
-);
 SignalFfiError* signal_register_account_response_get_number(
   SignalCStringPtr* out,
+  SignalConstPointerRegisterAccountResponse response
+);
+SignalFfiError* signal_register_account_response_get_pni(
+  SignalOptionalUuid* out,
   SignalConstPointerRegisterAccountResponse response
 );
 SignalFfiError* signal_register_account_response_get_reregistration(
@@ -5108,6 +6226,14 @@ SignalFfiError* signal_registration_service_register_account(
   SignalConstPointerRegisterAccountRequest register_account,
   SignalConstPointerRegistrationAccountAttributes account_attributes
 );
+SignalFfiError* signal_registration_service_register_account_without_number(
+  SignalCPromiseMutPointerRegisterAccountResponse* promise,
+  SignalConstPointerTokioAsyncContext async_runtime,
+  SignalConstPointerFfiConnectChatBridgeStruct connect_chat,
+  SignalBorrowedBuffer receipt_credential_presentation,
+  SignalConstPointerRegisterAccountRequest register_account,
+  SignalConstPointerRegistrationAccountAttributes account_attributes
+);
 SignalFfiError* signal_registration_service_registration_session(
   SignalMutPointerRegistrationSession* out,
   SignalConstPointerRegistrationService service
@@ -5131,6 +6257,14 @@ SignalFfiError* signal_registration_service_reregister_account(
   SignalConstPointerTokioAsyncContext async_runtime,
   SignalConstPointerFfiConnectChatBridgeStruct connect_chat,
   const int8_t* number,
+  SignalConstPointerRegisterAccountRequest register_account,
+  SignalConstPointerRegistrationAccountAttributes account_attributes
+);
+SignalFfiError* signal_registration_service_reregister_account_without_number(
+  SignalCPromiseMutPointerRegisterAccountResponse* promise,
+  SignalConstPointerTokioAsyncContext async_runtime,
+  SignalConstPointerFfiConnectChatBridgeStruct connect_chat,
+  const SignalType_FixedArray17_uint8_t* aci,
   SignalConstPointerRegisterAccountRequest register_account,
   SignalConstPointerRegistrationAccountAttributes account_attributes
 );
@@ -5511,6 +6645,14 @@ SignalFfiError* signal_server_public_params_receive_auth_credential_with_pni_as_
   uint64_t redemption_time,
   SignalBorrowedBuffer auth_credential_with_pni_response_bytes
 );
+SignalFfiError* signal_server_public_params_receive_auth_credential_zkc_without_pni(
+  SignalOwnedBuffer* out,
+  SignalConstPointerServerPublicParams params,
+  const SignalType_FixedArray17_uint8_t* aci,
+  SignalBorrowedBuffer salt,
+  uint64_t redemption_time,
+  SignalBorrowedBuffer auth_credential_with_pni_response_bytes
+);
 SignalFfiError* signal_server_public_params_receive_expiring_profile_key_credential(
   SignalType_FixedArray153_uint8_t* out,
   SignalConstPointerServerPublicParams server_public_params,
@@ -5554,6 +6696,14 @@ SignalFfiError* signal_server_secret_params_issue_auth_credential_with_pni_zkc_d
   const SignalType_FixedArray32_uint8_t* randomness,
   const SignalType_FixedArray17_uint8_t* aci,
   const SignalType_FixedArray17_uint8_t* pni,
+  uint64_t redemption_time
+);
+SignalFfiError* signal_server_secret_params_issue_auth_credential_zkc_without_pni_deterministic(
+  SignalOwnedBuffer* out,
+  SignalConstPointerServerSecretParams server_secret_params,
+  const SignalType_FixedArray32_uint8_t* randomness,
+  const SignalType_FixedArray17_uint8_t* aci,
+  SignalBorrowedBuffer salt,
   uint64_t redemption_time
 );
 SignalFfiError* signal_server_secret_params_issue_expiring_profile_key_credential_deterministic(
@@ -5649,7 +6799,6 @@ SignalFfiError* signal_session_record_get_remote_registration_id(
 SignalFfiError* signal_session_record_has_usable_sender_chain(
   bool* out,
   SignalConstPointerSessionRecord s,
-  double require_pq_ratio,
   uint64_t now
 );
 SignalFfiError* signal_session_record_serialize(
@@ -5842,6 +6991,17 @@ SignalFfiError* signal_unauthenticated_chat_connection_backup_get_upload_form(
   uint64_t upload_size,
   int64_t rng
 );
+SignalFfiError* signal_unauthenticated_chat_connection_backup_list_media(
+  SignalCPromiseListMediaResponseFfiResult* promise,
+  SignalConstPointerTokioAsyncContext async_runtime,
+  SignalConstPointerUnauthenticatedChatConnection chat,
+  SignalBorrowedBuffer credential,
+  SignalBorrowedBuffer server_keys,
+  SignalConstPointerPrivateKey signing_key,
+  const int8_t* cursor,
+  int32_t limit,
+  int64_t rng
+);
 SignalFfiError* signal_unauthenticated_chat_connection_backup_refresh(
   SignalCPromisebool* promise,
   SignalConstPointerTokioAsyncContext async_runtime,
@@ -5860,11 +7020,29 @@ SignalFfiError* signal_unauthenticated_chat_connection_backup_set_public_key(
   SignalConstPointerPrivateKey signing_key,
   int64_t rng
 );
+SignalFfiError* signal_unauthenticated_chat_connection_check_svr_credentials(
+  SignalCPromiseOwnedBufferOfMaxAlignedPairOfCStringPtrAuthCheckResultFfiResult* promise,
+  SignalConstPointerTokioAsyncContext async_runtime,
+  SignalConstPointerUnauthenticatedChatConnection chat,
+  const int8_t* number,
+  SignalBorrowedSliceOfCStringPtr credentials
+);
 SignalFfiError* signal_unauthenticated_chat_connection_connect(
   SignalCPromiseMutPointerUnauthenticatedChatConnection* promise,
   SignalConstPointerTokioAsyncContext async_runtime,
   SignalConstPointerConnectionManager connection_manager,
   SignalBorrowedBytestringArray languages
+);
+SignalFfiError* signal_unauthenticated_chat_connection_create_login_receipt_credential(
+  SignalCPromiseOwnedBuffer* promise,
+  SignalConstPointerTokioAsyncContext async_runtime,
+  SignalConstPointerUnauthenticatedChatConnection chat,
+  SignalPaymentProviderInternalFfiArg payment_processor,
+  const int8_t* purchase_identifier,
+  SignalBorrowedBuffer receipt_credential_request_context,
+  SignalConstPointerServerPublicParams server_params,
+  uint64_t purchase_time,
+  SignalLoginReceiptLevelFfiArg expected_level
 );
 SignalFfiError* signal_unauthenticated_chat_connection_destroy(
   SignalMutPointerUnauthenticatedChatConnection p
@@ -5896,6 +7074,21 @@ SignalFfiError* signal_unauthenticated_chat_connection_get_pre_keys_unrestricted
   SignalConstPointerUnauthenticatedChatConnection chat,
   const SignalType_FixedArray17_uint8_t* target,
   int32_t device
+);
+SignalFfiError* signal_unauthenticated_chat_connection_get_profile_key_credential(
+  SignalCPromisec_uchar153* promise,
+  SignalConstPointerTokioAsyncContext async_runtime,
+  SignalConstPointerUnauthenticatedChatConnection chat,
+  const SignalType_FixedArray473_uint8_t* profile_key_request_context,
+  SignalConstPointerServerPublicParams server_params
+);
+SignalFfiError* signal_unauthenticated_chat_connection_get_subscription_receipt_credential(
+  SignalCPromiseOwnedBuffer* promise,
+  SignalConstPointerTokioAsyncContext async_runtime,
+  SignalConstPointerUnauthenticatedChatConnection chat,
+  const SignalType_FixedArray32_uint8_t* subscriber_id,
+  SignalBorrowedBuffer receipt_credential_request_context,
+  SignalConstPointerServerPublicParams server_params
 );
 SignalFfiError* signal_unauthenticated_chat_connection_info(
   SignalMutPointerChatConnectionInfo* out,
@@ -5949,13 +7142,11 @@ SignalFfiError* signal_unauthenticated_chat_connection_send_multi_recipient_mess
   bool online_only,
   bool is_urgent
 );
-SignalFfiError* signal_unauthenticated_chat_connection_send_raw_grpc(
-  SignalCPromiseOwnedBuffer* promise,
+SignalFfiError* signal_unauthenticated_chat_connection_submit_call_quality_survey(
+  SignalCPromisebool* promise,
   SignalConstPointerTokioAsyncContext async_runtime,
   SignalConstPointerUnauthenticatedChatConnection chat,
-  const int8_t* service,
-  const int8_t* method,
-  SignalBorrowedBuffer payload
+  SignalCallQualitySurveyInternalFfiArg survey
 );
 SignalFfiError* signal_unidentified_sender_message_content_deserialize(
   SignalMutPointerUnidentifiedSenderMessageContent* out,
@@ -6077,10 +7268,6 @@ SignalFfiError* signal_zk_credential_public_key_check_valid_contents(
   SignalBorrowedBuffer public_key_bytes
 );
 typedef SignalBytestringArray SignalStringArray;
-typedef SignalCPromiseOptionalPairOfCStringPtrc_uchar32 SignalCPromiseOptionalPairOfCStringPtru832;
-typedef SignalCPromiseOwnedBuffer SignalCPromiseOwnedBufferOfc_uchar;
-typedef SignalCPromiseOwnedBufferOfc_uchar17 SignalCPromiseOwnedBufferOfServiceIdFixedWidthBinaryBytes;
-typedef SignalCPromisePairOfOwnedBufferOwnedBuffer SignalCPromisePairOfOwnedBufferOfc_ucharOwnedBufferOfc_uchar;
 typedef SignalConstPointerFfiSyncInputStreamStruct SignalConstPointerFfiInputStreamStruct;
 typedef SignalFfiIdentityKeyStoreStruct SignalIdentityKeyStore;
 typedef SignalFfiKyberPreKeyStoreStruct SignalKyberPreKeyStore;
@@ -6091,10 +7278,7 @@ typedef SignalFfiSignedPreKeyStoreStruct SignalSignedPreKeyStore;
 typedef SignalFfiSyncInputStreamStruct SignalFfiInputStreamStruct;
 typedef SignalFfiSyncInputStreamStruct SignalInputStream;
 typedef SignalFfiSyncInputStreamStruct SignalSyncInputStream;
-typedef SignalOptionalPairOfCStringPtrc_uchar32 SignalOptionalPairOfCStringPtru832;
 typedef SignalOwnedBufferOfc_uchar17 SignalOwnedBufferOfServiceIdFixedWidthBinaryBytes;
-typedef SignalOwnedLookupResponseEntryList SignalOwnedBufferOfFfiCdsiLookupResponseEntry;
-typedef SignalPairOfOwnedBufferOwnedBuffer SignalPairOfOwnedBufferOfc_ucharOwnedBufferOfc_uchar;
 typedef SignalRegistrationAccountAttributes SignalRegistrationAccountAttributes;
 typedef SignalType_FixedArray16_uint8_t SignalReceiptSerialBytes;
 typedef SignalType_FixedArray16_uint8_t SignalUidBytes;
@@ -6110,43 +7294,43 @@ typedef SignalType_FixedArray32_uint8_t SignalRandomnessBytes;
 typedef SignalType_FixedArray64_uint8_t SignalNotarySignatureBytes;
 typedef SignalType_FixedArray64_uint8_t SignalProfileKeyVersionEncodedBytes;
 typedef SignalType_FixedArray64_uint8_t SignalSignatureBytes;
-typedef SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void SignalFfiChatListenerReceivedQueueEmpty;
-typedef SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void SignalFfiLoggerFlush;
-typedef SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalBytestringArray SignalFfiChatListenerReceivedAlerts;
-typedef SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalCStringPtr_SignalMutPointerServerMessageAck SignalFfiProvisioningListenerReceivedAddress;
-typedef SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalLogLevel_SignalCStringPtr_uint32_t_SignalCStringPtr SignalFfiLoggerLog;
-typedef SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalMutPointerProtocolAddress_SignalMutPointerSessionRecord SignalFfiSessionStoreStoreSession;
-typedef SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalMutPointerProtocolAddress_SignalUuid_SignalMutPointerSenderKeyRecord SignalFfiSenderKeyStoreStoreSenderKey;
-typedef SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalOwnedBuffer_SignalMutPointerServerMessageAck SignalFfiProvisioningListenerReceivedEnvelope;
-typedef SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalOwnedBuffer_uint64_t_SignalMutPointerServerMessageAck SignalFfiChatListenerReceivedIncomingMessage;
-typedef SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalFfiError SignalFfiChatListenerConnectionInterrupted;
-typedef SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalFfiError SignalFfiProvisioningListenerConnectionInterrupted;
-typedef SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalMutPointerKyberPreKeyRecord_uint32_t SignalFfiKyberPreKeyStoreLoadKyberPreKey;
-typedef SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalMutPointerPreKeyRecord_uint32_t SignalFfiPreKeyStoreLoadPreKey;
-typedef SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalMutPointerPublicKey_SignalMutPointerProtocolAddress SignalFfiIdentityKeyStoreGetIdentityKey;
-typedef SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalMutPointerSenderKeyRecord_SignalMutPointerProtocolAddress_SignalUuid SignalFfiSenderKeyStoreLoadSenderKey;
-typedef SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalMutPointerSessionRecord_SignalMutPointerProtocolAddress SignalFfiSessionStoreLoadSession;
-typedef SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalMutPointerSignedPreKeyRecord_uint32_t SignalFfiSignedPreKeyStoreLoadSignedPreKey;
-typedef SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_SignalPairOfMutPointerPrivateKeyMutPointerPublicKey SignalFfiIdentityKeyStoreGetLocalIdentityKeyPair;
-typedef SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_bool_SignalMutPointerProtocolAddress_SignalMutPointerPublicKey_uint32_t SignalFfiIdentityKeyStoreIsTrustedIdentity;
-typedef SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_size_t_SignalBorrowedMutableBuffer SignalFfiSyncInputStreamRead;
-typedef SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_uint32_t SignalFfiIdentityKeyStoreGetLocalRegistrationId;
-typedef SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_SignalType_MutPointer_uint8_t_SignalMutPointerProtocolAddress_SignalMutPointerPublicKey SignalFfiIdentityKeyStoreSaveIdentityKey;
-typedef SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_uint32_t SignalFfiPreKeyStoreRemovePreKey;
-typedef SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_uint32_t_SignalMutPointerKyberPreKeyRecord SignalFfiKyberPreKeyStoreStoreKyberPreKey;
-typedef SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_uint32_t_SignalMutPointerPreKeyRecord SignalFfiPreKeyStoreStorePreKey;
-typedef SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_uint32_t_SignalMutPointerSignedPreKeyRecord SignalFfiSignedPreKeyStoreStoreSignedPreKey;
-typedef SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_uint32_t_uint32_t_SignalMutPointerPublicKey SignalFfiKyberPreKeyStoreMarkKyberPreKeyUsed;
-typedef SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_uint64_t SignalFfiChatListenerReceivedServerTimestamp;
-typedef SignalType_FunctionPointer_int32_t_SignalType_MutPointer_void_uint64_t SignalFfiSyncInputStreamSkip;
-typedef SignalType_FunctionPointer_void_SignalType_MutPointer_void SignalFfiChatListenerDestroy;
-typedef SignalType_FunctionPointer_void_SignalType_MutPointer_void SignalFfiIdentityKeyStoreDestroy;
-typedef SignalType_FunctionPointer_void_SignalType_MutPointer_void SignalFfiKyberPreKeyStoreDestroy;
-typedef SignalType_FunctionPointer_void_SignalType_MutPointer_void SignalFfiLoggerDestroy;
-typedef SignalType_FunctionPointer_void_SignalType_MutPointer_void SignalFfiPreKeyStoreDestroy;
-typedef SignalType_FunctionPointer_void_SignalType_MutPointer_void SignalFfiProvisioningListenerDestroy;
-typedef SignalType_FunctionPointer_void_SignalType_MutPointer_void SignalFfiSenderKeyStoreDestroy;
-typedef SignalType_FunctionPointer_void_SignalType_MutPointer_void SignalFfiSessionStoreDestroy;
-typedef SignalType_FunctionPointer_void_SignalType_MutPointer_void SignalFfiSignedPreKeyStoreDestroy;
-typedef SignalType_FunctionPointer_void_SignalType_MutPointer_void SignalFfiSyncInputStreamDestroy;
+typedef SignalType_FunctionPointer_int32_t_MutPointer_void SignalFfiChatListenerReceivedQueueEmpty;
+typedef SignalType_FunctionPointer_int32_t_MutPointer_void SignalFfiLoggerFlush;
+typedef SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalFfiError SignalFfiChatListenerConnectionInterrupted;
+typedef SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalFfiError SignalFfiProvisioningListenerConnectionInterrupted;
+typedef SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalMutPointerKyberPreKeyRecord_uint32_t SignalFfiKyberPreKeyStoreLoadKyberPreKey;
+typedef SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalMutPointerPreKeyRecord_uint32_t SignalFfiPreKeyStoreLoadPreKey;
+typedef SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalMutPointerPublicKey_SignalMutPointerProtocolAddress SignalFfiIdentityKeyStoreGetIdentityKey;
+typedef SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalMutPointerSenderKeyRecord_SignalMutPointerProtocolAddress_SignalUuid SignalFfiSenderKeyStoreLoadSenderKey;
+typedef SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalMutPointerSessionRecord_SignalMutPointerProtocolAddress SignalFfiSessionStoreLoadSession;
+typedef SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalMutPointerSignedPreKeyRecord_uint32_t SignalFfiSignedPreKeyStoreLoadSignedPreKey;
+typedef SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_SignalPairOfMutPointerPrivateKeyMutPointerPublicKey SignalFfiIdentityKeyStoreGetLocalIdentityKeyPair;
+typedef SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_bool_SignalMutPointerProtocolAddress_SignalMutPointerPublicKey_uint32_t SignalFfiIdentityKeyStoreIsTrustedIdentity;
+typedef SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_size_t_SignalBorrowedMutableBuffer SignalFfiSyncInputStreamRead;
+typedef SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_uint32_t SignalFfiIdentityKeyStoreGetLocalRegistrationId;
+typedef SignalType_FunctionPointer_int32_t_MutPointer_void_MutPointer_uint8_t_SignalMutPointerProtocolAddress_SignalMutPointerPublicKey SignalFfiIdentityKeyStoreSaveIdentityKey;
+typedef SignalType_FunctionPointer_int32_t_MutPointer_void_SignalBytestringArray SignalFfiChatListenerReceivedAlerts;
+typedef SignalType_FunctionPointer_int32_t_MutPointer_void_SignalCStringPtr_SignalMutPointerServerMessageAck SignalFfiProvisioningListenerReceivedAddress;
+typedef SignalType_FunctionPointer_int32_t_MutPointer_void_SignalLogLevel_SignalCStringPtr_uint32_t_SignalCStringPtr SignalFfiLoggerLog;
+typedef SignalType_FunctionPointer_int32_t_MutPointer_void_SignalMutPointerProtocolAddress_SignalMutPointerSessionRecord SignalFfiSessionStoreStoreSession;
+typedef SignalType_FunctionPointer_int32_t_MutPointer_void_SignalMutPointerProtocolAddress_SignalUuid_SignalMutPointerSenderKeyRecord SignalFfiSenderKeyStoreStoreSenderKey;
+typedef SignalType_FunctionPointer_int32_t_MutPointer_void_SignalOwnedBuffer_SignalMutPointerServerMessageAck SignalFfiProvisioningListenerReceivedEnvelope;
+typedef SignalType_FunctionPointer_int32_t_MutPointer_void_SignalOwnedBuffer_uint64_t_SignalMutPointerServerMessageAck SignalFfiChatListenerReceivedIncomingMessage;
+typedef SignalType_FunctionPointer_int32_t_MutPointer_void_uint32_t SignalFfiPreKeyStoreRemovePreKey;
+typedef SignalType_FunctionPointer_int32_t_MutPointer_void_uint32_t_SignalMutPointerKyberPreKeyRecord SignalFfiKyberPreKeyStoreStoreKyberPreKey;
+typedef SignalType_FunctionPointer_int32_t_MutPointer_void_uint32_t_SignalMutPointerPreKeyRecord SignalFfiPreKeyStoreStorePreKey;
+typedef SignalType_FunctionPointer_int32_t_MutPointer_void_uint32_t_SignalMutPointerSignedPreKeyRecord SignalFfiSignedPreKeyStoreStoreSignedPreKey;
+typedef SignalType_FunctionPointer_int32_t_MutPointer_void_uint32_t_uint32_t_SignalMutPointerPublicKey SignalFfiKyberPreKeyStoreMarkKyberPreKeyUsed;
+typedef SignalType_FunctionPointer_int32_t_MutPointer_void_uint64_t SignalFfiChatListenerReceivedServerTimestamp;
+typedef SignalType_FunctionPointer_int32_t_MutPointer_void_uint64_t SignalFfiSyncInputStreamSkip;
+typedef SignalType_FunctionPointer_void_MutPointer_void SignalFfiChatListenerDestroy;
+typedef SignalType_FunctionPointer_void_MutPointer_void SignalFfiIdentityKeyStoreDestroy;
+typedef SignalType_FunctionPointer_void_MutPointer_void SignalFfiKyberPreKeyStoreDestroy;
+typedef SignalType_FunctionPointer_void_MutPointer_void SignalFfiLoggerDestroy;
+typedef SignalType_FunctionPointer_void_MutPointer_void SignalFfiPreKeyStoreDestroy;
+typedef SignalType_FunctionPointer_void_MutPointer_void SignalFfiProvisioningListenerDestroy;
+typedef SignalType_FunctionPointer_void_MutPointer_void SignalFfiSenderKeyStoreDestroy;
+typedef SignalType_FunctionPointer_void_MutPointer_void SignalFfiSessionStoreDestroy;
+typedef SignalType_FunctionPointer_void_MutPointer_void SignalFfiSignedPreKeyStoreDestroy;
+typedef SignalType_FunctionPointer_void_MutPointer_void SignalFfiSyncInputStreamDestroy;
 typedef uint64_t SignalCancellationId;

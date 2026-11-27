@@ -5,8 +5,10 @@
 
 package org.signal.libsignal.net
 
+import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.Json
 import org.junit.Test
+import org.signal.libsignal.internal.NativeTestingNice
 import org.signal.libsignal.internal.TokioAsyncContext
 import org.signal.libsignal.protocol.ServiceId.Aci
 import org.signal.libsignal.protocol.message.PlaintextContent
@@ -20,6 +22,10 @@ import kotlin.test.assertEquals
 import kotlin.test.assertIs
 
 class AuthMessagesServiceTest {
+  companion object {
+    val GRPC_OVERRIDES = arrayOf("AttachmentsGetUploadForm", "MessagesSendMessage")
+  }
+
   private val recipientUuid = UUID.fromString("4FCFE887-A600-40CD-9AB7-FD2A695E9981")
 
   @Test
@@ -29,6 +35,8 @@ class AuthMessagesServiceTest {
       AuthenticatedChatConnection.fakeConnect(
         tokioAsyncContext,
         NoOpListener(),
+        GRPC_OVERRIDES,
+        arrayOf(),
       )
 
     val service = AuthMessagesService(chat)
@@ -72,6 +80,8 @@ class AuthMessagesServiceTest {
       AuthenticatedChatConnection.fakeConnect(
         tokioAsyncContext,
         NoOpListener(),
+        GRPC_OVERRIDES,
+        arrayOf(),
       )
 
     val service = AuthMessagesService(chat)
@@ -169,6 +179,8 @@ class AuthMessagesServiceTest {
       AuthenticatedChatConnection.fakeConnect(
         tokioAsyncContext,
         NoOpListener(),
+        GRPC_OVERRIDES,
+        arrayOf(),
       )
 
     listOf(
@@ -198,6 +210,8 @@ class AuthMessagesServiceTest {
       AuthenticatedChatConnection.fakeConnect(
         tokioAsyncContext,
         NoOpListener(),
+        GRPC_OVERRIDES,
+        arrayOf(),
       )
 
     val (responseFuture, requestId) = sendTestMessage(chat, syncMessage = false, fakeRemote)
@@ -222,6 +236,8 @@ class AuthMessagesServiceTest {
       AuthenticatedChatConnection.fakeConnect(
         tokioAsyncContext,
         NoOpListener(),
+        GRPC_OVERRIDES,
+        arrayOf(),
       )
 
     val (responseFuture, requestId) = sendTestMessage(chat, syncMessage = false, fakeRemote)
@@ -265,6 +281,8 @@ class AuthMessagesServiceTest {
       AuthenticatedChatConnection.fakeConnect(
         tokioAsyncContext,
         NoOpListener(),
+        GRPC_OVERRIDES,
+        arrayOf(),
       )
 
     val (responseFuture, requestId) = sendTestMessage(chat, syncMessage = false, fakeRemote)
@@ -306,6 +324,8 @@ class AuthMessagesServiceTest {
       AuthenticatedChatConnection.fakeConnect(
         tokioAsyncContext,
         NoOpListener(),
+        GRPC_OVERRIDES,
+        arrayOf(),
       )
 
     val (responseFuture, requestId) = sendTestMessage(chat, syncMessage = false, fakeRemote)
@@ -333,4 +353,24 @@ class AuthMessagesServiceTest {
     assertEquals("zzz", challengeException.token)
     assertEquals(setOf(ChallengeOption.CAPTCHA), challengeException.options)
   }
+
+  @Test
+  fun testReportMessage() =
+    runTest {
+      GrpcTestCase.runTests(
+        NativeTestingNice.TESTING_ReportMessageTests(),
+        AuthenticatedChatConnection::fakeConnect,
+        ::AuthMessagesService,
+        invoke = { chat, req ->
+          chat.reportMessage(
+            source = req.source,
+            messageGuid = req.messageGuid,
+            reportSpamToken = req.reportSpamToken,
+          )
+        },
+        check = { _, actual ->
+          assertIs<RequestResult.Success<Unit>>(actual)
+        },
+      )
+    }
 }

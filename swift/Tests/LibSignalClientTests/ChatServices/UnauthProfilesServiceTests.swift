@@ -12,6 +12,9 @@ import XCTest
 
 class UnauthProfilesServiceTests: UnauthChatServiceTestBase<any UnauthProfilesService> {
     override class var selector: SelectorCheck { .profiles }
+    override var grpcOverrides: [String] {
+        ["AccountsAnonymousCheckAccountExistence"]
+    }
 
     func testAccountExists() async throws {
         let ACI = Aci(fromUUID: UUID(uuidString: "9d0652a3-dcc3-4d11-975f-74d61598733f")!)
@@ -35,6 +38,42 @@ class UnauthProfilesServiceTests: UnauthChatServiceTestBase<any UnauthProfilesSe
             let resp = try await responseFuture
             XCTAssertEqual(resp, testCase.found)
         }
+    }
+
+    func testGetProfileKeyCredential() async throws {
+        try await testGrpcCases(
+            try NativeTestingNice.TESTING_GetProfileKeyCredentialTests(),
+            invoke: { api, args in
+                try await api.getProfileKeyCredential(
+                    requestContext: args.profileKeyRequestContext,
+                    serverParams: try ServerPublicParams(contents: args.serverParams.bytes)
+                )
+            },
+            check: { expected, actual in
+                switch expected {
+                case .success(let credential):
+                    XCTAssertEqual(try actual.get().serialize(), credential.serialize())
+                case .unexpectedError(let contains):
+                    do {
+                        _ = try actual.get()
+                        XCTFail("Expected exception")
+                    } catch SignalError.networkProtocolError(let message) {
+                        XCTAssert(message.contains(contains))
+                    }
+                case .explicitError(.authFailed):
+                    do {
+                        _ = try actual.get()
+                        XCTFail("Expected exception")
+                    } catch SignalError.requestUnauthorized(_) {}
+                case .explicitError(.profileNotFound):
+                    do {
+                        _ = try actual.get()
+                        XCTFail("Expected exception")
+                    } catch SignalError.profileNotFound(_) {}
+                }
+            }
+        )
+
     }
 }
 

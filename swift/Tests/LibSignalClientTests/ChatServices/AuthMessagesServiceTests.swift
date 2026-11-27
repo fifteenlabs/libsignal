@@ -15,6 +15,10 @@ private let recipientUuid = UUID(uuidString: "4FCFE887-A600-40CD-9AB7-FD2A695E99
 class AuthMessagesServiceTests: AuthChatServiceTestBase<any AuthMessagesService> {
     override class var selector: SelectorCheck { .messages }
 
+    override var grpcOverrides: [String] {
+        ["AttachmentsGetUploadForm", "MessagesSendMessage"]
+    }
+
     func testGetUploadForm() async throws {
         let api = self.api
         async let responseFuture = api.getUploadForm(uploadSize: 42)
@@ -248,6 +252,22 @@ class AuthMessagesServiceTests: AuthChatServiceTestBase<any AuthMessagesService>
         } catch SignalError.rateLimitChallengeError(token: "zzz", options: let options, retryAfter: nil, message: _) {
             XCTAssertEqual(options, [ChallengeOption.captcha])
         }
+    }
+
+    func testReportMessage() async throws {
+        try await testGrpcCases(
+            try NativeTestingNice.TESTING_ReportMessageTests(),
+            invoke: { api, args in
+                try await api.reportMessage(
+                    args.messageGuid,
+                    from: args.source,
+                    spamToken: args.reportSpamToken
+                )
+            },
+            check: { _, actual in
+                try actual.get()
+            }
+        )
     }
 }
 

@@ -7,7 +7,7 @@ use std::fmt::Formatter;
 
 use async_trait::async_trait;
 use itertools::Itertools as _;
-use libsignal_core::{DeviceId, ServiceId};
+use libsignal_core::{Aci, DeviceId, ServiceId};
 use libsignal_net_grpc::proto::chat::attachments::attachments_client::AttachmentsClient;
 use libsignal_net_grpc::proto::chat::attachments::get_upload_form_response::Outcome;
 use libsignal_net_grpc::proto::chat::common::ServiceIdentifier;
@@ -15,7 +15,8 @@ use libsignal_net_grpc::proto::chat::messages::messages_anonymous_client::Messag
 use libsignal_net_grpc::proto::chat::messages::messages_client::MessagesClient;
 use libsignal_net_grpc::proto::chat::messages::{
     IndividualRecipientMessageBundle, MismatchedDevices, MultiRecipientMessage,
-    MultiRecipientMismatchedDevices, MultiRecipientSuccess, SendAuthenticatedSenderMessageRequest,
+    MultiRecipientMismatchedDevices, MultiRecipientSuccess, ReportMessageRequest,
+    ReportMessageResponse, SendAuthenticatedSenderMessageRequest,
     SendMessageAuthenticatedSenderResponse, SendMessageResponse, SendMessageType,
     SendMultiRecipientMessageRequest, SendMultiRecipientMessageResponse,
     SendMultiRecipientStoryRequest, SendSealedSenderMessageRequest, SendStoryMessageRequest,
@@ -25,6 +26,7 @@ use libsignal_net_grpc::proto::chat::messages::{
 };
 use libsignal_net_grpc::proto::chat::{attachments, common, errors};
 use libsignal_protocol::Timestamp;
+use uuid::Uuid;
 
 use super::{GrpcServiceProvider, OverGrpc, log_and_send};
 use crate::api::messages::{
@@ -44,7 +46,7 @@ impl From<UserBasedAuthorization> for send_sealed_sender_message_request::Author
                 Self::GroupSendToken(zkgroup::serialize(&token))
             }
             UserBasedAuthorization::UnrestrictedUnauthenticatedAccess => {
-                Self::UnrestrictedAccess(Default::default())
+                Self::UnrestrictedAccess(())
             }
         }
     }
@@ -167,7 +169,7 @@ impl<T: GrpcServiceProvider> crate::api::messages::UnauthenticatedChatApi<OverGr
                 };
 
                 let log_safe_description = Redact(&request).to_string();
-                log_and_send("unauth", &log_safe_description, || {
+                log_and_send(Self::LOG_TAG, &log_safe_description, || {
                     service.send_story(request)
                 })
                 .await?
@@ -182,7 +184,7 @@ impl<T: GrpcServiceProvider> crate::api::messages::UnauthenticatedChatApi<OverGr
                     authorization: Some(auth.into()),
                 };
                 let log_safe_description = Redact(&request).to_string();
-                log_and_send("unauth", &log_safe_description, || {
+                log_and_send(Self::LOG_TAG, &log_safe_description, || {
                     service.send_single_recipient_message(request)
                 })
                 .await?
@@ -235,7 +237,7 @@ impl<T: GrpcServiceProvider> crate::api::messages::UnauthenticatedChatApi<OverGr
                 assert!(!online_only, "stories should never be sent online-only");
                 let request = SendMultiRecipientStoryRequest { urgent, message };
                 let log_safe_description = Redact(&request).to_string();
-                log_and_send("unauth", &log_safe_description, || {
+                log_and_send(Self::LOG_TAG, &log_safe_description, || {
                     service.send_multi_recipient_story(request)
                 })
                 .await?
@@ -251,7 +253,7 @@ impl<T: GrpcServiceProvider> crate::api::messages::UnauthenticatedChatApi<OverGr
                 };
                 let log_safe_description = Redact(&request).to_string();
 
-                log_and_send("unauth", &log_safe_description, || {
+                log_and_send(Self::LOG_TAG, &log_safe_description, || {
                     service.send_multi_recipient_message(request)
                 })
                 .await?
@@ -347,7 +349,7 @@ impl<T: GrpcServiceProvider> crate::api::messages::AuthenticatedChatApi<OverGrpc
         let log_safe_description = Redact(&request).to_string();
 
         let SendMessageAuthenticatedSenderResponse { response } =
-            log_and_send("auth", &log_safe_description, || {
+            log_and_send(Self::LOG_TAG, &log_safe_description, || {
                 service.send_message(request)
             })
             .await?
@@ -413,7 +415,7 @@ impl<T: GrpcServiceProvider> crate::api::messages::AuthenticatedChatApi<OverGrpc
         let log_safe_description = Redact(&request).to_string();
 
         let SendMessageAuthenticatedSenderResponse { response } =
-            log_and_send("auth", &log_safe_description, || {
+            log_and_send(Self::LOG_TAG, &log_safe_description, || {
                 service.send_sync_message(request)
             })
             .await?
@@ -453,7 +455,7 @@ impl<T: GrpcServiceProvider> crate::api::messages::AuthenticatedChatApi<OverGrpc
         let mut attachments_service = AttachmentsClient::new(self.0.service());
         let request = attachments::GetUploadFormRequest { upload_length };
         let log_safe_description = Redact(&request).to_string();
-        let response = log_and_send("auth", &log_safe_description, || {
+        let response = log_and_send(Self::LOG_TAG, &log_safe_description, || {
             attachments_service.get_upload_form(request)
         })
         .await?
@@ -479,6 +481,36 @@ impl<T: GrpcServiceProvider> crate::api::messages::AuthenticatedChatApi<OverGrpc
                 Err(RequestError::Other(UploadTooLarge))
             }
         }
+    }
+}
+
+impl<T: GrpcServiceProvider> Auth<T> {
+    /// Reports a message as spam.
+    ///
+    /// `message_guid` is the offending message's `server_guid`, and `report_spam_token` is its
+    /// `report_spam_token`. Pass an empty slice for a message that arrived without one; the server
+    /// interprets an empty token as no token.
+    pub async fn report_message(
+        &self,
+        source: Aci,
+        message_guid: Uuid,
+        report_spam_token: &[u8],
+    ) -> Result<(), RequestError<std::convert::Infallible>> {
+        let mut service = MessagesClient::new(self.0.service());
+        let request = ReportMessageRequest {
+            source_service_identifier: Some(source.into()),
+            message_guid: message_guid.as_bytes().to_vec(),
+            report_spam_token: report_spam_token.to_vec(),
+        };
+        let log_safe_description = Redact(&request).to_string();
+
+        let ReportMessageResponse {} = log_and_send(Self::LOG_TAG, &log_safe_description, || {
+            service.report_message(request)
+        })
+        .await?
+        .into_inner();
+
+        Ok(())
     }
 }
 
@@ -568,12 +600,92 @@ impl std::fmt::Display for Redact<SendSyncMessageRequest> {
     }
 }
 
+impl std::fmt::Display for Redact<ReportMessageRequest> {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let Self(ReportMessageRequest {
+            source_service_identifier,
+            message_guid: _,
+            report_spam_token,
+        }) = self;
+        f.debug_struct("ReportMessageRequest")
+            .field(
+                "source_service_identifier",
+                &source_service_identifier.as_ref().map(Redact),
+            )
+            .field(
+                "report_spam_token",
+                if report_spam_token.is_empty() {
+                    &"empty"
+                } else {
+                    &"not empty"
+                },
+            )
+            .finish_non_exhaustive()
+    }
+}
+
 impl std::fmt::Display for Redact<attachments::GetUploadFormRequest> {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         let Self(attachments::GetUploadFormRequest { upload_length }) = self;
         f.debug_struct("attachments::GetUploadFormRequest")
             .field("upload_length", upload_length)
             .finish()
+    }
+}
+
+pub mod test_cases {
+    use libsignal_core::Aci;
+    use uuid::uuid;
+
+    use super::*;
+    use crate::grpc::GrpcTestCase;
+
+    pub struct ReportMessageArgs {
+        pub source: Aci,
+        pub message_guid: Uuid,
+        pub report_spam_token: Vec<u8>,
+    }
+
+    pub fn report_message_test_cases()
+    -> Vec<GrpcTestCase<ReportMessageArgs, ReportMessageRequest, ReportMessageResponse, ()>> {
+        let method = "/org.signal.chat.messages.Messages/ReportMessage";
+        let message_guid = uuid!("bd4b6e1e-1f2e-4a3c-9d6f-8e0a7c5b4d3e");
+        let aci = Aci::from(uuid!("9d0652a3-dcc3-4d11-975f-74d61598733f"));
+
+        vec![
+            GrpcTestCase {
+                name: "with spam token".to_owned(),
+                method: method.to_owned(),
+                request: ReportMessageArgs {
+                    source: aci,
+                    message_guid,
+                    report_spam_token: b"token".to_vec(),
+                },
+                request_grpc: ReportMessageRequest {
+                    source_service_identifier: Some(ServiceId::from(aci).into()),
+                    message_guid: message_guid.as_bytes().to_vec(),
+                    report_spam_token: b"token".to_vec(),
+                },
+                response_grpc: ReportMessageResponse {},
+                response: (),
+            },
+            GrpcTestCase {
+                name: "without spam token".to_owned(),
+                method: method.to_owned(),
+                request: ReportMessageArgs {
+                    source: aci,
+                    message_guid,
+                    report_spam_token: vec![],
+                },
+                request_grpc: ReportMessageRequest {
+                    source_service_identifier: Some(ServiceId::from(aci).into()),
+                    message_guid: message_guid.as_bytes().to_vec(),
+                    report_spam_token: vec![],
+                },
+                response_grpc: ReportMessageResponse {},
+                response: (),
+            },
+        ]
     }
 }
 
@@ -593,15 +705,15 @@ mod test {
     use libsignal_net_grpc::proto::chat::services;
     use libsignal_protocol::{CiphertextMessage, PlaintextContent, Timestamp};
     use test_case::test_case;
-    use uuid::{Uuid, uuid};
+    use uuid::uuid;
 
     use super::*;
     use crate::api::messages::{AuthenticatedChatApi, UnauthenticatedChatApi as _};
     use crate::api::testutil::{SERIALIZED_GROUP_SEND_TOKEN, structurally_valid_group_send_token};
-    use crate::api::{ChallengeOption, RateLimitChallenge};
+    use crate::api::{ChallengeOption, DisconnectedError, RateLimitChallenge};
     use crate::grpc::testutil::{
         GrpcOverrideRequestValidator, RequestValidator, TypedRequestValidator,
-        UnreachableValidator, err, ok, req, req_typed,
+        UnreachableValidator, err, ok, req, req_typed, run_tests,
     };
 
     const ACI_UUID: Uuid = uuid!("9d0652a3-dcc3-4d11-975f-74d61598733f");
@@ -743,7 +855,7 @@ mod test {
             },
         )),
     }) => matches Err(RequestError::Unexpected { .. }))]
-    #[test_case(err(tonic::Code::Internal) => matches Err(RequestError::Unexpected { .. }))]
+    #[test_case(err(tonic::Code::Internal) => matches Err(RequestError::Disconnected(DisconnectedError::Transport { .. })))]
     fn test_story(
         response: http::Response<BodyWithTrailers>,
     ) -> Result<MultiRecipientMessageResponse, RequestError<MultiRecipientSendFailure>> {
@@ -834,7 +946,7 @@ mod test {
     }
 
     #[test_case(ok(SendMessageResponse {
-        response: Some(send_message_response::Response::Success(Default::default()))
+        response: Some(send_message_response::Response::Success(()))
     }) => matches Ok(()))]
     #[test_case(ok(SendMessageResponse {
         response: None
@@ -980,7 +1092,7 @@ mod test {
                     },
                 ),
                 response: ok(SendMessageResponse {
-                    response: Some(send_message_response::Response::Success(Default::default())),
+                    response: Some(send_message_response::Response::Success(())),
                 }),
             },
         };
@@ -1021,9 +1133,7 @@ mod test {
                         destination: Some(Aci::from(ACI_UUID).into()),
                         ephemeral: false,
                         urgent: true,
-                        authorization: Some(SealedSenderAuthorization::UnrestrictedAccess(
-                            Default::default(),
-                        )),
+                        authorization: Some(SealedSenderAuthorization::UnrestrictedAccess(())),
                         messages: Some(IndividualRecipientMessageBundle {
                             timestamp: 1700000000000,
                             messages: HashMap::from_iter([
@@ -1048,7 +1158,7 @@ mod test {
                     },
                 ),
                 response: ok(SendMessageResponse {
-                    response: Some(send_message_response::Response::Success(Default::default())),
+                    response: Some(send_message_response::Response::Success(())),
                 }),
             },
         };
@@ -1112,7 +1222,7 @@ mod test {
                     },
                 ),
                 response: ok(SendMessageResponse {
-                    response: Some(send_message_response::Response::Success(Default::default())),
+                    response: Some(send_message_response::Response::Success(())),
                 }),
             },
         };
@@ -1248,7 +1358,7 @@ mod test {
     }
 
     #[test_case(ok(SendMessageAuthenticatedSenderResponse {
-        response: Some(send_message_authenticated_sender_response::Response::Success(Default::default()))
+        response: Some(send_message_authenticated_sender_response::Response::Success(()))
     }) => matches Ok(()))]
     #[test_case(ok(SendMessageAuthenticatedSenderResponse {
         response: None
@@ -1377,7 +1487,7 @@ mod test {
     }
 
     #[test_case(ok(SendMessageAuthenticatedSenderResponse {
-        response: Some(send_message_authenticated_sender_response::Response::Success(Default::default()))
+        response: Some(send_message_authenticated_sender_response::Response::Success(()))
     }) => matches Ok(()))]
     #[test_case(ok(SendMessageAuthenticatedSenderResponse {
         response: None
@@ -1499,5 +1609,22 @@ mod test {
             )
             .now_or_never()
             .expect("sync")
+    }
+
+    #[test]
+    fn test_report_message() {
+        run_tests(
+            test_cases::report_message_test_cases(),
+            |chat: Auth<_>, args: test_cases::ReportMessageArgs| async move {
+                let test_cases::ReportMessageArgs {
+                    source,
+                    message_guid,
+                    report_spam_token,
+                } = args;
+                chat.report_message(source, message_guid, &report_spam_token)
+                    .await
+            },
+            |(), result| result.expect("success"),
+        );
     }
 }

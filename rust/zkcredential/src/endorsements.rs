@@ -103,7 +103,9 @@ impl Serialize for ServerRootKeyPair {
 
 /// A *specific* secret key pair for issuing and verifying endorsements.
 ///
-/// Derived from a [`ServerRootKeyPair`].
+/// Derived from a [`ServerRootKeyPair`]. Note that this derivation is *not* a "trapdoor"; someone
+/// who has both the derived key pair (specifically the private key) and the original tag info can
+/// reverse the derivation to recover the root key.
 #[derive(Clone, Serialize, Deserialize, PartialDefault)]
 pub struct ServerDerivedKeyPair {
     sk_prime: Scalar,
@@ -436,7 +438,9 @@ impl EndorsementResponse {
         const SMALL_SCALAR_BYTES: usize = 16;
         let randomness = hasher.squeeze_and_ratchet((E.len() - 1) * SMALL_SCALAR_BYTES);
         randomness
-            .chunks_exact(SMALL_SCALAR_BYTES)
+            .as_chunks::<SMALL_SCALAR_BYTES>()
+            .0
+            .iter()
             .map(|chunk| {
                 let mut scalar_bytes = [0; 32];
                 scalar_bytes[..16].copy_from_slice(chunk);

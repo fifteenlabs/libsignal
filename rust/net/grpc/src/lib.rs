@@ -4,54 +4,60 @@
 //
 
 #![warn(clippy::unwrap_used)]
+#![allow(clippy::doc_overindented_list_items, clippy::doc_lazy_continuation)]
 
-#[cfg(feature = "json")]
-pub mod json;
-
-// The generated pbjson `Serialize`/`Deserialize` impls emit `write!(f, "{}", &x)`,
-// which trips the useless_borrows_in_formatting lint. Only gated on `json` because that's
-// the feature that pulls in the offending generated code.
-#[cfg_attr(feature = "json", expect(clippy::useless_borrows_in_formatting))]
 pub mod proto {
     // Mirror the protobuf package structure so relative references work correctly.
     // We'll export org::signal::chat for a more flat interface elsewhere.
     mod org {
         pub(super) mod signal {
+            // The generated code shouldn't be held to strict clippy/rustdoc standards.
+            #[allow(rustdoc::bare_urls, clippy::style)]
             pub mod chat {
                 pub mod common {
                     tonic::include_proto!("org.signal.chat.common");
-                    #[cfg(feature = "json")]
-                    tonic::include_proto!("org.signal.chat.common.serde");
                 }
                 pub mod errors {
                     tonic::include_proto!("org.signal.chat.errors");
-                    #[cfg(feature = "json")]
-                    tonic::include_proto!("org.signal.chat.errors.serde");
                 }
                 pub mod account {
                     tonic::include_proto!("org.signal.chat.account");
-                    #[cfg(feature = "json")]
-                    tonic::include_proto!("org.signal.chat.account.serde");
                 }
                 pub mod attachments {
                     tonic::include_proto!("org.signal.chat.attachments");
-                    #[cfg(feature = "json")]
-                    tonic::include_proto!("org.signal.chat.attachments.serde");
                 }
                 pub mod backup {
                     tonic::include_proto!("org.signal.chat.backup");
-                    #[cfg(feature = "json")]
-                    tonic::include_proto!("org.signal.chat.backup.serde");
+                }
+                pub mod call_quality {
+                    tonic::include_proto!("org.signal.chat.calling.quality");
+                }
+                pub mod challenge {
+                    tonic::include_proto!("org.signal.chat.challenge");
+                }
+                pub mod credentials {
+                    tonic::include_proto!("org.signal.chat.credentials");
                 }
                 pub mod device {
                     tonic::include_proto!("org.signal.chat.device");
-                    #[cfg(feature = "json")]
-                    tonic::include_proto!("org.signal.chat.device.serde");
+                }
+                pub mod donations {
+                    tonic::include_proto!("org.signal.chat.donations");
+                }
+                pub mod keys {
+                    tonic::include_proto!("org.signal.chat.keys");
                 }
                 pub mod messages {
                     tonic::include_proto!("org.signal.chat.messages");
-                    #[cfg(feature = "json")]
-                    tonic::include_proto!("org.signal.chat.messages.serde");
+                }
+                pub mod payments {
+                    tonic::include_proto!("org.signal.chat.payments");
+                }
+                pub mod profile {
+                    tonic::include_proto!("org.signal.chat.profile");
+                }
+                pub mod purchase {
+                    tonic::include_proto!("org.signal.chat.purchase");
                 }
 
                 // Not actually a proto, we just make sure to generate our helper file in the same place.
@@ -64,15 +70,21 @@ pub mod proto {
 
     pub use org::signal::chat;
 
+    // Key transparency is served by chat, but its protos are in their own top-level
+    // package rather than under org.signal.chat.
+    #[allow(clippy::style)]
+    pub mod kt_query {
+        tonic::include_proto!("kt_query");
+    }
+
+    #[allow(clippy::style)]
     pub mod textsecure {
         tonic::include_proto!("textsecure");
-        #[cfg(feature = "json")]
-        tonic::include_proto!("textsecure.serde");
     }
 
     // These protos come directly from Google and their doc comments aren't necessarily valid Markdown.
     #[allow(
-        clippy::doc_overindented_list_items,
+        clippy::style,
         rustdoc::bare_urls,
         rustdoc::broken_intra_doc_links,
         rustdoc::invalid_html_tags
@@ -83,11 +95,6 @@ pub mod proto {
         }
     }
 }
-
-#[cfg(not(feature = "json"))]
-pub type Duration = prost_types::Duration;
-#[cfg(feature = "json")]
-pub type Duration = pbjson_types::Duration;
 
 impl From<libsignal_core::ServiceId> for proto::chat::common::ServiceIdentifier {
     fn from(value: libsignal_core::ServiceId) -> Self {

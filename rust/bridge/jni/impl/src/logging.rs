@@ -12,7 +12,7 @@ use jni::sys::jint;
 use jni::{JavaVM, jni_sig, jni_str};
 use libsignal_bridge::describe_panic;
 use libsignal_bridge::jni::{
-    BridgeLayerError, call_static_method_unchecked, new_jstring_from_owned_utf8,
+    BridgeLayerErrorInner, call_static_method_unchecked, new_jstring_from_owned_utf8,
 };
 
 // Keep this in sync with SignalProtocolLogger.java, as well as the list below.
@@ -92,12 +92,12 @@ impl JniLogger {
                 record.line().unwrap_or(0),
                 record.args(),
             );
-            let message = Auto::new(new_jstring_from_owned_utf8(env, message).map_err(
-                |e| match e {
-                    BridgeLayerError::Jni(err) => err,
-                    _ => panic!("unexpected error converting string: {e}"),
-                },
-            )?);
+            let message = Auto::new(new_jstring_from_owned_utf8(env, message).map_err(|e| {
+                match e.into_inner() {
+                    BridgeLayerErrorInner::Jni(err) => err,
+                    e => panic!("unexpected error converting string: {e}"),
+                }
+            })?);
             let result = unsafe {
                 // This gets called often enough during backup validation that the
                 // performance wins of using the unchecked call with a cached method
@@ -169,6 +169,7 @@ fn set_max_level_from_java_level(max_level: jint) {
     log::set_max_level(log::Level::from(level).to_level_filter());
 }
 
+// Keep in sync with the definition in Native.kt.in
 #[unsafe(no_mangle)]
 pub unsafe extern "C" fn Java_org_signal_libsignal_internal_Native_Logger_1Initialize(
     mut env: jni::EnvUnowned<'_>,
@@ -200,6 +201,7 @@ pub unsafe extern "C" fn Java_org_signal_libsignal_internal_Native_Logger_1Initi
     .resolve::<jni::errors::ThrowRuntimeExAndDefault>();
 }
 
+// Keep in sync with the definition in Native.kt.in
 #[unsafe(no_mangle)]
 pub unsafe extern "C" fn Java_org_signal_libsignal_internal_Native_Logger_1SetMaxLevel(
     _env: jni::EnvUnowned<'_>,

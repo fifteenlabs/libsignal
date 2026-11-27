@@ -18,8 +18,10 @@ use futures_util::{FutureExt as _, Stream, StreamExt as _};
 use http::status::InvalidStatusCode;
 use http::uri::{InvalidUri, PathAndQuery};
 use http::{HeaderMap, HeaderName, HeaderValue};
-use libsignal_account_keys::{MEDIA_ENCRYPTION_KEY_LEN, MEDIA_ID_LEN};
-use libsignal_bridge_macros::{BridgedAsValue, bridge_callbacks};
+use libsignal_account_keys::{
+    InvalidMfaMetadata, MEDIA_ENCRYPTION_KEY_LEN, MEDIA_ID_LEN, MfaMetadata,
+};
+use libsignal_bridge_macros::{BridgedAsValue, StructuralFrom, bridge_callbacks};
 use libsignal_net::chat::fake::FakeChatRemote;
 use libsignal_net::chat::server_requests::DisconnectCause;
 use libsignal_net::chat::ws::ListenerEvent;
@@ -37,10 +39,14 @@ use libsignal_net::infra::tcp_ssl::InvalidProxyConfig;
 use libsignal_net::infra::{EnableDomainFronting, EnforceMinimumTls, OverrideNagleAlgorithm};
 use libsignal_net_chat::api::backups::BackupAuthCredentialRejected;
 use libsignal_net_chat::api::{Auth as AuthConn, RequestError, Unauth};
+use libsignal_net_chat::grpc::accounts::{
+    ConfirmedMfaKey, MfaKeyKind, PendingTotpKey, TotpParameters, WebAuthnCreateParameters,
+};
 use libsignal_net_chat::grpc::backups::{
     CopyBackupMediaFailure, CopyBackupMediaItem, CopyBackupMediaOutcome, DeleteBackupMediaItem,
     MediaBackupInfo, MessageBackupInfo,
 };
+use libsignal_net_chat::grpc::keys::PreKeyCounts;
 use libsignal_net_chat::stream_util::{
     BulkPolledStream, BulkPolledStreamChunk, BulkPolledStreamTerminationReason,
 };
@@ -49,7 +55,7 @@ use static_assertions::assert_impl_all;
 
 use crate::net::ConnectionManager;
 use crate::net::remote_config::RemoteConfigKey;
-use crate::support::{AsyncMutex, BridgeVec, BridgedError, LimitedLifetimeRef};
+use crate::support::{AsType, AsyncMutex, BridgeVec, BridgedError, LimitedLifetimeRef, str_as_int};
 use crate::*;
 
 pub type ChatConnectionInfo = ConnectionInfo;
@@ -865,6 +871,7 @@ pub enum UserBasedSendAuthorizationKind {
 }
 
 #[derive(BridgedAsValue)]
+#[bridge(jni_nice_type = "org.signal.libsignal.net.CopyBackupMediaItem")]
 pub struct BridgeCopyBackupMediaItem {
     pub source_attachment_cdn: i32,
     pub source_key: String,
@@ -874,41 +881,127 @@ pub struct BridgeCopyBackupMediaItem {
 }
 
 // TODO: This can go away when we implement u32 and u64 Nice bridging to Kotlin.
-#[derive(BridgedAsValue)]
-#[bridge(arg = false)]
+#[derive(BridgedAsValue, StructuralFrom)]
+#[structural_from(MessageBackupInfo)]
+#[bridge(
+    arg = false,
+    jni_nice_type = "org.signal.libsignal.net.MessageBackupInfo"
+)]
 pub struct BridgeMessageBackupInfo {
     pub backup_dir: String,
-    pub cdn: i32,
+    pub cdn: AsType<u32, i32, { str_as_int("cdn") }>,
     pub backup_name: String,
 }
 
-impl From<MessageBackupInfo> for BridgeMessageBackupInfo {
-    fn from(value: MessageBackupInfo) -> Self {
+#[derive(BridgedAsValue, StructuralFrom)]
+#[structural_from(MediaBackupInfo)]
+#[bridge(
+    arg = false,
+    jni_nice_type = "org.signal.libsignal.net.MediaBackupInfo"
+)]
+pub struct BridgeMediaBackupInfo {
+    pub backup_dir: String,
+    pub media_dir: String,
+    pub used_space: AsType<u64, i64, { str_as_int("usedSpace") }>,
+}
+
+// TODO: When u32 Nice bridging to Kotlin is implemented, this becomes a remote derive on
+// libsignal_net_chat::grpc::keys::PreKeyCounts (and gets renamed PreKeyCountsInternal to match),
+// dropping this `StructuralFrom` impl.
+#[derive(BridgedAsValue, StructuralFrom)]
+#[structural_from(PreKeyCounts)]
+#[bridge(arg = false, jni_nice_type = "org.signal.libsignal.net.PreKeyCounts")]
+pub struct BridgePreKeyCounts {
+    pub aci_ec_pre_key_count: AsType<u32, i32, { str_as_int("AciEcPreKeyCnt") }>,
+    pub aci_kem_pre_key_count: AsType<u32, i32, { str_as_int("AciKemPreKeyCnt") }>,
+    pub pni_ec_pre_key_count: AsType<u32, i32, { str_as_int("PniEcPreKeyCnt") }>,
+    pub pni_kem_pre_key_count: AsType<u32, i32, { str_as_int("PniKemPreKeyCnt") }>,
+}
+
+// TODO: More i32/u32 cheating.
+#[derive(BridgedAsValue, StructuralFrom)]
+#[structural_from(TotpParameters)]
+#[bridge(arg = false)]
+pub struct BridgeTotpParameters {
+    pub algorithm: String,
+    pub password_length: AsType<u32, i32, { str_as_int("passwordLength") }>,
+    pub time_step_seconds: AsType<u32, i32, { str_as_int("timeStepSeconds") }>,
+}
+
+#[derive(BridgedAsValue, StructuralFrom)]
+#[structural_from(PendingTotpKey)]
+#[bridge(arg = false)]
+pub struct BridgePendingTotpKey {
+    pub key: Vec<u8>,
+    pub parameters: BridgeTotpParameters,
+}
+
+#[derive(BridgedAsValue)]
+#[bridge(arg = false)]
+pub struct BridgeMfaMetadata {
+    pub name: String,
+    pub created_at: Timestamp,
+}
+
+impl From<MfaMetadata> for BridgeMfaMetadata {
+    fn from(value: MfaMetadata) -> Self {
         Self {
-            backup_dir: value.backup_dir,
-            cdn: value.cdn.try_into().expect("CDN numbers are small"),
-            backup_name: value.backup_name,
+            name: value.name().to_owned(),
+            created_at: value.created_at(),
         }
     }
 }
 
+/// The metadata attached to a confirmed MFA key, or a marker that it couldn't be read with the
+/// SVR key provided to the listing.
 #[derive(BridgedAsValue)]
 #[bridge(arg = false)]
-pub struct BridgeMediaBackupInfo {
-    pub backup_dir: String,
-    pub media_dir: String,
-    pub used_space: i64,
+pub enum BridgeConfirmedMfaKeyMetadata {
+    Metadata(BridgeMfaMetadata),
+    Unreadable,
 }
 
-impl From<MediaBackupInfo> for BridgeMediaBackupInfo {
-    fn from(value: MediaBackupInfo) -> Self {
+/// The kind of a confirmed MFA key.
+#[derive(BridgedAsValue, StructuralFrom, Clone, Copy, PartialEq, Eq, Debug)]
+#[structural_from(MfaKeyKind)]
+#[bridge(arg = false)]
+pub enum BridgeMfaKeyKind {
+    Totp,
+    WebAuthn,
+    Unknown,
+}
+
+#[derive(BridgedAsValue, StructuralFrom)]
+#[structural_from(WebAuthnCreateParameters)]
+#[bridge(arg = false)]
+pub struct BridgeWebAuthnCreateParameters {
+    pub user_handle: Vec<u8>,
+    // This will be bridged as List<Object> to Java, which is less efficient than it could be, but
+    // in practice, the list will contain only a handful of elements.
+    pub allowed_algorithms: BridgeVec<i32>,
+    pub exclude_credential_ids: BridgeVec<Vec<u8>>,
+}
+
+#[derive(BridgedAsValue)]
+#[bridge(arg = false)]
+pub struct BridgeConfirmedMfaKey {
+    pub id: i32,
+    pub metadata: BridgeConfirmedMfaKeyMetadata,
+    pub kind: BridgeMfaKeyKind,
+}
+
+impl From<ConfirmedMfaKey> for BridgeConfirmedMfaKey {
+    fn from(value: ConfirmedMfaKey) -> Self {
+        let ConfirmedMfaKey { id, metadata, kind } = value;
         Self {
-            backup_dir: value.backup_dir,
-            media_dir: value.media_dir,
-            used_space: value
-                .used_space
+            id: u32::from(id)
                 .try_into()
-                .expect("space measurements fit in i64"),
+                .expect("validated by libsignal-net-chat"),
+            metadata: match metadata {
+                Ok(metadata) => BridgeConfirmedMfaKeyMetadata::Metadata(metadata.into()),
+                Err(InvalidMfaMetadata) => BridgeConfirmedMfaKeyMetadata::Unreadable,
+            },
+            kind: kind.into(),
         }
     }
 }
@@ -1071,6 +1164,7 @@ bridge_as_handle!(
 );
 
 #[derive(BridgedAsValue)]
+#[bridge(jni_nice_type = "org.signal.libsignal.net.DeleteBackupMediaItem")]
 pub struct BridgeDeleteBackupMediaItem {
     pub media_id: [u8; MEDIA_ID_LEN],
     pub cdn: i32,
@@ -1105,12 +1199,103 @@ bridge_as_handle!(
 );
 
 pub mod remote_derives {
+    use libsignal_bridge_macros::StructuralFrom;
     use libsignal_core::DeviceId;
+    use libsignal_net_chat::api::S3UploadForm;
+    use libsignal_net_chat::grpc::payments::{Currency, CurrencyConversions};
 
     use super::*;
 
     #[derive(BridgedAsValue)]
-    #[bridge(remote = libsignal_net_chat::grpc::devices::LinkedDevice)]
+    #[bridge(arg = false)]
+    pub struct CurrencyInternal {
+        pub base: String,
+        pub conversions: BridgeVec<(String, String)>,
+    }
+    impl From<Currency> for CurrencyInternal {
+        fn from(Currency { base, conversions }: Currency) -> Self {
+            Self {
+                base,
+                conversions: BridgeVec(conversions.into_iter().collect()),
+            }
+        }
+    }
+    #[derive(BridgedAsValue, StructuralFrom)]
+    #[bridge(arg = false)]
+    #[structural_from(CurrencyConversions)]
+    pub struct CurrencyConversionsInternal {
+        pub timestamp_ms: Timestamp,
+        pub currencies: BridgeVec<CurrencyInternal>,
+    }
+
+    #[derive(BridgedAsValue)]
+    #[bridge(
+        remote = libsignal_net_chat::grpc::login_purchase::LoginReceiptLevel,
+        ffi_nice_type = "LoginReceiptLevel",
+        jni_nice_type = "org.signal.libsignal.net.LoginReceiptLevel",
+    )]
+    #[allow(unused)]
+    enum LoginReceiptLevel {
+        Normal,
+        Sandbox,
+    }
+
+    #[derive(BridgedAsValue)]
+    #[bridge(
+        remote = libsignal_net_chat::grpc::credentials::AuthCheckResult,
+        ffi_nice_type = "AuthCheckResult",
+        jni_nice_type = "org.signal.libsignal.net.AuthCheckResult",
+    )]
+    #[allow(unused)]
+    pub enum AuthCheckResult {
+        /// The credentials could be used to make a call to SVR service by the user
+        /// associated with the `CheckSvrCredentialsRequest.number` phone number.
+        Match,
+        /// The credentials were generated by a different user.
+        NoMatch,
+        /// This status indicates that the corresponding credentials token should no longer be used.
+        /// This may be because it has expired or invalid, but it can also mean that there is a more
+        /// recent token in the request which should be used instead.
+        Invalid,
+    }
+
+    #[derive(BridgedAsValue)]
+    #[bridge(
+        remote = libsignal_net_chat::api::purchase::PaymentProvider,
+        ffi_nice_type = "PaymentProvider",
+        jni_nice_type = "org.signal.libsignal.net.PaymentProvider",
+    )]
+    #[allow(unused)]
+    pub enum PaymentProviderInternal {
+        GooglePlayBilling,
+        AppleAppStore,
+        Stripe,
+        Braintree,
+    }
+
+    #[derive(BridgedAsValue)]
+    #[bridge(
+        remote = libsignal_net_chat::api::purchase::ChargeFailure,
+        ffi_nice_type = "ChargeFailure",
+        jni_nice_type = "org.signal.libsignal.net.ChargeFailure",
+        node = false,
+    )]
+    #[allow(unused)]
+    pub struct ChargeFailure {
+        pub processor: libsignal_net_chat::api::purchase::PaymentProvider,
+        pub code: String,
+        pub message: String,
+        pub outcome_network_status: Option<String>,
+        pub outcome_reason: Option<String>,
+        pub outcome_type: Option<String>,
+    }
+
+    #[derive(BridgedAsValue)]
+    #[bridge(
+        remote = libsignal_net_chat::grpc::devices::LinkedDevice,
+        ffi_nice_type = "LinkedDevice",
+        jni_nice_type = "org.signal.libsignal.net.LinkedDevice",
+    )]
     #[allow(unused)]
     pub struct LinkedDeviceInternal {
         pub id: DeviceId,
@@ -1119,6 +1304,377 @@ pub mod remote_derives {
         pub registration_id: u16,
         pub created_at_ciphertext: Vec<u8>,
     }
+
+    #[derive(BridgedAsValue, StructuralFrom)]
+    #[structural_from(libsignal_net_chat::grpc::backups::ListMediaItem)]
+    #[bridge(
+        arg = false,
+        jni_nice_type = "org.signal.libsignal.net.ListBackupMediaResponse.Item"
+    )]
+    pub struct ListMediaItem {
+        pub cdn: AsType<u32, i32, { str_as_int("cdn") }>,
+        pub media_id: [u8; MEDIA_ID_LEN],
+        pub object_length: AsType<u64, i64, { str_as_int("objectLength") }>,
+    }
+
+    #[derive(BridgedAsValue, StructuralFrom)]
+    #[structural_from(libsignal_net_chat::grpc::backups::ListMediaResponse)]
+    #[bridge(
+        arg = false,
+        jni_nice_type = "org.signal.libsignal.net.ListBackupMediaResponse"
+    )]
+    pub struct ListMediaResponse {
+        /// The requested page of items.
+        pub items: BridgeVec<ListMediaItem>,
+        /// The base directory of the backup data on the CDN.
+        ///
+        /// Always non-empty, even if no media has been stored to the CDN or the credential is for a
+        /// tier that does not support media.
+        pub backup_dir: String,
+        /// The prefix path component for media objects on a CDN.
+        ///
+        /// Stored media for a `media_id` can be found at `/backup_dir/media_dir/media_id`, where the
+        /// `media_id` is encoded in unpadded url-safe base64. Always non-empty, even if no media has
+        /// been stored to the CDN or the credential is for a tier that does not support media.
+        pub media_dir: String,
+        /// If set, the cursor value to pass to the next list request to continue listing. If absent,
+        /// all objects have been listed.
+        pub cursor: Option<String>,
+    }
+
+    #[derive(BridgedAsValue, StructuralFrom)]
+    #[structural_from(libsignal_net_chat::grpc::call_quality::CallQualitySurvey, into)]
+    #[bridge(
+        ffi_nice_type = "CallQualitySurvey",
+        jni_nice_type = "org.signal.libsignal.net.CallQualitySurvey"
+    )]
+    pub struct CallQualitySurveyInternal {
+        /// Indicates whether the caller was generally satisfied with the quality of
+        /// the call
+        pub user_satisfied: bool,
+
+        /// A list of call quality issues selected by the caller
+        pub call_quality_issues: BridgeVec<String>,
+
+        /// A free-form description of any additional issues as written by the caller
+        pub additional_issues_description: Option<String>,
+
+        /// A URL for a set of debug logs associated with the call if the caller chose
+        /// to submit debug logs
+        pub debug_log_url: Option<String>,
+
+        /// The time at which the call started in milliseconds since the epoch
+        pub start_timestamp: Timestamp,
+
+        /// The time at which the call ended in milliseconds since the epoch
+        pub end_timestamp: Timestamp,
+
+        /// The type of call, note that direct voice calls can become video calls and
+        /// vice versa, and this field indicates which mode was selected at call
+        /// initiation time. At the time of writing, expected call types are
+        /// "direct_voice", "direct_video", "group", and "call_link".
+        pub call_type: String,
+
+        /// Indicates whether the call completed without error or if it terminated
+        /// abnormally
+        pub success: bool,
+
+        /// A client-defined, but human-readable reason for call termination
+        pub call_end_reason: String,
+
+        /// The median round-trip time, measured in milliseconds, for STUN/ICE packets
+        /// (i.e. connection maintenance and establishment)
+        pub connection_rtt_median: Option<f32>,
+
+        /// The median round-trip time, measured in milliseconds, for RTP/RTCP packets
+        /// for audio streams
+        pub audio_rtt_median: Option<f32>,
+
+        /// The median round-trip time, measured in milliseconds, for RTP/RTCP packets
+        /// for video streams
+        pub video_rtt_median: Option<f32>,
+
+        /// The median jitter for audio streams, measured in milliseconds, for the
+        /// duration of the call as measured by the client submitting the survey
+        pub audio_recv_jitter_median: Option<f32>,
+
+        /// The median jitter for video streams, measured in milliseconds, for the
+        /// duration of the call as measured by the client submitting the survey
+        pub video_recv_jitter_median: Option<f32>,
+
+        /// The median jitter for audio streams, measured in milliseconds, for the
+        /// duration of the call as measured by the remote endpoint in the call (either
+        /// the peer of the client submitting the survey in a direct call or the SFU in
+        /// a group call)
+        pub audio_send_jitter_median: Option<f32>,
+
+        /// The median jitter for video streams, measured in milliseconds, for the
+        /// duration of the call as measured by the remote endpoint in the call (either
+        /// the peer of the client submitting the survey in a direct call or the SFU in
+        /// a group call)
+        pub video_send_jitter_median: Option<f32>,
+
+        /// The fraction of audio packets lost over the duration of the call as
+        /// measured by the client submitting the survey
+        pub audio_recv_packet_loss_fraction: Option<f32>,
+
+        /// The fraction of video packets lost over the duration of the call as
+        /// measured by the client submitting the survey
+        pub video_recv_packet_loss_fraction: Option<f32>,
+
+        /// The fraction of audio packets lost over the duration of the call as
+        /// measured by the remote endpoint in the call (either the peer of the client
+        /// submitting the survey in a direct call or the SFU in a group call)
+        pub audio_send_packet_loss_fraction: Option<f32>,
+
+        /// The fraction of video packets lost over the duration of the call as
+        /// measured by the remote endpoint in the call (either the peer of the client
+        /// submitting the survey in a direct call or the SFU in a group call)
+        pub video_send_packet_loss_fraction: Option<f32>,
+
+        /// Machine-generated telemetry from the call, this is a serialized protobuf
+        /// entity generated (and, critically, explained to the user!) by the calling
+        /// library
+        pub call_telemetry: Option<Vec<u8>>,
+
+        /// A hash of a call ID (shared between clients and never sent to the calling
+        /// server) that can be used to correlate survey responses from multiple
+        /// participants in a call.
+        pub call_id_hash: Option<Vec<u8>>,
+    }
+
+    #[derive(BridgedAsValue)]
+    #[bridge(
+        remote = libsignal_net_chat::grpc::devices::DeviceCapability,
+        ffi_nice_type = "DeviceCapability",
+    )]
+    #[allow(unused)]
+    pub enum DeviceCapabilityInternal {
+        Storage,
+        Transfer,
+        AttachmentBackfill,
+        SparsePostQuantumRatchet,
+        ProfilesV2,
+        UsernameChangeSyncMessage,
+        OptionalPhoneNumber,
+    }
+
+    #[derive(BridgedAsValue)]
+    #[bridge(
+        remote = libsignal_net_chat::grpc::donations::BadgeVisibility,
+        ffi_nice_type = "BadgeVisibility",
+        jni_nice_type = "org.signal.libsignal.net.BadgeVisibility",
+    )]
+    #[allow(unused)]
+    pub enum BadgeVisibility {
+        DoNotSet,
+        SetVisible,
+        SetPrimary,
+    }
+
+    #[derive(BridgedAsValue)]
+    #[bridge(
+        remote = libsignal_net_chat::api::S3UploadForm,
+        ffi_nice_type = "S3UploadForm",
+        jni_nice_type = "org.signal.libsignal.net.S3UploadForm"
+    )]
+    #[allow(unused)]
+    struct S3UploadFormInternal {
+        pub key: String,
+        pub credential: String,
+        pub acl: String,
+        pub algorithm: String,
+        pub date: String,
+        pub policy: String,
+        pub signature: String,
+    }
+
+    #[derive(BridgedAsValue, StructuralFrom)]
+    #[structural_from(libsignal_net_chat::grpc::stickers::GetStickerUploadFormsResponse)]
+    #[bridge(
+        arg = false,
+        ffi_nice_type = "GetStickerUploadFormsResponse",
+        jni_nice_type = "org.signal.libsignal.net.GetStickerUploadFormsResponse"
+    )]
+    pub struct GetStickerUploadFormsResponse {
+        pub pack_id: String,
+        pub manifest_upload_form: S3UploadForm,
+        pub sticker_upload_forms: BridgeVec<S3UploadForm>,
+    }
+
+    #[derive(BridgedAsValue)]
+    #[bridge(
+        // TODO: no ffi_nice_type because we want to use UInt32 for the TOTP password there.
+        jni_nice_type = "org.signal.libsignal.net.MfaVerificationCredential"
+    )]
+    pub enum BridgeMfaVerificationCredential {
+        Totp { password: i32 },
+        WebAuthn { json: String },
+    }
+    impl From<BridgeMfaVerificationCredential>
+        for libsignal_net_chat::grpc::accounts::MfaVerificationCredential
+    {
+        fn from(value: BridgeMfaVerificationCredential) -> Self {
+            match value {
+                BridgeMfaVerificationCredential::Totp { password } => Self::Totp {
+                    password: password.try_into().expect("TOTP passwords are 6 digits"),
+                },
+                BridgeMfaVerificationCredential::WebAuthn { json } => Self::WebAuthn { json },
+            }
+        }
+    }
+    impl From<libsignal_net_chat::grpc::accounts::MfaVerificationCredential>
+        for BridgeMfaVerificationCredential
+    {
+        fn from(value: libsignal_net_chat::grpc::accounts::MfaVerificationCredential) -> Self {
+            type OriginalCredential = libsignal_net_chat::grpc::accounts::MfaVerificationCredential;
+            match value {
+                OriginalCredential::Totp { password } => Self::Totp {
+                    password: password.try_into().expect("TOTP passwords are 6 digits"),
+                },
+                OriginalCredential::WebAuthn { json } => Self::WebAuthn { json },
+            }
+        }
+    }
+
+    #[derive(BridgedAsValue)]
+    #[bridge(
+        arg = false,
+        ffi_nice_type = "StartMfaVerificationResponse",
+        jni_nice_type = "org.signal.libsignal.net.StartMfaVerificationResponse"
+    )]
+    pub struct StartMfaVerificationResponse {
+        pub has_totp: bool,
+        pub webauthn_params: Option<BridgeWebAuthnAuthenticationParameters>,
+    }
+
+    impl From<libsignal_net_chat::grpc::accounts::StartMfaVerificationResponse>
+        for StartMfaVerificationResponse
+    {
+        fn from(value: libsignal_net_chat::grpc::accounts::StartMfaVerificationResponse) -> Self {
+            let libsignal_net_chat::grpc::accounts::StartMfaVerificationResponse {
+                has_totp,
+                webauthn_params,
+            } = value;
+            Self {
+                has_totp,
+                webauthn_params: webauthn_params.map(Into::into),
+            }
+        }
+    }
+
+    #[derive(BridgedAsValue)]
+    #[bridge(
+        arg = false,
+        ffi_nice_type = "WebAuthnAuthenticationParameters",
+        jni_nice_type = "org.signal.libsignal.net.WebAuthnAuthenticationParameters"
+    )]
+    pub struct BridgeWebAuthnAuthenticationParameters {
+        pub challenge: Vec<u8>,
+        pub timeout_seconds: i32,
+        pub allowed_credential_ids: BridgeVec<Vec<u8>>,
+    }
+
+    impl From<libsignal_net_chat::grpc::accounts::WebAuthnAuthenticationParameters>
+        for BridgeWebAuthnAuthenticationParameters
+    {
+        fn from(
+            value: libsignal_net_chat::grpc::accounts::WebAuthnAuthenticationParameters,
+        ) -> Self {
+            let libsignal_net_chat::grpc::accounts::WebAuthnAuthenticationParameters {
+                challenge,
+                timeout,
+                allowed_credential_ids,
+            } = value;
+            Self {
+                challenge,
+                timeout_seconds: timeout.as_secs().try_into().expect("timeouts are short"),
+                allowed_credential_ids: allowed_credential_ids.into(),
+            }
+        }
+    }
+
+    #[derive(BridgedAsValue)]
+    #[bridge(
+        arg = false,
+        ffi_nice_type = "AccountEntitlements",
+        jni_nice_type = "org.signal.libsignal.net.AccountEntitlements"
+    )]
+    pub struct AccountEntitlements {
+        pub badges: BridgeVec<BadgeEntitlement>,
+        pub backup: Option<BackupEntitlement>,
+    }
+
+    impl From<libsignal_net_chat::grpc::accounts::AccountEntitlements> for AccountEntitlements {
+        fn from(value: libsignal_net_chat::grpc::accounts::AccountEntitlements) -> Self {
+            let libsignal_net_chat::grpc::accounts::AccountEntitlements { badges, backup } = value;
+            AccountEntitlements {
+                badges: badges.into(),
+                backup: backup.map(Into::into),
+            }
+        }
+    }
+    #[derive(BridgedAsValue)]
+    #[bridge(
+        ffi_nice_type = "BadgeEntitlement",
+        jni_nice_type = "org.signal.libsignal.net.BadgeEntitlement"
+    )]
+    pub struct BadgeEntitlement {
+        pub badge_id: String,
+        pub expiration: libsignal_protocol::Timestamp,
+        pub visible: bool,
+    }
+
+    impl From<libsignal_net_chat::grpc::accounts::BadgeEntitlement> for BadgeEntitlement {
+        fn from(value: libsignal_net_chat::grpc::accounts::BadgeEntitlement) -> Self {
+            let libsignal_net_chat::grpc::accounts::BadgeEntitlement {
+                badge_id,
+                expiration,
+                visible,
+            } = value;
+            Self {
+                badge_id,
+                expiration: expiration
+                    .try_into()
+                    .expect("expiration is not too far in the future"),
+                visible,
+            }
+        }
+    }
+
+    #[derive(BridgedAsValue)]
+    #[bridge(
+        ffi_nice_type = "BackupEntitlement",
+        jni_nice_type = "org.signal.libsignal.net.BackupEntitlement"
+    )]
+    pub struct BackupEntitlement {
+        pub level: i64, /* zkgroup::ReceiptLevel */
+        pub expiration: libsignal_protocol::Timestamp,
+    }
+
+    impl From<libsignal_net_chat::grpc::accounts::BackupEntitlement> for BackupEntitlement {
+        fn from(value: libsignal_net_chat::grpc::accounts::BackupEntitlement) -> Self {
+            let libsignal_net_chat::grpc::accounts::BackupEntitlement { level, expiration } = value;
+            Self {
+                // Preserve all bits for zkgroup receipt levels.
+                level: level as i64,
+                expiration: expiration
+                    .try_into()
+                    .expect("expiration is not too far in the future"),
+            }
+        }
+    }
+
+    #[derive(BridgedAsValue)]
+    #[bridge(
+        remote = libsignal_net_chat::grpc::accounts::ChallengeAnswer,
+        ffi_nice_type = "ChallengeAnswer",
+    )]
+    #[allow(unused)]
+    enum BridgeChallengeAnswer {
+        Push(String),
+        Captcha(String),
+    }
 }
 
 #[cfg(test)]
@@ -1126,6 +1682,7 @@ mod test {
     use std::sync::Arc;
 
     use assert_matches::assert_matches;
+    use libsignal_net_chat::grpc::accounts::MfaKeyId;
     use test_case::test_case;
 
     use super::*;
@@ -1149,6 +1706,30 @@ mod test {
     #[test_case("a" => None)]
     fn test_parse_username(input: &str) -> Option<(libsignal_core::Aci, libsignal_core::DeviceId)> {
         AuthenticatedChatConnection::parse_username(input)
+    }
+
+    #[test]
+    fn invalid_mfa_metadata_is_bridged_as_unreadable() {
+        let bridged = BridgeConfirmedMfaKey::from(ConfirmedMfaKey {
+            id: MfaKeyId::try_from(1).expect("in range"),
+            metadata: Err(InvalidMfaMetadata),
+            kind: MfaKeyKind::Totp,
+        });
+        assert!(matches!(
+            bridged.metadata,
+            BridgeConfirmedMfaKeyMetadata::Unreadable
+        ));
+        assert_eq!(bridged.kind, BridgeMfaKeyKind::Totp);
+    }
+
+    #[test]
+    fn unknown_mfa_key_kind_is_bridged_as_unknown() {
+        let bridged = BridgeConfirmedMfaKey::from(ConfirmedMfaKey {
+            id: MfaKeyId::try_from(1).expect("in range"),
+            metadata: Err(InvalidMfaMetadata),
+            kind: MfaKeyKind::Unknown,
+        });
+        assert_eq!(bridged.kind, BridgeMfaKeyKind::Unknown);
     }
 
     #[tokio::test]

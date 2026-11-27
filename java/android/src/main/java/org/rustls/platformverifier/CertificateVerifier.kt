@@ -1,4 +1,5 @@
-// Forked from https://github.com/rustls/rustls-platform-verifier/blob/v/0.5.1/android/rustls-platform-verifier/src/main/java/org/rustls/platformverifier/CertificateVerifier.kt.
+// Forked from https://github.com/rustls/rustls-platform-verifier/blob/v/0.5.1/android/rustls-platform-verifier/src/main/java/org/rustls/platformverifier/CertificateVerifier.kt
+// and last updated to match https://github.com/rustls/rustls-platform-verifier/blob/v/0.7.1/android/rustls-platform-verifier/src/main/java/org/rustls/platformverifier/CertificateVerifier.kt
 // under the MIT License:
 //
 //     Copyright (c) 2022 1Password
@@ -21,7 +22,7 @@
 //     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //     SOFTWARE.
 //
-// Additional modifications Copyright 2025 Signal Messenger, LLC.
+// Additional modifications Copyright 2025-2026 Signal Messenger, LLC.
 
 // We use the same package and class name to avoid having to change the Rust side of the bridge.
 package org.rustls.platformverifier
@@ -31,6 +32,7 @@ import android.content.Context
 import android.net.http.X509TrustManagerExtensions
 import android.os.Build
 import android.util.Log
+import org.signal.libsignal.protocol.util.Hex
 import java.io.ByteArrayInputStream
 import java.io.File
 import java.security.KeyStore
@@ -68,7 +70,7 @@ private enum class StatusCode(val value: Int) {
 // Marked private as this is not meant to be used in Android code.
 private class VerificationResult(
     status: StatusCode,
-    @Suppress("unused") val message: String? = null
+    @Suppress("unused") val message: String? = null,
 ) {
     @Suppress("unused")
     private val code: Int = status.value
@@ -90,6 +92,28 @@ private object BuildConfig {
 @SuppressLint("LongLogTag")
 public object CertificateVerifier {
     private const val TAG = "rustls-platform-verifier-android"
+
+    // ADDED BY SIGNAL: Distrusted SPKIs for weak intermediate certs from
+    // https://github.com/rustls/webpki/commit/f3caaa9f2ba94a42dcd31767e367688a416a3d87
+    // Must match DISTRUSTED_EMUDHRA_SPKI_SHA256 in rust/net/infra/src/certs.rs.
+    private val distrustedEmudhraSpkiSha256 = setOf(
+        // EMDVTLSCAG3B
+        "ebed6475c2c2d80fcb199f3fe8dd6e6b3ce60b77eb15d4e42c3dec0c6f5b5105",
+        // EMDVTLSCAG3C
+        "49dd353dc2b919a3770645117d0e60c16115e7d1bc259eefe734b00ea434fe5f",
+        // EMEVTLSCAG3B
+        "e0254c7fcdc265e2f0f8a428dabb75ab4ae039b4872d62f5ee57f0877d5a8a41",
+        // EMEVTLSCAG3C
+        "5c0660a2b164910d8ff589c18e14552e9e0ec237dcefe2cb736d41a4811f81a0",
+        // EMOVCSCAG3B
+        "ec4ffa1ad0ac88081314b7aaffef6a91f97cd57291bb5ba686c5415f5eb4f6b6",
+        // EMOVCSCAG3C
+        "92c063d67e8f14db71d288e11266ffdaf69cbf115f7bab14f3bc2f68d25e0e30",
+        // EMOVTLSCAG3B
+        "43bffa19d6ef651451f6841e019931e96f6f2eaeff28ab4b6f1ce4576de2717b",
+        // EMOVTLSCAG3C
+        "63ecefee431d49523bc1136c4e72d0206a477086caf606cd5cf025686c109cf8",
+    )
 
     // ADDED BY SIGNAL
     @JvmStatic
@@ -222,7 +246,7 @@ public object CertificateVerifier {
         allowedEkus: Array<String>,
         ocspResponse: ByteArray?,
         time: Long,
-        certChain: Array<ByteArray>
+        certChain: Array<ByteArray>,
     ): VerificationResult {
         // Convert the array of (supposedly) DER bytes into certificates.
         val certificateChain = mutableListOf<X509Certificate>()
@@ -304,7 +328,7 @@ public object CertificateVerifier {
                 return when (rootCause) {
                     is CertificateExpiredException, is CertificateNotYetValidException -> VerificationResult(
                         StatusCode.Expired,
-                        rootCause.toString()
+                        rootCause.toString(),
                     )
 
                     else -> VerificationResult(StatusCode.UnknownCert, rootCause.toString())
@@ -314,6 +338,14 @@ public object CertificateVerifier {
             // can simply return an unknown cert error without digging through the exception
             // cause chain.
             return VerificationResult(StatusCode.UnknownCert, e.toString())
+        }
+
+        // ADDED BY SIGNAL: Check the full signature chain Android built for the distrusted intermediates
+        if (validChain.any(::hasDistrustedEmudhraSpki)) {
+            return VerificationResult(
+                StatusCode.Revoked,
+                "certificate chain contains a distrusted eMudhra CA key",
+            )
         }
 
         // TEST ONLY: Mock test suite cannot attempt to check revocation status if no OSCP data has been stapled,
@@ -368,7 +400,7 @@ public object CertificateVerifier {
 
             revocationChecker.options = EnumSet.of(
                 PKIXRevocationChecker.Option.SOFT_FAIL,
-                PKIXRevocationChecker.Option.ONLY_END_ENTITY
+                PKIXRevocationChecker.Option.ONLY_END_ENTITY,
             )
 
             // Use the OCSP data `rustls` provided, if present.
@@ -407,6 +439,12 @@ public object CertificateVerifier {
         }
 
         return VerificationResult(StatusCode.Ok)
+    }
+
+    // ADDED BY SIGNAL
+    private fun hasDistrustedEmudhraSpki(certificate: X509Certificate): Boolean {
+        val digest = MessageDigest.getInstance("SHA-256").digest(certificate.publicKey.encoded)
+        return Hex.toStringCondensed(digest) in distrustedEmudhraSpkiSha256
     }
 
     private fun verifyCertUsage(certificate: X509Certificate, allowedEkus: Array<String>): Boolean {
@@ -465,6 +503,7 @@ public object CertificateVerifier {
                 var i = 0
                 while (true) {
                     val alias = "$hash.$i"
+                    i += 1
 
                     if (!File(loadedSystemCertificateDirectory, alias).exists()) {
                         break
@@ -491,8 +530,6 @@ public object CertificateVerifier {
                             return true
                         }
                     }
-
-                    i += 1
                 }
             }
         }
